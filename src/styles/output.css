@@ -849,6 +849,16 @@ html[data-theme="light"] .text-color {
   transition-duration: 200ms;
 }
 
+@font-face {
+  font-family: 'Makinas-4-Flat';
+
+  src: url('fonts/Makinas-4-Flat.otf') format('opentype');
+
+  font-weight: normal;
+
+  font-style: normal;
+}
+
 html, body {
   /*
     overscroll-behavior-y: none;
@@ -857,6 +867,12 @@ html, body {
 
 body {
   overflow-x: hidden;
+}
+
+.Makinas-4-Flat {
+  font-family: "Makinas-4-Flat", sans-serif;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .zen-kaku-gothic-new {
@@ -1442,7 +1458,7 @@ img {
 }
 
 .header_container {
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .card {
@@ -1890,6 +1906,10 @@ img {
     padding: 1.5rem;
   }
 
+  .max-lg\:p-8{
+    padding: 2rem;
+  }
+
   .max-lg\:pb-5{
     padding-bottom: 1.25rem;
   }
@@ -1943,6 +1963,10 @@ img {
     width: 8rem;
   }
 
+  .lg\:p-10{
+    padding: 2.5rem;
+  }
+
   .lg\:p-8{
     padding: 2rem;
   }
@@ -1952,6 +1976,10 @@ img {
     line-height: 2rem;
   }
 
+  .lg\:text-\[17px\]{
+    font-size: 17px;
+  }
+
   .lg\:text-base{
     font-size: 1rem;
     line-height: 1.5rem;
@@ -1959,6 +1987,11 @@ img {
 
   .lg\:text-lg{
     font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .lg\:text-xl{
+    font-size: 1.25rem;
     line-height: 1.75rem;
   }
 }
