@@ -152,6 +152,13 @@ body {
     @apply max-lg:text-[18px];
 }
 
+.midashi2 {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  @apply max-lg:text-[18px];
+}
+
 .hover-color:hover {
     color: #b2b5b3;
 }
