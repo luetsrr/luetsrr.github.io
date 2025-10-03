@@ -149,7 +149,7 @@ body {
     font-family: "Zen Kaku Gothic New", sans-serif;
     font-weight: 500;
     font-size: 1.4rem;
-    @apply max-lg:text-lg;
+    @apply max-lg:text-[18px];
 }
 
 .hover-color:hover {

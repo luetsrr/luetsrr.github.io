@@ -716,16 +716,16 @@ html[data-theme="light"] .text-color {
   border-radius: 1.5rem;
 }
 
+.rounded-\[30px\]{
+  border-radius: 30px;
+}
+
 .rounded-\[40px\]{
   border-radius: 40px;
 }
 
 .rounded-full{
   border-radius: 9999px;
-}
-
-.rounded-\[30px\]{
-  border-radius: 30px;
 }
 
 .border-b{
@@ -778,21 +778,10 @@ html[data-theme="light"] .text-color {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
 
-.from-red-400{
-  --tw-gradient-from: #f87171 var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(248 113 113 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
 .from-orange-400{
   --tw-gradient-from: #fb923c var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(251 146 60 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.via-red-500{
-  --tw-gradient-to: rgb(239 68 68 / 0)  var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), #ef4444 var(--tw-gradient-via-position), var(--tw-gradient-to);
 }
 
 .to-red-600{
@@ -1055,8 +1044,7 @@ body {
 
 @media not all and (min-width: 1024px){
   .midashi{
-    font-size: 1.125rem;
-    line-height: 1.75rem;
+    font-size: 18px;
   }
 }
 
@@ -2114,13 +2102,13 @@ img {
     margin-top: 0.25rem;
   }
 
-  .xl\:text-lg{
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-  }
-
   .xl\:text-base{
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+
+  .xl\:text-lg{
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 }
