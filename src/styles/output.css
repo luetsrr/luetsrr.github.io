@@ -716,9 +716,9 @@ html[data-theme="light"] .text-color {
   border-top-width: 1px;
 }
 
-.border-gray-400{
+.border-black{
   --tw-border-opacity: 1;
-  border-color: rgb(156 163 175 / var(--tw-border-opacity, 1));
+  border-color: rgb(0 0 0 / var(--tw-border-opacity, 1));
 }
 
 .bg-black{
@@ -1566,8 +1566,8 @@ img {
 .card-box {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
+  padding-left: 0.02rem;
+  padding-right: 0.02rem;
   color: #000000;
   text-align: center;
 }
@@ -1837,6 +1837,19 @@ img {
   overflow: hidden;
   height: 100vh;
   /* 念のため高さも固定 */
+}
+
+.no-select {
+  user-select: none;
+  /* 選択禁止 */
+  -webkit-user-select: none;
+  /* Safari対応 */
+  -moz-user-select: none;
+  /* Firefox対応 */
+  -ms-user-select: none;
+  /* 古いIE対応 */
+  cursor: default;
+  /* 通常の矢印カーソル */
 }
 
 .hover\:scale-110:hover{

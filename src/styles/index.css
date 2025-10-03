@@ -565,8 +565,8 @@ img {
 .card-box {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
+    padding-left: 0.02rem;
+    padding-right: 0.02rem;
     color: #000000;
     text-align: center;
 }
@@ -800,4 +800,12 @@ img {
 .no-scroll {
   overflow: hidden;
   height: 100vh; /* 念のため高さも固定 */
+}
+
+.no-select {
+  user-select: none;      /* 選択禁止 */
+  -webkit-user-select: none; /* Safari対応 */
+  -moz-user-select: none;    /* Firefox対応 */
+  -ms-user-select: none;     /* 古いIE対応 */
+  cursor: default;        /* 通常の矢印カーソル */
 }
