@@ -96,13 +96,22 @@ revealElements.forEach(el => io.observe(el));
     </a>
   </div>
   -->
+  <div
+  class="midashi2 max-lg:p-4 lg:p-4 text-white margin-contents 
+         bg-gradient-to-r from-red-600 to-orange-400 rounded-[40px] shadow-md 
+         flex justify-between items-center text-center px-6"
+  style="max-width: 900px; width: 100%;"
+  >
+  <span>&nbsp;&nbsp;お知らせ</span>
+  <span class="font-bold"></span>
+  </div>
 
+    <div style="height: 36px;" />
     <div
       class="max-lg:p-6 lg:p-8 text-color margin-contents bg-white rounded-[40px] shadow-md"
       style="max-width: 900px; width: 100%;"
     >
-    <span class="midashi mb-4">お知らせ</span>
-    <div style="height: 10px;"></div>
+    <!-- <span class="midashi mb-4">お知らせ</span> -->
     <ul style="margin-left: 0.25rem; margin-right: 0.25rem;">
       {
         latestPosts.map((post) => (
@@ -140,12 +149,15 @@ revealElements.forEach(el => io.observe(el));
     </div>
     <div style="height: 100px;" />
     <div
-    class="midashi2 max-lg:p-4 lg:p-4 text-white text-center margin-contents 
-          bg-gradient-to-r from-orange-400 to-red-600 rounded-[40px] shadow-md"
-    style="max-width: 900px; width: 100%;"
-    >
-    概要
-    </div>
+  class="midashi2 max-lg:p-4 lg:p-4 text-white margin-contents 
+         bg-gradient-to-r from-red-600 to-orange-400 rounded-[40px] shadow-md 
+         flex justify-between items-center px-6"
+  style="max-width: 900px; width: 100%;"
+  >
+  <span>&nbsp;&nbsp;開催概要
+  </span>
+  <span class="font-bold"></span>
+  </div>
     <div style="height: 36px;" />
     <div class="max-xl:text-sm xl:text-base text-color bg-white rounded-[30px] shadow-md max-w-[900px] w-full">
       <div class="grid grid-cols-[2fr_5fr] divide-gray rounded-[30px] overflow-hidden">
@@ -153,7 +165,7 @@ revealElements.forEach(el => io.observe(el));
           名称
         </div>
         <div class="px-4 py-6 about_color2 border-b border-gray text-center">
-          第8回 うぃーすた全国交流会
+          第8回うぃーすた全国交流会
         </div>
     
         <div class="px-4 py-6 border-b border-r border-white about_color text-center">
