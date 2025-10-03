@@ -124,10 +124,10 @@ revealElements.forEach(el => io.observe(el));
               </div>
             ) : (
               <div class="no-update-content">
-                <a class="text-base max-lg:text-xs">{post.frontmatter.date}</a>
+                <a class="text-base max-lg:text-[14px]">{post.frontmatter.date}</a>
               </div>
             )}
-            <a class="text-lg max-lg:text-sm font-medium hover-color" href={post.url}>
+            <a class="text-lg max-lg:text-base font-medium hover-color" href={post.url}>
               {post.frontmatter.title}
             </a>
             <br />
@@ -147,7 +147,7 @@ revealElements.forEach(el => io.observe(el));
       </a>
     </div>
     </div>
-    <div style="height: 100px;" />
+    <div style="height: 70px;" />
     <div
   class="midashi2 max-lg:p-4 lg:p-4 text-white margin-contents 
          bg-gradient-to-r from-red-600 to-orange-400 rounded-[40px] shadow-md 
