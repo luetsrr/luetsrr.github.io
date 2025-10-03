@@ -122,11 +122,19 @@ body {
 
 
 .footer_bcolor {
-    background-color: #ffd7d7;
+  background-color: #ffd7d7;
 }
 
 .header_tcolor {
   color: #e6f499;
+}
+
+.about_color {
+  background-color: #ffdbdb;
+}
+
+.about_color2 {
+  background-color: #ffffff;
 }
 
 .menu_bcolor {
