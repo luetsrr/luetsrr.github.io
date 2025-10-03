@@ -724,6 +724,10 @@ html[data-theme="light"] .text-color {
   border-radius: 9999px;
 }
 
+.rounded-\[30px\]{
+  border-radius: 30px;
+}
+
 .border-b{
   border-bottom-width: 1px;
 }
@@ -777,6 +781,12 @@ html[data-theme="light"] .text-color {
 .from-red-400{
   --tw-gradient-from: #f87171 var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(248 113 113 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-orange-400{
+  --tw-gradient-from: #fb923c var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(251 146 60 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
@@ -2107,5 +2117,10 @@ img {
   .xl\:text-lg{
     font-size: 1.125rem;
     line-height: 1.75rem;
+  }
+
+  .xl\:text-base{
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 }
