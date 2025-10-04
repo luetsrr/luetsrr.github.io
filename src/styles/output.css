@@ -959,6 +959,7 @@ html[data-theme="light"] .text-color {
 }
 
 html, body {
+  overscroll-behavior-x: none;
   /*
     overscroll-behavior-y: none;
     */
