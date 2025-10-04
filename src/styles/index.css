@@ -33,7 +33,7 @@
   }
 
 html, body {
-  overscroll-behavior-x: none;
+  overflow-x: hidden;
   
   /*
     overscroll-behavior-y: none;
@@ -42,6 +42,7 @@ html, body {
 
 body {
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .Makinas-4-Flat {
@@ -845,7 +846,7 @@ img {
 /* body のスクロールを止める用クラス */
 .no-scroll {
   overflow: hidden;
-  height: 100vh; /* 念のため高さも固定 */
+
 }
 
 .no-select {
