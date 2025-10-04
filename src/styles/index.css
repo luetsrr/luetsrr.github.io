@@ -160,12 +160,11 @@ body {
 }
 
 
-
 .headline {
   position: relative;
   font-size: 1.6rem;
   font-weight: 600;
-  color: #333;
+  color: #000000;
   overflow: visible; /* はみ出し防止（任意） */
   @apply max-lg:text-[20px];
 }
@@ -183,8 +182,6 @@ body {
   pointer-events: none; /* クリックなど無効化 */
   @apply max-lg:text-[60px];
 }
-
-
 
 .hover-color:hover {
     color: #b2b5b3;

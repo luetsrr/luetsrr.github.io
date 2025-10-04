@@ -1050,7 +1050,7 @@ body {
   position: relative;
   font-size: 1.6rem;
   font-weight: 600;
-  color: #333;
+  color: #000000;
   overflow: visible;
   /* はみ出し防止（任意） */
 }
