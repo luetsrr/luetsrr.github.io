@@ -852,12 +852,23 @@ img {
   cursor: default;        /* 通常の矢印カーソル */
 }
 
+.swiper-container-wrapper {
+  width: 100vw;            /* 画面横いっぱい */
+  background-color: white;    /* 白い長方形 */
+  padding: 30px 0;           /* 上下余白 */
+  box-sizing: border-box;
+}
+
 .swiper {
   width: 90%;        /* 画面幅の80%に縮小 */
   max-width: 800px;  /* 任意で最大幅を指定 */
-  margin: 0 auto;    /* 中央揃え */
   position: relative !important;
   overflow: visible !important;
+}
+
+.swiper-slide {
+  will-change: transform;  /* スライドのアニメーションをスムーズに */
+  flex-shrink: 0;
 }
 
 .swiper-slide img {
@@ -908,4 +919,14 @@ img {
 
 .swiper-pagination-bullet {
   background-color: rgb(255, 255, 255) !important;
+}
+
+img {
+  -webkit-user-drag: none; /* Safari, Chrome */
+  -khtml-user-drag: none;
+  -moz-user-drag: none;    /* Firefox */
+  -o-user-drag: none;
+  user-drag: none;
+
+  -webkit-touch-callout: none; /* iOSの長押しメニュー無効 */
 }

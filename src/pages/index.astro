@@ -38,13 +38,13 @@ const latestPosts = sortedPosts.slice(0, 3);
     <a href="#">Scroll</a>
   </div>
 -->
-  <div class="margin-contents text-color zen-kaku-gothic-new">
+  <div class="margin-contents text-color zen-kaku-gothic-new" style="padding-bottom: 0rem;">
     <div style="height: 40px;"></div>
-    <p class="max-xl:text-base xl:text-lg resp-sm-g" style="text-align: center;">「第8回うぃーすた全国交流会」を<br>2026年7月18日(土)〜19日(日)に大阪にて開催します！</p>
+    <p class="max-xl:text-base xl:text-lg resp-sm-g" style="text-align: center;">「第8回うぃーすた全国交流会」を2026年7月18日(土)〜19日(日)に大阪にて開催します！</p>
     <p class="max-xl:text-base xl:text-lg resp-sm-f" style="text-align: center;">「第8回うぃーすた全国交流会」を<br>2026年7月18日(土)〜19日(日)に<br>大阪にて開催します！</p>
     <div style="height: 30px;"></div>
-    <p class="max-xl:text-base xl:text-lg resp-sm-g" style="text-align: center;">吃音のある同年代の仲間たちと悩みや夢を語り合う、<br>かけがえのない時間を過ごしてみませんか？</p>
-    <p class="max-xl:text-base xl:text-lg resp-sm-f" style="text-align: center;">吃音のある同年代の仲間たちと悩みや夢を語り合う、<br>かけがえのない時間を過ごしてみませんか？</p>
+    <p class="max-xl:text-base xl:text-lg resp-sm-g" style="text-align: center;">吃音のある同年代の仲間たちと悩みや夢を語り合う、かけがえのない時間を過ごしてみませんか？</p>
+    <p class="max-xl:text-base xl:text-lg resp-sm-f" style="text-align: center;">吃音のある同年代の仲間たちと<br>悩みや夢を語り合う、<br>かけがえのない時間を過ごしてみませんか？</p>
     <div style="height: 90px;"></div>
     
     <!--
@@ -131,6 +131,8 @@ const latestPosts = sortedPosts.slice(0, 3);
       <span class="max-lg:ml-6 lg:ml-8" style="display: inline-block; vertical-align: middle; padding-top: 0.5rem;">過去の全国交流会</span>
     </h1>
     <div style="height: 36px;" />
+  </div>
+    <div class="swiper-container-wrapper">
     <div class="swiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
@@ -170,6 +172,8 @@ const latestPosts = sortedPosts.slice(0, 3);
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
     </div>
+    </div>
+    <div class="margin-contents text-color zen-kaku-gothic-new" style="padding-top: 0rem;">
     <div style="height: 90px;" />
     <h1 class="headline">
       <span class="headline-bg">Event</span>
@@ -260,6 +264,7 @@ revealElements.forEach(el => io.observe(el));
   speed: 3000, // 少しゆっくり(デフォルトは300)
   slidesPerView: 1.1, // 一度に表示する枚数
   spaceBetween: 20, // スライド間の距離
+  preloadImages: true,
   centeredSlides: true, // アクティブなスライドを中央にする
   autoplay: {
     // 自動再生
