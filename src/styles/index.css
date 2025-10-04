@@ -853,7 +853,7 @@ img {
 }
 
 .swiper-container-wrapper {
-  width: 100vw;            /* 画面横いっぱい */
+  width: 100%;            /* 画面横いっぱい */
   background-color: white;    /* 白い長方形 */
   padding: 30px 0;           /* 上下余白 */
   box-sizing: border-box;

@@ -2004,7 +2004,7 @@ img {
 }
 
 .swiper-container-wrapper {
-  width: 100vw;
+  width: 100%;
   /* 画面横いっぱい */
   background-color: white;
   /* 白い長方形 */
