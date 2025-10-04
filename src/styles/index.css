@@ -859,6 +859,12 @@ img {
   box-sizing: border-box;
 }
 
+@media (max-width: 768px) {
+  .swiper-container-wrapper {
+    padding: 20px 0;
+  }
+}
+
 .swiper {
   width: 90%;        /* 画面幅の80%に縮小 */
   max-width: 800px;  /* 任意で最大幅を指定 */
