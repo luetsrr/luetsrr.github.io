@@ -159,6 +159,33 @@ body {
   @apply max-lg:text-[19px];
 }
 
+
+
+.headline {
+  position: relative;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+  overflow: visible; /* はみ出し防止（任意） */
+  @apply max-lg:text-[20px];
+}
+
+.headline-bg {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 5.4rem;
+  font-weight: 900;
+  color: rgba(255, 0, 0, 0.1);
+  z-index: -1; /* 背景に */
+  white-space: nowrap;
+  pointer-events: none; /* クリックなど無効化 */
+  @apply max-lg:text-[70px];
+}
+
+
+
 .hover-color:hover {
     color: #b2b5b3;
 }
