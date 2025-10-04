@@ -1410,7 +1410,7 @@ body {
   display: block;
 }
 
-@media not all and (min-width: 640px){
+@media not all and (min-width: 768px){
   .resp-xl-f{
     display: none;
   }
@@ -1436,7 +1436,7 @@ body {
   display: block;
 }
 
-@media (min-width: 640px){
+@media (min-width: 768px){
   .resp-sm-f{
     display: none;
   }

@@ -407,7 +407,7 @@ body {
 
 .resp-xl-f {
     @apply block;
-    @apply xl:hidden max-sm:hidden;
+    @apply xl:hidden max-md:hidden;
 }
 
 .resp-xl-g {
@@ -420,7 +420,7 @@ body {
 
 .resp-sm-f {
     @apply block;
-    @apply sm:hidden;
+    @apply md:hidden;
 }
 
 .resp-lg-g {
