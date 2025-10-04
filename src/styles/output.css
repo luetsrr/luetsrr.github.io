@@ -2003,6 +2003,74 @@ img {
   /* 通常の矢印カーソル */
 }
 
+.swiper {
+  width: 90%;
+  /* 画面幅の80%に縮小 */
+  max-width: 800px;
+  /* 任意で最大幅を指定 */
+  margin: 0 auto;
+  /* 中央揃え */
+  position: relative !important;
+  overflow: visible !important;
+}
+
+.swiper-slide img {
+  width: 100%;
+  /* 幅は90%のまま */
+  height: auto;
+  /* 高さは自動 */
+  display: block;
+  /* ブロック要素にして */
+  margin: 0 auto;
+  /* 左右マージンを自動にして中央揃え */
+}
+
+.swiper-button-prev,
+  .swiper-button-next {
+  /*width: 48px !important;
+    height: 48px !important;
+    background-color: white;
+    border-radius: 50%;         /* 丸くする */
+  color: #000000 !important;
+  /* 矢印の色 */
+  display: flex;
+  /* 中央寄せ */
+  align-items: center;
+  justify-content: center;
+  position: absolute !important;
+  display: none !important;
+}
+
+.swiper-button-prev {
+  left: -10px !important;
+}
+
+/* Swiperのデフォルト矢印を小さめに */
+
+.swiper-button-prev::after,
+  .swiper-button-next::after {
+  font-size: 24px !important;
+  /* 矢印サイズ */
+  font-weight: bold;
+}
+
+/* ホバー時（任意
+  .swiper-button-prev:hover,
+  .swiper-button-next:hover {
+    background-color: #b6b6b6;
+    color: white;
+    transition: all 0.3s ease;
+  }*/
+
+.swiper-button-prev svg,
+.swiper-button-next svg {
+  display: none !important;
+}
+
+.swiper-pagination-bullet {
+  background-color: rgb(255, 255, 255) !important;
+}
+
 .hover\:scale-110:hover{
   --tw-scale-x: 1.1;
   --tw-scale-y: 1.1;

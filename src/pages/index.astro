@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
+
 const allPosts = await Astro.glob("./posts/*.md");
 const nonDraftPosts = allPosts.filter((post) => !post.frontmatter.draft);
 
@@ -11,6 +12,7 @@ const sortedPosts = nonDraftPosts.sort((a, b) => {
 });
 
 const latestPosts = sortedPosts.slice(0, 3);
+
 ---
 
 <Layout title="ホーム｜第8回うぃーすた全国交流会">
@@ -37,10 +39,13 @@ const latestPosts = sortedPosts.slice(0, 3);
   </div>
 -->
   <div class="margin-contents text-color zen-kaku-gothic-new">
-    <div style="height: 30px;"></div>
+    <div style="height: 40px;"></div>
     <p class="max-xl:text-base xl:text-lg resp-sm-g" style="text-align: center;">「第8回うぃーすた全国交流会」を<br>2026年7月18日(土)〜19日(日)に大阪にて開催します！</p>
     <p class="max-xl:text-base xl:text-lg resp-sm-f" style="text-align: center;">「第8回うぃーすた全国交流会」を<br>2026年7月18日(土)〜19日(日)に<br>大阪にて開催します！</p>
-    <div style="height: 60px;"></div>
+    <div style="height: 30px;"></div>
+    <p class="max-xl:text-base xl:text-lg resp-sm-g" style="text-align: center;">吃音のある同年代の仲間たちと悩みや夢を語り合う、<br>かけがえのない時間を過ごしてみませんか？</p>
+    <p class="max-xl:text-base xl:text-lg resp-sm-f" style="text-align: center;">吃音のある同年代の仲間たちと悩みや夢を語り合う、<br>かけがえのない時間を過ごしてみませんか？</p>
+    <div style="height: 90px;"></div>
     
     <!--
     <div class="cards-container text-color text-font max-lg:gap-10">
@@ -120,17 +125,52 @@ const latestPosts = sortedPosts.slice(0, 3);
       </a>
     </div>
     </div>
-    <div style="height: 70px;" />
+    <div style="height: 90px;" />
     <h1 class="headline">
       <span class="headline-bg">Archives</span>
       <span class="max-lg:ml-6 lg:ml-8" style="display: inline-block; vertical-align: middle; padding-top: 0.5rem;">過去の全国交流会</span>
     </h1>
-    <div class="slider">
-      <div><img src="/images/img1.jpg" alt="画像1"></div>
-      <div><img src="/images/img2.jpg" alt="画像2"></div>
-      <div><img src="/images/img3.jpg" alt="画像3"></div>
+    <div style="height: 36px;" />
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img
+            src="/images/img4.jpeg"
+            alt=""
+          />
+        </div>
+        <div class="swiper-slide">
+          <img
+            src="/images/img2.jpg"
+            alt=""
+          />
+        </div>
+        <div class="swiper-slide">
+          <img
+            src="/images/img3.jpg"
+            alt=""
+          />
+        </div>
+        <div class="swiper-slide">
+          <img
+            src="/images/img1.jpg"
+            alt=""
+          />
+        </div>
+        <div class="swiper-slide">
+          <img
+            src="/images/img5.jpeg"
+            alt=""
+          />
+        </div>
+      </div>
+      <!-- ページネーション -->
+      <div class="swiper-pagination"></div>
+      <!-- 前後の矢印 -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
     </div>
-    <div style="height: 70px;" />
+    <div style="height: 90px;" />
     <h1 class="headline">
       <span class="headline-bg">Event</span>
       <span class="max-lg:ml-6 lg:ml-8" style="display: inline-block; vertical-align: middle; padding-top: 0.5rem;">概要</span>
@@ -176,11 +216,18 @@ const latestPosts = sortedPosts.slice(0, 3);
     </div>
     
 
-    <div style="height: 70px;" />
+    <div style="height: 90px;" />
   </div>
+
 </Layout>
 
-<script is:inline>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+<script>
   const revealElements = document.querySelectorAll('.reveal');
 
 const io = new IntersectionObserver((entries, observer) => {
@@ -200,21 +247,37 @@ const io = new IntersectionObserver((entries, observer) => {
 });
 
 revealElements.forEach(el => io.observe(el));
+</script>
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (window.$ && $('.slider').length) {
-      $('.slider').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        arrows: true,
-        dots: true,
-        responsive: [
-          { breakpoint: 768, settings: { slidesToShow: 1 } }
-        ]
-      });
-    }
-  });
+<script>
+  import Swiper from 'swiper';
+  import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
+  import 'swiper/css/bundle';
+
+  export const swiperConfig = {
+    modules: [Autoplay, Navigation, Pagination, EffectFade],
+  loop: true, // ループ
+  speed: 3000, // 少しゆっくり(デフォルトは300)
+  slidesPerView: 1.5, // 一度に表示する枚数
+  spaceBetween: 30, // スライド間の距離
+  centeredSlides: true, // アクティブなスライドを中央にする
+  autoplay: {
+    // 自動再生
+    delay: 3000, // 1秒後に次のスライド
+    disableOnInteraction: false, // 矢印をクリックしても自動再生を止めない
+  },
+  // ページネーション
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  // 前後の矢印
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+};
+
+new Swiper('.swiper', swiperConfig);
 
 </script>
