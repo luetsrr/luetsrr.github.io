@@ -955,6 +955,8 @@ html[data-theme="light"] .text-color {
 }
 
 html, body {
+  overflow-x: hidden;
+  /* 横スクロールを強制的に消す */
   /*
     overscroll-behavior-y: none;
     */
