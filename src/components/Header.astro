@@ -44,27 +44,42 @@
     </a>
 
     <script>
-      const burger = document.querySelector("#burger");
-      const close = document.querySelector("#close");
-      const menu = document.querySelector("#menu");
+      const burger = document.querySelector("#burger") as HTMLElement | null;
+      const close = document.querySelector("#close") as HTMLElement | null;
+      const menu = document.querySelector("#menu") as HTMLElement | null;
+      const contactButton = document.querySelector("#contactButton") as HTMLElement | null;
 
       if (burger) {
         burger.addEventListener("click", () => {
-          burger?.classList.toggle("is-active");
+          const isActive = menu?.classList.toggle("is-active"); // メニュー開閉
+          burger.classList.toggle("is-active");
           close?.classList.toggle("is-active");
-          menu?.classList.toggle("is-active");
-          document.body.classList.toggle("no-scroll"); // ← ここ追加
+          document.body.classList.toggle("no-scroll");
+
+          // お問い合わせボタンの表示切替
+          if (contactButton) {
+            if (isActive) {
+              contactButton.style.display = "none";
+            } else {
+              contactButton.style.display = "flex";
+            }
+          }
         });
       }
 
       if (close) {
         close.addEventListener("click", () => {
+          menu?.classList.remove("is-active");
           burger?.classList.remove("is-active");
           close?.classList.remove("is-active");
-          menu?.classList.remove("is-active");
-          document.body.classList.remove("no-scroll"); // ← ここ追加
+          document.body.classList.remove("no-scroll");
+
+          // 閉じたらボタンを再表示
+          if (contactButton) contactButton.style.display = "flex";
         });
       }
+
+
 
       // サブメニュー内のリンククリックでメニューを閉じる
 const dropdownLinks = document.querySelectorAll(".dropdown-content a");
