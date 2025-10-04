@@ -630,6 +630,10 @@ html[data-theme="light"] .text-color {
   margin-top: 1rem;
 }
 
+.mt-\[115px\]{
+  margin-top: 115px;
+}
+
 .mt-\[128px\]{
   margin-top: 128px;
 }
@@ -955,8 +959,6 @@ html[data-theme="light"] .text-color {
 }
 
 html, body {
-  overflow-x: hidden;
-  /* 横スクロールを強制的に消す */
   /*
     overscroll-behavior-y: none;
     */
@@ -1859,6 +1861,7 @@ img {
 #burger {
   touch-action: manipulation;
   /* ダブルタップズームやピンチズームを防ぐ */
+  position: relative;
 }
 
 .topbar {
