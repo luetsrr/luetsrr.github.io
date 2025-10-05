@@ -638,6 +638,30 @@ html[data-theme="light"] .text-color {
   margin-top: 128px;
 }
 
+.mt-\[125px\]{
+  margin-top: 125px;
+}
+
+.mt-\[105px\]{
+  margin-top: 105px;
+}
+
+.mt-\[135px\]{
+  margin-top: 135px;
+}
+
+.mt-\[1\]{
+  margin-top: 1;
+}
+
+.mt-\[123px\]{
+  margin-top: 123px;
+}
+
+.mt-\[126px\]{
+  margin-top: 126px;
+}
+
 .block{
   display: block;
 }
@@ -2237,6 +2261,10 @@ img {
 
   .lg\:mt-6{
     margin-top: 1.5rem;
+  }
+
+  .lg\:mt-\[115px\]{
+    margin-top: 115px;
   }
 
   .lg\:h-32{
