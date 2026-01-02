@@ -2744,7 +2744,7 @@ h1 {
 .label {
   font-family: "Zen Kaku Gothic New", "Makinas-4-Flat", sans-serif;
   font-size: 4rem; /* ★単位のサイズ */
-  font-weight: 700;
+  font-weight: 600;
   color: #636363;
 }
 
@@ -2782,7 +2782,7 @@ h1 {
   }
   .label {
     margin-top: 10px;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
   
   .flip-card {
