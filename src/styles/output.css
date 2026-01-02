@@ -1444,6 +1444,10 @@ html[data-theme="light"] .text-color {
   gap: 0.75rem;
 }
 
+.gap-4{
+  gap: 1rem;
+}
+
 .gap-6{
   gap: 1.5rem;
 }
@@ -1953,6 +1957,11 @@ html[data-theme="light"] .text-color {
   padding-right: 1.5rem;
 }
 
+.px-8{
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 .py-1{
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -1986,11 +1995,6 @@ html[data-theme="light"] .text-color {
 .py-\[2px\]{
   padding-top: 2px;
   padding-bottom: 2px;
-}
-
-.px-8{
-  padding-left: 2rem;
-  padding-right: 2rem;
 }
 
 .pb-1{
@@ -2260,6 +2264,11 @@ html[data-theme="light"] .text-color {
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.text-blue-600{
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity, 1));
 }
 
 .opacity-0{
@@ -5664,6 +5673,20 @@ article h2 {
   }
 }
 
+/* --- 修正箇所 1: 数字と単位を横並びにする設定 --- */
+
+.time-unit {
+  display: flex;
+  flex-direction: row;
+  /* ★ column から row に変更（これで横並びになります） */
+  align-items: flex-end;
+  /* ★ 下揃え（文字をカードの下辺に合わせる） */
+  gap: 10px;
+  /* ★ 数字と文字の間の隙間 */
+}
+
+/* --- その他の既存スタイル（変更なし） --- */
+
 .countdown-container {
   text-align: center;
 }
@@ -5684,44 +5707,27 @@ h1 {
   justify-content: center;
 }
 
-.time-unit {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* --- ここから新しいカードスタイル --- */
+/* --- カードスタイルの定義（そのまま） --- */
 
 .flip-card {
   width: 180px;
-  /* 全体の高さは 140px + 隙間 2px = 142px 程度になります */
   display: flex;
   flex-direction: column;
   gap: 2px;
-  /* ★ここで物理的な隙間を作っています */
 }
-
-/* 上下の共通スタイル */
 
 .card-half {
   position: relative;
   background: #d34040;
   width: 100%;
   height: 90px;
-  /* 全体の半分の高さ */
   overflow: hidden;
-  /* はみ出した文字を隠す */
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-/* 上半分 */
-
 .top-half {
   border-radius: 8px 8px 4px 4px;
-  /* ★上だけ大きく丸める */
 }
-
-/* 上半分の光沢 */
 
 .top-half::before {
   content: "";
@@ -5733,14 +5739,9 @@ h1 {
   background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(255,255,255,0));
 }
 
-/* 下半分 */
-
 .bottom-half {
   border-radius: 4px 4px 8px 8px;
-  /* ★下だけ大きく丸める */
 }
-
-/* 数字のスタイル */
 
 .number {
   font-family: "Barlow", sans-serif;
@@ -5752,26 +5753,24 @@ h1 {
   width: 100%;
   text-align: center;
   line-height: 180px;
-  /* 全体の高さに合わせる */
 }
-
-/* 数字の位置調整 */
 
 .top-half .number {
   top: 0;
-  /* 上辺に合わせる */
 }
 
 .bottom-half .number {
   bottom: 0;
-  /* 下辺に合わせる（これで文字の下半分が表示される） */
 }
 
-/* ラベル */
+/* --- 修正箇所 2: ラベルの余白調整 --- */
 
 .label {
   font-family: "Zen Kaku Gothic New", "Makinas-4-Flat", sans-serif;
-  margin-top: 20px;
+  /* margin-top: 20px;  <-- ★これは削除または0にする */
+  margin-top: 0;
+  margin-bottom: 20px;
+  /* ★下揃え(align-items: flex-end)にした際、少し位置を上げる調整 */
   font-size: 1.7rem;
   color: #000000;
   font-weight: 700;
@@ -6193,11 +6192,6 @@ h1 {
     padding-right: 1.5rem;
   }
 
-  .max-md\:px-8{
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-
   .max-md\:text-\[1\.2rem\]{
     font-size: 1.2rem;
   }
@@ -6224,6 +6218,10 @@ h1 {
 
   .sm\:max-w-md{
     max-width: 28rem;
+  }
+
+  .sm\:gap-6{
+    gap: 1.5rem;
   }
 
   .sm\:p-0{
