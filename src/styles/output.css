@@ -22,6 +22,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 *, ::before, ::after{
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -1710,6 +1712,11 @@ html[data-theme="light"] .text-color {
   background-color: rgb(226 97 97 / var(--tw-bg-opacity, 1));
 }
 
+.bg-\[\#e6cfd3\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(230 207 211 / var(--tw-bg-opacity, 1));
+}
+
 .bg-\[\#fae1e1\]{
   --tw-bg-opacity: 1;
   background-color: rgb(250 225 225 / var(--tw-bg-opacity, 1));
@@ -2442,6 +2449,18 @@ html[data-theme="light"] .text-color {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'LeagueGothic-Regular';
+
+  src: url('/fonts/cLeagueGothic-Regular.woff2') format('woff2'),
+       url('/fonts/LeagueGothic-Regular.woff') format('woff'),
+       url('/fonts/LeagueGothic-Regular.ttf') format('opentype');
+
+  font-weight: normal;
+
+  font-style: normal;
+}
+
 html, body {
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -2452,6 +2471,12 @@ html, body {
 
 body {
   overflow-x: clip;
+}
+
+.lobster-regular {
+  font-family: "Lobster", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .kaisei-decol-regular {
@@ -5687,8 +5712,8 @@ article h2 {
 h1 {
   font-family: "Zen Kaku Gothic New", "Makinas-4-Flat", sans-serif;
   font-weight: 700;
-  font-size: 1.7rem;
-  color: #000000;
+  font-size: 4rem;
+  color: #636363;
   letter-spacing: 0em;
   text-transform: uppercase;
 }
@@ -5717,12 +5742,12 @@ h1 {
 /* --- 数字のスタイル --- */
 
 .number {
-  font-family: "Barlow", sans-serif;
+  font-family: "Lobster", sans-serif;
   /* お好みのフォントで */
-  font-size: 5rem;
+  font-size: 10rem;
   /* ★数字を大きく */
   font-weight: bold;
-  color: #000000;
+  color: hsl(0, 31%, 53%);
   /* 黒文字に変更 */
   line-height: 1;
   /* 行間を詰める */
@@ -5732,22 +5757,22 @@ h1 {
 
 .label {
   font-family: "Zen Kaku Gothic New", "Makinas-4-Flat", sans-serif;
-  font-size: 1.7rem;
+  font-size: 6rem;
   /* ★単位のサイズ */
   font-weight: 700;
-  color: #000000;
+  color: #636363;
 }
 
 /* --- スマホ対応 --- */
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   h1 {
-    font-size: 1.2rem;
+    font-size: 2rem;
   }
 
   .label {
     margin-top: 13px;
-    font-size: 1.2rem;
+    font-size: 3rem;
   }
 
   .flip-card {
@@ -5761,19 +5786,46 @@ h1 {
   }
 
   .number {
-    font-size: 3.5rem;
+    font-size: 5rem;
     line-height: 100px;
     /* スマホ時の全体の高さ */
   }
 
-  /* 角丸の比率も少し調整 */
+  .timer-wrapper {
+    gap: 10px;
+    /* 「日」「時間」「分」の各グループの間隔 */
+  }
+}
 
-  .top-half {
-    border-radius: 8px 8px 4px 4px;
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.2rem;
   }
 
-  .bottom-half {
-    border-radius: 4px 4px 8px 8px;
+  .label {
+    margin-top: 10px;
+    font-size: 2rem;
+  }
+
+  .flip-card {
+    width: 100px;
+    gap: 1px;
+  }
+
+  .card-half {
+    height: 50px;
+    /* 高さ100pxの半分 */
+  }
+
+  .number {
+    font-size: 3rem;
+    line-height: 80px;
+    /* スマホ時の全体の高さ */
+  }
+
+  .timer-wrapper {
+    gap: 10px;
+    /* 「日」「時間」「分」の各グループの間隔 */
   }
 }
 
@@ -6105,10 +6157,6 @@ h1 {
     height: 15px;
   }
 
-  .max-md\:h-\[16px\]{
-    height: 16px;
-  }
-
   .max-md\:h-\[17px\]{
     height: 17px;
   }
@@ -6125,12 +6173,12 @@ h1 {
     height: 30px;
   }
 
-  .max-md\:h-\[40px\]{
-    height: 40px;
+  .max-md\:h-\[35px\]{
+    height: 35px;
   }
 
-  .max-md\:h-\[45px\]{
-    height: 45px;
+  .max-md\:h-\[40px\]{
+    height: 40px;
   }
 
   .max-md\:h-\[60px\]{
