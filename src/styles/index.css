@@ -3,7 +3,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Mochiy+Pop+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=M+PLUS+Rounded+1c&family=Mochiy+Pop+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kaisei+Opti&family=Kiwi+Maru&family=M+PLUS+Rounded+1c&family=Mochiy+Pop+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Zen+Kaku+Gothic+New:wght@500;700&family=Zen+Maru+Gothic&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=RocknRoll+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
@@ -157,12 +156,6 @@ body {
 
 .inter {
   font-family: "Inter", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.kaisei-opti-regular {
-  font-family: "Kaisei Opti", serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -2714,8 +2707,8 @@ article h2 {
   text-align: center;
 }
 
-h4 {
-  font-family: "zen-kaku-gothic-new", "Makinas-4-Flat", sans-serif;
+h1 {
+  font-family: "Zen Kaku Gothic New", "Makinas-4-Flat", sans-serif;
   font-weight: 700;
   font-size: 2.8rem;
   color: #636363;
@@ -2757,7 +2750,7 @@ h4 {
 
 /* --- スマホ対応 --- */
 @media (max-width: 1024px) {
-  h4 {
+  h1 {
       font-size: 2rem;
   }
   .label {
@@ -2784,7 +2777,7 @@ h4 {
 }
 
 @media (max-width: 600px) {
-  h4 {
+  h1 {
       font-size: 1.2rem;
   }
   .label {
