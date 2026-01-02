@@ -2778,11 +2778,11 @@ h1 {
 
 @media (max-width: 600px) {
   h1 {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
   }
   .label {
     margin-top: 10px;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
   }
   
   .flip-card {
@@ -2793,7 +2793,7 @@ h1 {
       height: 50px; /* 高さ100pxの半分 */
   }
   .number {
-      font-size: 3rem;
+      font-size: 3.6rem;
       line-height: 80px; /* スマホ時の全体の高さ */
   }
 
