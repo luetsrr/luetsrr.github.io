@@ -5712,7 +5712,7 @@ article h2 {
 h1 {
   font-family: "Zen Kaku Gothic New", "Makinas-4-Flat", sans-serif;
   font-weight: 700;
-  font-size: 4rem;
+  font-size: 2.8rem;
   color: #636363;
   letter-spacing: 0em;
   text-transform: uppercase;
@@ -5744,10 +5744,10 @@ h1 {
 .number {
   font-family: "Lobster", sans-serif;
   /* お好みのフォントで */
-  font-size: 10rem;
+  font-size: 8rem;
   /* ★数字を大きく */
   font-weight: bold;
-  color: hsl(0, 31%, 53%);
+  color: #AC6262;
   /* 黒文字に変更 */
   line-height: 1;
   /* 行間を詰める */
@@ -5757,7 +5757,7 @@ h1 {
 
 .label {
   font-family: "Zen Kaku Gothic New", "Makinas-4-Flat", sans-serif;
-  font-size: 6rem;
+  font-size: 4rem;
   /* ★単位のサイズ */
   font-weight: 700;
   color: #636363;
@@ -5772,12 +5772,12 @@ h1 {
 
   .label {
     margin-top: 13px;
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 
   .flip-card {
     width: 100px;
-    gap: 1px;
+    gap: 10px;
   }
 
   .card-half {
@@ -6153,12 +6153,12 @@ h1 {
     height: 10px;
   }
 
-  .max-md\:h-\[15px\]{
-    height: 15px;
+  .max-md\:h-\[12px\]{
+    height: 12px;
   }
 
-  .max-md\:h-\[17px\]{
-    height: 17px;
+  .max-md\:h-\[15px\]{
+    height: 15px;
   }
 
   .max-md\:h-\[20px\]{
@@ -6252,14 +6252,6 @@ h1 {
     left: 1.5rem;
   }
 
-  .md\:left-\[250px\]{
-    left: 250px;
-  }
-
-  .md\:right-\[250px\]{
-    right: 250px;
-  }
-
   .md\:mb-0{
     margin-bottom: 0px;
   }
@@ -6336,8 +6328,8 @@ h1 {
     height: 70px;
   }
 
-  .md\:h-\[75px\]{
-    height: 75px;
+  .md\:h-\[72px\]{
+    height: 72px;
   }
 
   .md\:h-\[80px\]{
@@ -6433,8 +6425,16 @@ h1 {
     bottom: 3.5rem;
   }
 
+  .lg\:left-\[250px\]{
+    left: 250px;
+  }
+
   .lg\:right-14{
     right: 3.5rem;
+  }
+
+  .lg\:right-\[250px\]{
+    right: 250px;
   }
 
   .lg\:mb-\[3px\]{
