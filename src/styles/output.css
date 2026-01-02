@@ -5709,8 +5709,8 @@ article h2 {
   text-align: center;
 }
 
-h1 {
-  font-family: "Zen Kaku Gothic New", "Makinas-4-Flat", sans-serif;
+h4 {
+  font-family: "zen-kaku-gothic-new", "Makinas-4-Flat", sans-serif;
   font-weight: 700;
   font-size: 2.8rem;
   color: #636363;
@@ -5766,7 +5766,7 @@ h1 {
 /* --- スマホ対応 --- */
 
 @media (max-width: 1024px) {
-  h1 {
+  h4 {
     font-size: 2rem;
   }
 
@@ -5798,7 +5798,7 @@ h1 {
 }
 
 @media (max-width: 600px) {
-  h1 {
+  h4 {
     font-size: 1.2rem;
   }
 
@@ -6169,6 +6169,10 @@ h1 {
     height: 22px;
   }
 
+  .max-md\:h-\[25px\]{
+    height: 25px;
+  }
+
   .max-md\:h-\[30px\]{
     height: 30px;
   }
@@ -6187,10 +6191,6 @@ h1 {
 
   .max-md\:h-\[67px\]{
     height: 67px;
-  }
-
-  .max-md\:h-\[25px\]{
-    height: 25px;
   }
 
   .max-md\:w-16{
