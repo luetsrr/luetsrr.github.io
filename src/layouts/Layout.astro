@@ -148,7 +148,7 @@ window.addEventListener('DOMContentLoaded', () => {
         text-decoration: none;
         width: 100px;
         height: 100px;
-        bottom: 60px;
+        bottom: 120px;
         right: 60px;
         font-size: 16px;
       }
@@ -156,7 +156,7 @@ window.addEventListener('DOMContentLoaded', () => {
         background-color: rgba(255,255,255,0.3);
       }
       @media (max-width: 768px) {
-        .intro-container { gap: 1.5rem; padding-top: 105px;}
+        .intro-container { gap: 1.5rem; padding-top: 120px;}
         .intro-text { font-size: 1.1rem; line-height: 1.5; }
         .intro-skip-btn { width: 80px; height: 80px; bottom: 140px; right: 30px; font-size: 14px; }
       }
@@ -330,6 +330,15 @@ window.addEventListener('DOMContentLoaded', () => {
   gtag('js', new Date());
 
   gtag('config', 'G-J7TW1M281F');
+</script>
+<script>
+  // ユーザーエージェントを取得
+  var userAgent = window.navigator.userAgent.toLowerCase();
+  
+  // Chromeかどうか判定（EdgeやOperaを除外するための条件も含める）
+  if (userAgent.indexOf('chrome') != -1 && userAgent.indexOf('edge') == -1 && userAgent.indexOf('opr') == -1) {
+    document.body.classList.add('is-chrome');
+  }
 </script>
   <body class="flex flex-col m-0">
     <Header />

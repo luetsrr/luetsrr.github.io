@@ -5850,6 +5850,19 @@ h1 {
   }
 }
 
+/* 基本の設定（Safariなど用） */
+
+.intro-container {
+  padding-top: 120px;
+}
+
+/* Chromeの時だけ上書きする設定 */
+
+body.is-chrome .intro-container {
+  padding-top: 80px;
+  /* 例：Chromeだともっと上にしたい場合など */
+}
+
 .before\:absolute::before{
   content: var(--tw-content);
   position: absolute;
