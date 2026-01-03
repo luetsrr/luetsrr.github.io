@@ -72,15 +72,15 @@ const tagColors: Record<string, string> = {
 
 </a>
 
-<div class="resp-pc-f relative border-b-[4px] border-red-100 max-lg:h-[280px] lg:h-[500px] mt-[80px] bg-center flex justify-center items-center overflow-hidden z-10" 
+<div class="resp-pc-x relative border-b-[4px] border-red-100 h-[500px] 2xl:h-[800px] mt-[80px] 2xl:mt-[100px] bg-center flex justify-center items-center overflow-hidden z-10" 
      style="background-image: url('/images/S__182198276_2.jpg'); background-size: cover; width: 100%;">
 
      <img src="/images/LprcKIhriWwX3Xf1767333748_1767333752.png" 
-          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[190px] w-[800px]"
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[190px] 2xl:-translate-y-[100px] w-[800px]"
           style="display: block; margin: -12px auto;"
           alt="Title">
      
-  <div class="resp-sm-g absolute bottom-10 right-12 flex flex-col items-center gap-2">
+  <div class="resp-pc-a absolute bottom-10 right-12 flex flex-col items-center gap-2">
 
     <div class="craftmincho text-black max-lg:text-base lg:text-xl font-bold px-3 py-1 mb-1 backdrop-blur-sm relative">
       SNSも絶賛更新中！
@@ -103,7 +103,7 @@ const tagColors: Record<string, string> = {
   </div>
 </div>
 
-<div class="resp-pc-g relative border-b-[4px] border-red-100 h-[280px] mt-[90px] bg-center z-10" 
+<div class="resp-pc-i relative border-b-[4px] border-red-100 h-[280px] mt-[90px] bg-center z-10" 
      style="background-image: url('/images/S__182198276_2.jpg'); background-size: cover; width: 100%;">
 
      <img src="/images/LprcKIhriWwX3Xf1767333748_1767333752.png" 
@@ -113,97 +113,38 @@ const tagColors: Record<string, string> = {
      
 </div>
 
-  <div class="margin-contents text-color zen-kaku-gothic-new" style="padding-bottom: 0rem;">
-    <div class="max-md:h-[22px] md:h-[46px]" />
-    <h1 class="headline2 mx-auto text-left relative z-10" style="max-width: 900px;">
+<div class="w-full overflow-hidden">
+
+  <div class="w-full max-w-[900px] mx-auto px-6 margin-contents text-color zen-kaku-gothic-new" style="padding-bottom: 0rem;">
+    <div class="max-md:h-[22px] md:h-[46px]"></div>
+    <h1 class="headline2 text-left relative z-10 w-full">
       <span class="headline-bg">PICKUP</span>
       <span class="max-lg:ml-6 lg:ml-8 inline-block align-middle pt-2">ピックアップ</span>
     </h1>
   </div>
-  <div class="max-md:h-[0px] md:h-[11px]" />
+
+  <div class="max-md:h-[0px] md:h-[11px]"></div>
+
   <div class="zen-kaku-gothic-new relative w-full group py-2 z-10">
   
-    <button id="prevBtn" class="absolute left-2 lg:left-[250px] top-1/2 -translate-y-1/2 z-20 bg-white text-black p-1.5 md:p-3 rounded-full backdrop-blur-sm border border-black md:border-2 transition-transform duration-300 active:scale-110 md:hover:scale-110 disabled:opacity-0 disabled:cursor-not-allowed shadow-lg">
+    <button id="prevBtn" class="absolute left-3 min-[1100px]:left-[calc(50%-530px)] top-1/2 -translate-y-1/2 z-20 bg-white text-black p-1.5 md:p-3 rounded-full backdrop-blur-sm border border-black md:border-2 transition-transform duration-300 active:scale-110 md:hover:scale-110 disabled:opacity-0 disabled:cursor-not-allowed shadow-lg">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6 md:w-8 md:h-8">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
       </svg>
     </button>
   
-    <div id="slider" class="flex gap-3 md:gap-6 overflow-x-auto scroll-smooth no-scrollbar items-center md:px-[280px] max-md:px-6 py-6" style="scroll-snap-type: x mandatory;">
+    <div id="slider" class="flex gap-3 md:gap-6 overflow-x-auto scroll-smooth no-scrollbar items-center py-6 px-8 min-[1100px]:px-[calc(50%-500px)]" style="scroll-snap-type: x mandatory;">
       
       <div class="slider-card flex-shrink-0 snap-center relative rounded-2xl md:rounded-3xl overflow-hidden shadow-lg transition-transform hover:scale-[1.01]">
         <button id="sns-trigger" class="block h-full w-full text-left relative">
           <img src="/images/westu.jpg" alt="Topic" class="h-[180px] md:h-[400px] w-auto max-w-none object-cover" />
-          
           <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 100%);"></div>
-          
           <div class="absolute bottom-3 left-3 md:bottom-4 md:left-6 text-white z-10 pr-2 pointer-events-none">
             <h2 class="text-base md:text-2xl font-bold whitespace-nowrap">最新情報は各種SNSをチェック！</h2>
           </div>
         </button>
       </div>
       
-      
-      
-      <script>
-        const trigger = document.getElementById('sns-trigger');
-        const modal = document.getElementById('sns-modal');
-        const closeBtn = document.getElementById('modal-close-btn');
-        const scrollContainer = document.getElementById('modal-scroll-container');
-        const panel = document.getElementById('modal-panel');
-      
-        // ■ 開く処理
-        if (trigger && modal) {
-          trigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            // 1. まず表示エリアを確保
-            modal.classList.remove('hidden');
-      
-            // 2. アニメーション開始（不透明度とぼかしを同時に変化）
-            setTimeout(() => {
-              modal.classList.remove('opacity-0');
-              modal.classList.add('opacity-100');
-              
-              // ★ここを追加：ぼかしのアニメーション
-              modal.classList.remove('backdrop-blur-none'); // ぼかし無しを削除
-              modal.classList.add('backdrop-blur-sm');    // ぼかしを追加
-            }, 10);
-          });
-        }
-      
-        // ■ 閉じる処理
-        const closeModal = () => {
-          if (modal) {
-            // 1. アニメーション（透明へ、ぼかし無しへ）
-            modal.classList.remove('opacity-100');
-            modal.classList.add('opacity-0');
-            
-            // ★ここを追加：ぼかしを消すアニメーション
-            modal.classList.remove('backdrop-blur-sm');
-            modal.classList.add('backdrop-blur-none');
-      
-            // 2. 完了後に隠す (duration-300に合わせて300ms待つ)
-            setTimeout(() => {
-              modal.classList.add('hidden');
-            }, 300);
-          }
-        };
-      
-        // ボタン・背景クリックの処理（変更なし）
-        if (closeBtn) {
-          closeBtn.addEventListener('click', closeModal);
-        }
-      
-        if (scrollContainer && panel) {
-          scrollContainer.addEventListener('click', (e) => {
-            if (!panel.contains(e.target as Node)) {
-              closeModal();
-            }
-          });
-        }
-      </script>
-  
       <div class="slider-card flex-shrink-0 snap-center relative rounded-2xl md:rounded-3xl overflow-hidden shadow-lg transition-transform hover:scale-[1.01]">
         <a class="block h-full" href="/chukosei/">
           <img src="/images/chukosei_card.jpeg" alt="Topic" class="h-[180px] md:h-[400px] w-auto max-w-none" />
@@ -226,14 +167,72 @@ const tagColors: Record<string, string> = {
 
     </div>
   
-    <button id="nextBtn" class="absolute right-2 lg:right-[250px] top-1/2 -translate-y-1/2 z-20 bg-white text-black p-1.5 md:p-3 rounded-full backdrop-blur-sm border border-black md:border-2 transition-transform duration-300 active:scale-110 md:hover:scale-110 shadow-lg">
+    <button id="nextBtn" class="absolute right-6 min-[1100px]:right-[calc(50%-530px)] top-1/2 -translate-y-1/2 z-20 bg-white text-black p-1.5 md:p-3 rounded-full backdrop-blur-sm border border-black md:border-2 transition-transform duration-300 active:scale-110 md:hover:scale-110 shadow-lg">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6 md:w-8 md:h-8">
         <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
       </svg>
     </button>
 </div>
+
+  <script>
+    const trigger = document.getElementById('sns-trigger');
+    const modal = document.getElementById('sns-modal');
+    const closeBtn = document.getElementById('modal-close-btn');
+    const scrollContainer = document.getElementById('modal-scroll-container');
+    const panel = document.getElementById('modal-panel');
   
-  </div>
+    // ■ 開く処理
+    if (trigger && modal) {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // 1. まず表示エリアを確保
+        modal.classList.remove('hidden');
+  
+        // 2. アニメーション開始（不透明度とぼかしを同時に変化）
+        setTimeout(() => {
+          modal.classList.remove('opacity-0');
+          modal.classList.add('opacity-100');
+          
+          // ★ここを追加：ぼかしのアニメーション
+          modal.classList.remove('backdrop-blur-none'); // ぼかし無しを削除
+          modal.classList.add('backdrop-blur-sm');    // ぼかしを追加
+        }, 10);
+      });
+    }
+  
+    // ■ 閉じる処理
+    const closeModal = () => {
+      if (modal) {
+        // 1. アニメーション（透明へ、ぼかし無しへ）
+        modal.classList.remove('opacity-100');
+        modal.classList.add('opacity-0');
+        
+        // ★ここを追加：ぼかしを消すアニメーション
+        modal.classList.remove('backdrop-blur-sm');
+        modal.classList.add('backdrop-blur-none');
+  
+        // 2. 完了後に隠す (duration-300に合わせて300ms待つ)
+        setTimeout(() => {
+          modal.classList.add('hidden');
+        }, 300);
+      }
+    };
+  
+    // ボタン・背景クリックの処理（変更なし）
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeModal);
+    }
+  
+    if (scrollContainer && panel) {
+      scrollContainer.addEventListener('click', (e) => {
+        if (!panel.contains(e.target as Node)) {
+          closeModal();
+        }
+      });
+    }
+  </script>
+
   <div class="max-md:h-[12px] md:h-[43px]" />
   <section class="bg-[#e6cfd3]">
     <div class="max-md:h-[32px] md:h-[72px]" />

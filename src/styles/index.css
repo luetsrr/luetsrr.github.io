@@ -655,6 +655,15 @@ body {
   @apply md:hidden;
 }
 
+.resp-pc-p {
+  @apply hidden sm:flex;
+}
+
+.resp-pc-q {
+  @apply flex;
+  @apply sm:hidden;
+}
+
 .resp-pc-h {
   @apply flex flex-col;  /* ← ここを変更 */
   @apply xl:hidden;
