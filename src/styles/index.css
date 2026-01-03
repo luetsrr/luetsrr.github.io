@@ -2752,7 +2752,7 @@ h1 {
   font-family: "Lobster", sans-serif; /* お好みのフォントで */
   font-size: 8rem; /* ★数字を大きく */
   font-weight: bold;
-  color: #AC6262; /* 黒文字に変更 */
+  color: #a66767; /* 黒文字に変更 */
   line-height: 1; /* 行間を詰める */
 }
 
@@ -2817,14 +2817,4 @@ h1 {
     gap: 10px; /* 「日」「時間」「分」の各グループの間隔 */
   }
 
-}
-
-/* 基本の設定（Safariなど用） */
-.intro-container {
-  padding-top: 120px;
-}
-
-/* Chromeの時だけ上書きする設定 */
-body.is-chrome .intro-container {
-  padding-top: 80px; /* 例：Chromeだともっと上にしたい場合など */
 }
