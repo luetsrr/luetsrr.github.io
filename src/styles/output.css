@@ -6193,6 +6193,10 @@ h1 {
     height: 67px;
   }
 
+  .max-md\:h-\[px\]{
+    height: px;
+  }
+
   .max-md\:w-16{
     width: 4rem;
   }
