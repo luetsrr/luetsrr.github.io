@@ -439,6 +439,31 @@ body {
     padding-right: 1.5rem;
 }
 
+@media (max-width: 1024px) {
+.margin-contents {
+  max-width: 64rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+}
+
+@media (max-width: 768px) {
+  .margin-contents {
+    max-width: 64rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  }
+
+
 .margin-default {
   max-width: 56rem;
   margin-left: auto;
@@ -2143,7 +2168,7 @@ article h2 {
 /* ========= CSS Variables ========= */
 :root {
   --img-size: 280px;
-  --gap: 100px;
+  --gap: 80px;
   --bubble-bg: #fff;
   --bubble-color: #111;
   --bubble-radius: 16px;
