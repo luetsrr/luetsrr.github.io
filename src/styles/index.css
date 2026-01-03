@@ -2789,35 +2789,7 @@ h1 {
   color: #535353;
 }
 
-/* --- スマホ対応 --- */
-@media (max-width: 1024px) {
-  h1 {
-      font-size: 2rem;
-  }
-  .label {
-    margin-top: 13px;
-      font-size: 2.5rem;
-  }
-  
-  .flip-card {
-      width: 100px;
-      gap: 10px;
-  }
-  .card-half {
-      height: 50px; /* 高さ100pxの半分 */
-  }
-  .number {
-      font-size: 5rem;
-      line-height: 100px; /* スマホ時の全体の高さ */
-  }
-
-  .timer-wrapper {
-    gap: 10px; /* 「日」「時間」「分」の各グループの間隔 */
-  }
-
-}
-
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   h1 {
       font-size: 1.2rem;
   }

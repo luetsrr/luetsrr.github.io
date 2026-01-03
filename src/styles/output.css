@@ -830,10 +830,6 @@ html[data-theme="light"] .text-color {
   top: -3px;
 }
 
-.left-2{
-  left: 0.5rem;
-}
-
 .-z-10{
   z-index: -10;
 }
@@ -5812,41 +5808,7 @@ h1 {
   color: #535353;
 }
 
-/* --- スマホ対応 --- */
-
-@media (max-width: 1024px) {
-  h1 {
-    font-size: 2rem;
-  }
-
-  .label {
-    margin-top: 13px;
-    font-size: 2.5rem;
-  }
-
-  .flip-card {
-    width: 100px;
-    gap: 10px;
-  }
-
-  .card-half {
-    height: 50px;
-    /* 高さ100pxの半分 */
-  }
-
-  .number {
-    font-size: 5rem;
-    line-height: 100px;
-    /* スマホ時の全体の高さ */
-  }
-
-  .timer-wrapper {
-    gap: 10px;
-    /* 「日」「時間」「分」の各グループの間隔 */
-  }
-}
-
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   h1 {
     font-size: 1.2rem;
   }
@@ -6435,16 +6397,6 @@ h1 {
     padding-right: 3rem;
   }
 
-  .md\:px-8{
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-
-  .md\:px-6{
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-
   .md\:text-2xl{
     font-size: 1.5rem;
     line-height: 2rem;
@@ -6620,66 +6572,12 @@ h1 {
 }
 
 @media (min-width: 1100px){
-  .min-\[1100px\]\:left-\[calc\(50\%-530px\)\]{
-    left: calc(50% - 530px);
-  }
-
-  .min-\[1100px\]\:right-\[calc\(50\%-530px\)\]{
-    right: calc(50% - 530px);
-  }
-
-  .min-\[1100px\]\:right-\[calc\(50\%-480px\)\]{
-    right: calc(50% - 480px);
-  }
-
-  .min-\[1100px\]\:left-\[calc\(50\%-480px\)\]{
-    left: calc(50% - 480px);
-  }
-
-  .min-\[1100px\]\:left-\[calc\(50\%-460px\)\]{
-    left: calc(50% - 460px);
-  }
-
-  .min-\[1100px\]\:left-\[calc\(50\%-420px\)\]{
-    left: calc(50% - 420px);
-  }
-
-  .min-\[1100px\]\:left-\[calc\(50\%-370px\)\]{
-    left: calc(50% - 370px);
-  }
-
-  .min-\[1100px\]\:left-\[calc\(50\%0px\)\]{
-    left: calc(50%0px);
-  }
-
-  .min-\[1100px\]\:left-\[calc\(50\%-5000px\)\]{
-    left: calc(50% - 5000px);
-  }
-
-  .min-\[1100px\]\:left-\[calc\(50\%-500px\)\]{
-    left: calc(50% - 500px);
-  }
-
-  .min-\[1100px\]\:left-\[calc\(50\%-490px\)\]{
-    left: calc(50% - 490px);
-  }
-
   .min-\[1100px\]\:left-\[calc\(50\%-510px\)\]{
     left: calc(50% - 510px);
   }
 
   .min-\[1100px\]\:right-\[calc\(50\%-510px\)\]{
     right: calc(50% - 510px);
-  }
-
-  .min-\[1100px\]\:px-\[calc\(50\%-500px\)\]{
-    padding-left: calc(50% - 500px);
-    padding-right: calc(50% - 500px);
-  }
-
-  .min-\[1100px\]\:px-\[calc\(50\%-450px\)\]{
-    padding-left: calc(50% - 450px);
-    padding-right: calc(50% - 450px);
   }
 
   .min-\[1100px\]\:px-\[calc\(50\%-480px\)\]{
