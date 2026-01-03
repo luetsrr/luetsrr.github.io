@@ -6058,6 +6058,10 @@ h1 {
     height: 90px;
   }
 
+  .max-xl\:h-\[70px\]{
+    height: 70px;
+  }
+
   .max-xl\:w-20{
     width: 5rem;
   }
