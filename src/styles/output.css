@@ -6383,6 +6383,14 @@ h1 {
     height: 80px;
   }
 
+  .md\:h-\[105px\]{
+    height: 105px;
+  }
+
+  .md\:h-\[45px\]{
+    height: 45px;
+  }
+
   .md\:w-16{
     width: 4rem;
   }
