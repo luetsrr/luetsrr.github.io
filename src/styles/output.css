@@ -4577,7 +4577,7 @@ article h2 {
   /* 真円にする */
   font-weight: bold;
   font-size: 14px;
-  margin-right: 8px;
+  margin-right: 6px;
 }
 
 .qa-label.q {
@@ -6169,8 +6169,8 @@ h1 {
     height: 30px;
   }
 
-  .max-md\:h-\[35px\]{
-    height: 35px;
+  .max-md\:h-\[32px\]{
+    height: 32px;
   }
 
   .max-md\:h-\[40px\]{
@@ -6183,10 +6183,6 @@ h1 {
 
   .max-md\:h-\[67px\]{
     height: 67px;
-  }
-
-  .max-md\:h-\[32px\]{
-    height: 32px;
   }
 
   .max-md\:w-16{
