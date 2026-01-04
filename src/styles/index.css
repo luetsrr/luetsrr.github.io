@@ -2248,7 +2248,7 @@ article h2 {
 .face-board {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--gap);
+  gap: var(--gap) 60px;
   width: min(720px, calc(2 * var(--img-size) + var(--gap) + 40px));
   margin: 0 auto;
 }
