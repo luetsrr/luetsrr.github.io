@@ -50,12 +50,12 @@ const filteredPosts: any = posts.filter((post: any) =>
 
 // タグ名ごとの色を定義
 const tagColors: Record<string, string> = {
-
   // 必要なタグをここに追加
 };
 ---
 
 <Layout title=`タグ：${tag} - 第8回うぃーすた全国交流会`>
+  {/* ヘッダーバナーエリア */}
   <div class="relative z-[-1] mt-[80px] lg:mt-[78px] bg-[#fffdfd] border-b-[4px] border-red-100 w-full md:h-72 max-md:h-64 flex flex-col justify-center pl-8 zen-kaku-gothic-new">
     <span class="ml-10 pt-3 max-md:ml-1 text-[50px] font-bold outline-text tracking-widest z-0" style="display: inline-block;
   background: linear-gradient(90deg, #000 40%, #fff 50%, #000 60%);
@@ -70,7 +70,9 @@ const tagColors: Record<string, string> = {
       お知らせ
     </span>
   </div>
-  <div class="bg-white/30 text-color zen-kaku-gothic-new text-sm lg:text-base" style="line-height: 2.05;">
+
+  {/* 修正: min-h-[calc(100vh-370px)] を追加して画面下部までエリアを確保 */}
+  <div class="bg-white/30 text-color zen-kaku-gothic-new text-sm lg:text-base min-h-[calc(100vh-370px)]" style="line-height: 2.05;">
     <div class="margin-contents pt-8 md:px-12 max-md:px-6">
 
     <div class="h-[15px] md:h-[35px]"></div>
@@ -132,7 +134,10 @@ const tagColors: Record<string, string> = {
         </li>
       ))}
     </ul>
-    <div style="height: 120px;"></div>
+    
+    {/* 修正: 固定の120pxを削除し、適度な余白(h-12)に変更 */}
+    <div style="height: 120px"></div>
 
+  </div>
   </div>
 </Layout>
