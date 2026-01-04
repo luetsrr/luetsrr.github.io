@@ -3950,6 +3950,20 @@ html {
   transform: none;
 }
 
+.reveal2 {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 600ms ease, transform 600ms ease;
+  will-change: opacity, transform;
+}
+
+/* 発火時のクラス */
+
+.reveal2.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
 /* ゆっくりにしたい・速くしたいは transition-duration を変更 */
 
 /* prefers-reduced-motion 対応（アニメーションを無効に） */
@@ -5126,7 +5140,7 @@ article h2 {
 
 :root {
   --img-size: 280px;
-  --gap: 80px;
+  --gap: 90px;
   --bubble-bg: #fff;
   --bubble-color: #111;
   --bubble-radius: 16px;
