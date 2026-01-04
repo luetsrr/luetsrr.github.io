@@ -12,7 +12,9 @@ import Layout from "../layouts/Layout.astro";
       お問い合わせ
     </span>
   </div>
-  <div class="bg-white/30 text-color zen-kaku-gothic-new text-sm lg:text-base" style="line-height: 2.05;">
+
+  {/* 修正: min-h-[calc(100vh-370px)] を追加 */}
+  <div class="bg-white/30 text-color zen-kaku-gothic-new text-sm lg:text-base min-h-[calc(100vh-370px)]" style="line-height: 2.05;">
     <div class="fade-in margin-contents pt-8 md:px-12 max-md:px-6">
 
     <div class="h-[15px] md:h-[40px]"></div>
@@ -40,7 +42,10 @@ import Layout from "../layouts/Layout.astro";
           <br>
           うぃーすた全国交流会実行委員会<br>
       mail：<a class="hover-color" href="mailto:westu.zenkoku.2026@gmail.com">westu.zenkoku.2026@gmail.com</a></p>
-    <div style="height: 120px;"></div>
+    
+    {/* 修正: 固定の120pxを削除し、適度な余白(h-12)に変更 */}
+    <div style="height: 120px"></div>
     </div>
+  </div>
   </div>
 </Layout>

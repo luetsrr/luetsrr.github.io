@@ -1176,6 +1176,10 @@ html[data-theme="light"] .text-color {
   height: 100%;
 }
 
+.h-20{
+  height: 5rem;
+}
+
 .max-h-\[640px\]{
   max-height: 640px;
 }
@@ -1186,6 +1190,10 @@ html[data-theme="light"] .text-color {
 
 .min-h-full{
   min-height: 100%;
+}
+
+.min-h-\[calc\(100vh-370px\)\]{
+  min-height: calc(100vh - 370px);
 }
 
 .w-0{
