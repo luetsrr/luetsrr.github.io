@@ -1592,10 +1592,6 @@ html[data-theme="light"] .text-color {
   border-width: 1px;
 }
 
-.border-\[3px\]{
-  border-width: 3px;
-}
-
 .border-b{
   border-bottom-width: 1px;
 }
@@ -1626,11 +1622,6 @@ html[data-theme="light"] .text-color {
 
 .border-t-\[3px\]{
   border-top-width: 3px;
-}
-
-.border-\[\#ffc926\]{
-  --tw-border-opacity: 1;
-  border-color: rgb(255 201 38 / var(--tw-border-opacity, 1));
 }
 
 .border-black{
@@ -5734,14 +5725,16 @@ article h2 {
   text-align: center;
 }
 
-/* ベースの設定 */
+/* 背景を白くし、角を丸く、かつ「角以外の直線部分」に縁を付ける設定 */
 
 .schedule-card {
   background-color: #ffffffb3;
   border-radius: 40px;
+  /* 角丸の大きさ */
   position: relative;
   padding: 60px 40px;
   margin-bottom: 0px;
+  /* 直線部分のみの境界線を表現するために、before/after擬似要素で線を引く手法 */
 }
 
 @media (max-width: 768px) {
@@ -5750,60 +5743,36 @@ article h2 {
   }
 }
 
-/* 共通設定：擬似要素の配置 */
+/* 上下の線（外側に配置） */
 
-.schedule-card::before,
+.schedule-card::before {
+  content: "";
+  position: absolute;
+  /* 0 → -10px に変更して外側へ */
+  top: -3px;
+  bottom: -3px;
+  /* 線の長さ（角の空き具合）はここで調整 */
+  left: 40px;
+  right: 40px;
+  border-top: 3px solid #ffc926;
+  border-bottom: 3px solid #ffc926;
+  pointer-events: none;
+}
+
+/* 左右の線（外側に配置） */
+
 .schedule-card::after {
   content: "";
   position: absolute;
-  pointer-events: none;
-  /* カードの外側に配置 (-3px) */
-  top: -3px;
-  bottom: -3px;
+  /* 0 → -10px に変更して外側へ */
   left: -3px;
   right: -3px;
-  border-radius: 43px;
-}
-
-/* 【1】角のカーブ（丸い部分） */
-
-.schedule-card::before {
-  background-image: 
-    radial-gradient(circle at bottom right, transparent 40px, #ffc926 40px, #ffc926 43px, transparent 43px), /* 左上 */
-    radial-gradient(circle at bottom left, transparent 40px, #ffc926 40px, #ffc926 43px, transparent 43px),  /* 右上 */
-    radial-gradient(circle at top right, transparent 40px, #ffc926 40px, #ffc926 43px, transparent 43px),    /* 左下 */
-    radial-gradient(circle at top left, transparent 40px, #ffc926 40px, #ffc926 43px, transparent 43px);
-  /* 右下 */
-  background-position: top left, top right, bottom left, bottom right;
-  background-size: 43px 43px;
-  background-repeat: no-repeat;
-}
-
-/* 【2】直線部分（縦と横の延長線） */
-
-.schedule-card::after {
-  background-image: 
-    /* 縦（Y軸）の線 4本 */
-    linear-gradient(#ffc926, #ffc926), linear-gradient(#ffc926, #ffc926),
-    linear-gradient(#ffc926, #ffc926), linear-gradient(#ffc926, #ffc926),
-    /* 横（X軸）の線 4本 */
-    linear-gradient(#ffc926, #ffc926), linear-gradient(#ffc926, #ffc926),
-    linear-gradient(#ffc926, #ffc926), linear-gradient(#ffc926, #ffc926);
-  background-repeat: no-repeat;
-  /* ★ここで「線の長さ」を調整します★ */
-  background-size: 
-    /* 縦の線のサイズ： 幅3px  高さ30px */
-    3px 30px, 3px 30px, 3px 30px, 3px 30px,
-    /* 横の線のサイズ： 幅20px 高さ3px */
-    30px 3px, 30px 3px, 30px 3px, 30px 3px;
-  /* 線の位置合わせ（角の終わりである 42px からスタート） */
-  background-position: 
-    /* 縦の位置 (左上, 右上, 左下, 右下) */
-    left 0px top 42px,  right 0px top 42px,
-    left 0px bottom 42px, right 0px bottom 42px,
-    /* 横の位置 (左上, 右上, 左下, 右下) */
-    left 42px top 0px, right 42px top 0px,
-    left 42px bottom 0px, right 42px bottom 0px;
+  /* 線の長さ（角の空き具合）はここで調整 */
+  top: 40px;
+  bottom: 40px;
+  border-left: 3px solid #ffc926;
+  border-right: 3px solid #ffc926;
+  pointer-events: none;
 }
 
 .caption {
@@ -6701,8 +6670,8 @@ h1 {
 }
 
 @media (min-width: 1280px){
-  .xl\:mb-14{
-    margin-bottom: 3.5rem;
+  .xl\:mb-16{
+    margin-bottom: 4rem;
   }
 
   .xl\:ml-16{
@@ -6721,18 +6690,8 @@ h1 {
     margin-top: 0.25rem;
   }
 
-  @media (min-width: 1280px){
-    .xl\:xl\:mb-14{
-      margin-bottom: 3.5rem;
-    }
-  }
-
   .xl\:mt-2{
     margin-top: 0.5rem;
-  }
-
-  .xl\:mb-16{
-    margin-bottom: 4rem;
   }
 
   .xl\:h-\[100px\]{
