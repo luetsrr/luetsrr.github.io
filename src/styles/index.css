@@ -458,11 +458,66 @@ body {
     margin-right: auto;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  }
+
+  .margin-title {
+    max-width: 64rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+.margin-title {
+  max-width: 64rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+}
+
+@media (max-width: 768px) {
+  .margin-title {
+    max-width: 64rem;
+    margin-left: auto;
+    margin-right: auto;
     padding-left: 2rem;
     padding-right: 1.5rem;
   }
   }
 
+  .margin-contents2 {
+    max-width: 64rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+.margin-contents2 {
+  max-width: 64rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+}
+
+@media (max-width: 768px) {
+  .margin-contents2 {
+    max-width: 64rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  }
 
 .margin-default {
   max-width: 56rem;
