@@ -572,6 +572,7 @@ import Layout from "../layouts/Layout.astro";
     </a>
   </div>
   </div>
+  <div id="bubble-container" class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden"></div>
   <div style="height: 120px;" />
 </Layout>
 
@@ -627,7 +628,126 @@ revealElements.forEach(el => io.observe(el));
   });
   </script>
   
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('bubble-container');
+      if (!container) return;
   
+      // ▼▼▼ 設定エリア ▼▼▼
+      
+      const IMAGE_PATHS = [
+        '/images/bubble_1.png',
+        '/images/bubble_2.png',
+        '/images/bubble_3.png'
+      ];
   
+      const BUBBLE_COUNT = 12;
+      
+      // ▲▲▲ 設定エリア終了 ▲▲▲
+      
+      // @ts-ignore
+      const bubbles = [];
   
+      const winWidth = window.innerWidth;
   
+      for (let i = 0; i < BUBBLE_COUNT; i++) {
+        // ▼ 修正: ここで bubble = null と宣言するのをやめました（エラーの原因）
+        
+        let size = 0;
+        let initialXPercent = 0;
+        let initialY = 0;
+        let speed = 0;
+        let isOverlapping = true;
+        let attempts = 0;
+  
+        // 重なりチェックのリトライループ
+        while (isOverlapping && attempts < 30) {
+          attempts++;
+          
+          size = Math.random() * 200 + 40; // 40px 〜 240px
+          initialXPercent = Math.random() * 100;
+          initialY = Math.random() * window.innerHeight;
+          
+          const initialXPixel = (initialXPercent / 100) * winWidth;
+          
+          let collisionFound = false;
+          
+          // @ts-ignore
+          for (const existingBubble of bubbles) {
+            // @ts-ignore
+            const existingXPixel = (existingBubble.initialXPercent / 100) * winWidth;
+            // @ts-ignore
+            const existingY = existingBubble.baseY;
+  
+            const dx = initialXPixel - existingXPixel;
+            const dy = initialY - existingY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+  
+            // @ts-ignore
+            const minDistance = (size / 2) + (existingBubble.size / 2) + 20;
+  
+            if (distance < minDistance) {
+              collisionFound = true;
+              break; 
+            }
+          }
+  
+          if (!collisionFound) {
+            isOverlapping = false;
+          }
+        }
+  
+        // ▼ 修正: ここで初めて bubble を const で定義します
+        const bubble = document.createElement('img');
+        
+        const randomImgIndex = Math.floor(Math.random() * IMAGE_PATHS.length);
+        bubble.src = IMAGE_PATHS[randomImgIndex] ?? "";
+        bubble.classList.add('absolute');
+        bubble.alt = ""; 
+  
+        speed = Math.random() * 0.75 + 0.05;
+  
+        bubble.style.opacity = (Math.random() * 0.6 + 0.1).toString();
+        
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `auto`;
+        bubble.style.left = `${initialXPercent}%`;
+  
+        container.appendChild(bubble);
+  
+        // @ts-ignore
+        bubbles.push({
+          element: bubble,
+          baseY: initialY,
+          initialXPercent: initialXPercent,
+          speed: speed,
+          size: size
+        });
+      }
+  
+      function updatePositions() {
+        const scrollY = window.scrollY;
+        const viewportHeight = window.innerHeight;
+  
+        // @ts-ignore
+        bubbles.forEach(b => {
+          // @ts-ignore
+          let rawY = b.baseY - (scrollY * b.speed);
+          
+          // @ts-ignore
+          const loopHeight = viewportHeight + b.size + 250; 
+          let displayedY = ((rawY % loopHeight) + loopHeight) % loopHeight;
+          
+          // @ts-ignore
+          displayedY -= b.size;
+  
+          // @ts-ignore
+          b.element.style.transform = `translate3d(0, ${displayedY}px, 0)`;
+        });
+  
+        requestAnimationFrame(updatePositions);
+      }
+  
+      updatePositions();
+    });
+  </script>
