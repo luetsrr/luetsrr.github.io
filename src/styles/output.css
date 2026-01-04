@@ -6721,6 +6721,20 @@ h1 {
     margin-top: 0.25rem;
   }
 
+  @media (min-width: 1280px){
+    .xl\:xl\:mb-14{
+      margin-bottom: 3.5rem;
+    }
+  }
+
+  .xl\:mt-2{
+    margin-top: 0.5rem;
+  }
+
+  .xl\:mb-16{
+    margin-bottom: 4rem;
+  }
+
   .xl\:h-\[100px\]{
     height: 100px;
   }
