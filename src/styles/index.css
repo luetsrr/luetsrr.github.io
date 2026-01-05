@@ -2409,6 +2409,117 @@ article h2 {
   }
 }
 
+/* --- 新しいレイアウト用のCSS --- */
+
+/* 全体のコンテナ：左右に並べる */
+.chart-flex-container {
+  display: flex;
+  width: 100%;
+  align-items: flex-start; /* 上揃え */
+  border-bottom: 1px solid #eee; /* 必要に応じて調整 */
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* 左側ブロック（固定） */
+.fixed-left-block {
+  flex-shrink: 0; /* 縮小させない */
+  width: 40px;    /* Y軸の幅に合わせて調整 */
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  background-color: #fff; /* 背景白（透過防止） */
+}
+
+/* Y軸のスタイル */
+.y-axis {
+  height: 300px; /* グラフの高さと合わせる */
+  display: flex;
+  flex-direction: column;
+  border-right: 2px solid #333; /* 縦の軸線 */
+  padding-right: 5px;
+}
+
+.y-label {
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* 目隠し用長方形（左下の角） */
+.corner-spacer {
+  height: 100px; /* X軸ラベルエリアの高さに合わせる */
+  width: 100%;
+  background-color: #fff;
+  border-right: 2px solid #fff; /* 軸線の下端を隠す場合、または透明に */
+}
+
+/* 右側ブロック（スクロール） */
+.scrollable-right-block {
+  flex-grow: 1;     /* 残りの幅を埋める */
+  overflow-x: auto; /* 横スクロール発生 */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* スクロール内部のカラム */
+.chart-inner-column {
+  display: inline-block; /* 中身が縮まないように */
+  min-width: 100%;
+}
+
+/* 棒グラフエリア */
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 300px; /* Y軸の高さと合わせる */
+  border-bottom: 2px solid #333; /* 横の軸線 */
+  padding-left: 10px;
+  padding-right: 20px; /* 右端の余白 */
+  width: max-content; /* 中身に合わせて幅を確保 */
+}
+
+.bar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40px;
+  flex-shrink: 0; /* 棒が潰れないように */
+}
+
+.bar {
+  width: 40px;
+  background-color: #4faf4c;
+  border-radius: 5px 5px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  color: white;
+  font-size: 14px;
+}
+
+/* X軸ラベルエリア */
+.x-axis-labels {
+  display: flex;
+  gap: 10px;
+  padding-left: 10px;
+  padding-top: 5px;
+  height: 100px; /* corner-spacerと同じ高さにする */
+  width: max-content;
+}
+
+.x-label-item {
+  width: 40px; /* bar-containerと同じ幅 */
+  writing-mode: vertical-rl; /* 縦書き */
+  font-size: 14px;
+  display: flex;
+  align-items: center; /* 縦書きの中央寄せ */
+  justify-content: flex-start; /* 上寄せ */
+  flex-shrink: 0;
+  letter-spacing: 0.1em;
+}
+
 .chart-wrapper {
   width: 100%;
   overflow-x: auto; /* 横スクロールを可能に */
