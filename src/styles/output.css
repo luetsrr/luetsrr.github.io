@@ -5575,6 +5575,7 @@ article h2 {
   /* 背景を白にすると棒が重なっても見やすい */
   padding-right: 10px;
   /* 棒と少し間隔 */
+  padding-bottom: 0;
   border-right: 2px solid #333;
   /* 軸線をここで固定 */
   align-self: flex-end;
@@ -5596,6 +5597,7 @@ article h2 {
   /* 背景を白にすると棒が重なっても見やすい */
   padding-right: 10px;
   /* 棒と少し間隔 */
+  padding-bottom: 0;
   border-right: 2px solid #ffffff;
   /* 軸線をここで固定 */
   margin-bottom: 0px;
