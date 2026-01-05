@@ -2430,7 +2430,7 @@ article h2 {
   display: flex;
   align-items: flex-end;
   gap: 10px;
-  height: 300px;
+  height: auto;
   border-bottom: 2px solid #333;
   padding-left: 10px;
   padding-bottom: 0px;
@@ -2610,6 +2610,7 @@ article h2 {
   border-right: 2px solid #333; /* 軸線をここで固定 */
   align-self: flex-end;
   position: -webkit-sticky; /* iOS (Safari/X) 用にこれを必ず先頭に追加 */
+  height: auto;
 }
 
 .x-axis {
