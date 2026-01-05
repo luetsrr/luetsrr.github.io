@@ -2414,6 +2414,105 @@ body.is-x-browser .hide-on-x {
   display: none !important;
 }
 
+/* デフォルトでは非表示にする */
+.show-on-x-only {
+  display: none;
+}
+
+/* Xアプリ内ブラウザの時だけ、強制的に表示する */
+body.is-x-browser .show-on-x-only {
+  display: block !important;
+}
+  /* --- A. X限定表示の制御 --- */
+  
+  /* デフォルトではこのブロック全体を非表示にする */
+  .twitter-only-zoom-block {
+    display: none;
+  }
+
+  /* Xアプリ内ブラウザと判定された時だけ表示する */
+  body.is-x-browser .twitter-only-zoom-block {
+    display: block !important;
+  }
+
+
+  /* --- B. 画像とボタンのデザイン --- */
+  .image-container {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .image-container img.main-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* 中央の「タップで拡大」ボタン */
+  .zoom-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    /* スマホで見やすいよう、最初から表示しておく */
+    opacity: 0.9; 
+  }
+
+  /* --- C. モーダル（全画面表示）のデザイン --- */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;  /* 幅の指定を解除（左右固定で自動で広がる） */
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999; /* 最前面 */
+    background-color: rgba(0, 0, 0, 0.6);
+    /* アニメーション用 */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  /* 表示時のクラス */
+  .modal-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* 閉じるボタン（×） */
+  .close-modal-btn {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: none;
+    border: none;
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  /* モーダル内の画像 */
+  .modal-content img {
+    max-width: 95vw;
+    max-height: 80vh;
+    object-fit: contain;
+  }
 
 .chart-wrapper {
   width: 100%;

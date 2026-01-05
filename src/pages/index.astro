@@ -307,9 +307,87 @@ const tagColors: Record<string, string> = {
           昨年は全国各地より、計88名の方にご参加いただきました。
             <br>
           </p>
-          <div class="hide-on-x">
           <p class="text-sm link blog-width lg:text-[15px]"
           style="letter-spacing: .025em; margin-bottom: 10px; line-height: 2.05;">（参考）「第7回うぃーすた全国交流会」（2025年6月、東京開催）に参加された方のお住まいの都道府県</p>
+
+          <div class="twitter-only-zoom-block">
+  
+            <div class="image-container">
+              <img src="/images/todouhuken.png" alt="グラフの画像" class="main-image">
+          
+              <button id="openModalBtn" class="zoom-button">
+                🔍 タップで拡大
+              </button>
+            </div>
+          
+            <div id="imageModal" class="modal-overlay">
+              <button id="closeModalBtn" class="close-modal-btn">×</button>
+              
+              <div class="modal-content">
+                <img src="/images/todouhuken.png" alt="拡大画像">
+              </div>
+            </div>
+          
+          </div>
+
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              
+              // ページ内のすべての「拡大ボタン」を探す
+              const openButtons = document.querySelectorAll('.zoom-button');
+          
+              openButtons.forEach(function(btn) {
+                
+                // ボタンの近くにある「モーダル」を探す
+                // 構造: .zoom-wrapper > .image-container > button なので、
+                // 親(.image-container)の隣(.modal-overlay)を探す
+                const container = btn.closest('.image-container');
+                const modal = container.nextElementSibling; // すぐ下の要素（モーダル）を取得
+          
+                // モーダルが見つからなければスキップ
+                if (!modal) return;
+          
+                // モーダルの中にある「閉じるボタン」を探す
+                const closeBtn = modal.querySelector('.close-modal-btn');
+          
+                // --------------------------------------------------
+                // 親ボックスの影響を受けないよう、モーダルをbody直下へ移動
+                // （ただし、元のペア関係を忘れないように変数 modal で操作し続ける）
+                // --------------------------------------------------
+                document.body.appendChild(modal);
+          
+          
+                // 【開く機能】
+                btn.addEventListener('click', function() {
+                  modal.classList.add('is-open');
+                  document.body.style.overflow = 'hidden'; // 背景スクロール禁止
+                });
+          
+                // 【閉じる機能】関数化
+                const closeModal = function() {
+                  modal.classList.remove('is-open');
+                  document.body.style.overflow = '';
+                };
+          
+                // ×ボタンで閉じる
+                if (closeBtn) {
+                  closeBtn.addEventListener('click', closeModal);
+                }
+          
+                // 背景クリックで閉じる
+                modal.addEventListener('click', function(e) {
+                  // 画像とボタン以外（背景）をクリックしたら閉じる
+                  // .modal-content 自体はクリックしても閉じないようにする
+                  if (e.target === modal) {
+                    closeModal();
+                  }
+                });
+          
+              });
+            });
+          </script>
+
+          <div class="hide-on-x">
           <div class="chart-wrapper">
             <div class="chart-inner">
             <div class="max-md:h-[20px] md:h-[20px]"></div>
@@ -383,7 +461,7 @@ const tagColors: Record<string, string> = {
             
           
             <!-- 横軸ラベル -->
-            <div class="text-left" style="display: flex; gap: 20px; align-items: flex-start;">
+            <div class="text-left" style="display: flex; gap: 20px; margin-top: 5px; align-items: flex-start;">
               <!-- 縦軸スケール -->
               <div class="x-axis" style="display: flex; flex-direction: column; justify-content: flex-end; width: 38px; height: 80px; position: sticky;">
                 <div style="height: 8px; display: flex; align-items: flex-end; justify-content: center;">&emsp;</div>
@@ -431,6 +509,28 @@ const tagColors: Record<string, string> = {
       <div class="ml-2" style="height: 12px;"></div>
           <p class="text-sm link blog-width lg:text-[15px]"
           style="letter-spacing: .025em; margin-bottom: 10px; line-height: 2.05;">（参考）「第7回うぃーすた全国交流会」（2025年6月、東京開催）に参加された方の年齢性別</p>
+          
+          <div class="twitter-only-zoom-block">
+  
+            <div class="image-container">
+              <img src="/images/nenreiseibetu.png" alt="グラフの画像" class="main-image">
+          
+              <button id="openModalBtn" class="zoom-button">
+                🔍 タップで拡大
+              </button>
+            </div>
+          
+            <div id="imageModal" class="modal-overlay">
+              <button id="closeModalBtn" class="close-modal-btn">×</button>
+              
+              <div class="modal-content">
+                <img src="/images/nenreiseibetu.png" alt="拡大画像">
+              </div>
+            </div>
+          
+          </div>
+
+          <div class="hide-on-x">
           <div class="chart-wrapper">
             <div class="chart-inner">
             <div class="max-md:h-[20px] md:h-[20px]" />
@@ -875,6 +975,7 @@ const tagColors: Record<string, string> = {
           style="letter-spacing: .025em; line-height: 2.05;">※横スクロールで全体を見ることができます。<br>※崩れて見える場合はSafariやChromeなどのブラウザをお使いください。</p>
     </div>
   </div>
+</div>
   <a id="contactButton" href="/application/"
   class="fixed lg:right-14 lg:bottom-14 max-lg:right-5 max-lg:bottom-5 z-50 
   flex flex-col items-center justify-center
