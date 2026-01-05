@@ -2434,7 +2434,6 @@ article h2 {
   border-bottom: 2px solid #333;
   padding-left: 10px;
   padding-bottom: 0px;
-  margin-top: 10px;
   
 }
 
@@ -2614,7 +2613,6 @@ article h2 {
   align-items: flex-end;
   position: -webkit-sticky; /* iOS (Safari/X) 用にこれを必ず先頭に追加 */
   line-height: 1;
-  margin-top: 10px;
 }
 
 .x-axis {
