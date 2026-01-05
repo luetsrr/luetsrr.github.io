@@ -2820,7 +2820,7 @@ article h2 {
 h1 {
   font-family: "Zen Kaku Gothic New", "Makinas-4-Flat", sans-serif;
   font-weight: 700;
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   color: #535353;
   letter-spacing: 0em;
   text-transform: uppercase;
@@ -2844,7 +2844,7 @@ h1 {
 /* --- 数字のスタイル --- */
 .number {
   font-family: "Lobster", sans-serif; /* お好みのフォントで */
-  font-size: 8rem; /* ★数字を大きく */
+  font-size: 7.5rem; /* ★数字を大きく */
   font-weight: bold;
   color: #a66767; /* 黒文字に変更 */
   line-height: 1; /* 行間を詰める */
@@ -2853,7 +2853,7 @@ h1 {
 /* --- 単位（日・時間・分）のスタイル --- */
 .label {
   font-family: "Zen Kaku Gothic New", "Makinas-4-Flat", sans-serif;
-  font-size: 4rem; /* ★単位のサイズ */
+  font-size: 3.5rem; /* ★単位のサイズ */
   font-weight: 600;
   color: #535353;
 }
