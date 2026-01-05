@@ -5577,6 +5577,7 @@ article h2 {
   /* 棒と少し間隔 */
   border-right: 2px solid #333;
   /* 軸線をここで固定 */
+  align-self: flex-end;
 }
 
 .x-axis {
