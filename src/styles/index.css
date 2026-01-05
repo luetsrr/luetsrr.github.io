@@ -2610,7 +2610,6 @@ article h2 {
   border-right: 2px solid #333; /* 軸線をここで固定 */
   align-self: flex-end;
   position: -webkit-sticky; /* iOS (Safari/X) 用にこれを必ず先頭に追加 */
-  position: sticky;         /* 標準ブラウザ用 */
 }
 
 .x-axis {
@@ -2625,7 +2624,6 @@ article h2 {
   border-right: 2px solid #ffffff; /* 軸線をここで固定 */
   margin-bottom: 0px;
   position: -webkit-sticky; /* iOS (Safari/X) 用にこれを必ず先頭に追加 */
-  position: sticky;         /* 標準ブラウザ用 */
 }
 
 .box {
