@@ -5581,6 +5581,7 @@ article h2 {
   align-self: flex-end;
   position: -webkit-sticky;
   /* iOS (Safari/X) 用にこれを必ず先頭に追加 */
+  line-height: 1;
 }
 
 .x-axis {
