@@ -2618,9 +2618,10 @@ article h2 {
   position: sticky; /* ← ここで固定 */
   left: 0;          /* 左端に固定 */
   z-index: 10;      /* 棒グラフより前面に出す */
-  background: white; /* 背景を白にすると棒が重なっても見やすい */
+  background: rgb(255, 255, 255); /* 背景を白にすると棒が重なっても見やすい */
   padding-right: 10px; /* 棒と少し間隔 */
   border-right: 2px solid #ffffff; /* 軸線をここで固定 */
+  margin-bottom: 0px;
 }
 
 .box {
