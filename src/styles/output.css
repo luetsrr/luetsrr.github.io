@@ -5396,6 +5396,7 @@ body.is-x-browser .show-on-x-only {
 
 body.is-x-browser .twitter-only-zoom-block {
   display: block !important;
+  text-align: center;
 }
 
 /* --- B. 画像とボタンのデザイン --- */
@@ -5412,6 +5413,18 @@ body.is-x-browser .twitter-only-zoom-block {
   display: block;
   width: 100%;
   height: auto;
+}
+
+.image-container img.main-image2 {
+  display: block;
+  width: 100%;
+  height: 200px;
+  /* 好みの高さ（px）を指定してください */
+  -o-object-fit: cover;
+     object-fit: cover;
+  /* 画像を押しつぶさずに、枠に合わせてトリミングする */
+  -o-object-position: center;
+     object-position: center;
 }
 
 /* 中央の「タップで拡大」ボタン */

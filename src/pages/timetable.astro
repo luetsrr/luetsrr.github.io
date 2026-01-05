@@ -19,6 +19,48 @@ const venueWidths = [150, 150, 150, 150, 150];
   <div class="bg-white/30 text-color zen-kaku-gothic-new text-sm lg:text-base" style="line-height: 2.05;">
     <div class="fade-in margin-contents pt-8 md:px-12 max-md:px-6">
     <div class="h-[15px] md:h-[40px]"></div>
+
+  <div class="twitter-only-zoom-block">
+  
+    <div class="image-container">
+      <img src="/images/7-18.jpeg" alt="グラフの画像" class="main-image2">
+  
+      <button id="openModalBtn" class="zoom-button">
+        🔍 タップで拡大
+      </button>
+    </div>
+
+    <div id="imageModal" class="modal-overlay">
+      <button id="closeModalBtn" class="close-modal-btn">×</button>
+      
+      <div class="modal-content">
+        <img src="/images/7-18.jpeg" alt="拡大画像">
+      </div>
+    </div>
+  
+  </div>
+
+  <div class="twitter-only-zoom-block">
+  
+    <div class="image-container">
+      <img src="/images/7-19.jpeg" alt="グラフの画像" class="main-image2">
+  
+      <button id="openModalBtn" class="zoom-button">
+        🔍 タップで拡大
+      </button>
+    </div>
+  
+    <div id="imageModal" class="modal-overlay">
+      <button id="closeModalBtn" class="close-modal-btn">×</button>
+      
+      <div class="modal-content">
+        <img src="/images/7-19.jpeg" alt="拡大画像">
+      </div>
+    </div>
+  
+  </div>
+
+  <div class="hide-on-x">
     <div class="ml-1">
       <p class="mb-2">イベントをタップすることで詳細を確認できます。</p>
       
@@ -106,6 +148,62 @@ const venueWidths = [150, 150, 150, 150, 150];
       
     </div>
   </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    
+    // ページ内のすべての「拡大ボタン」を探す
+    const openButtons = document.querySelectorAll('.zoom-button');
+
+    openButtons.forEach(function(btn) {
+      
+      // ボタンの近くにある「モーダル」を探す
+      // HTML要素(Element)として扱うために型アサーションを行うか、nullチェックが必要
+      const container = btn.closest('.image-container');
+
+      // ▼▼▼【修正ポイント】この1行を追加してください ▼▼▼
+      if (!container) return; 
+      // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+
+      const modal = container.nextElementSibling; // すぐ下の要素（モーダル）を取得
+
+      // モーダルが見つからなければスキップ
+      if (!modal) return;
+
+      // モーダルの中にある「閉じるボタン」を探す
+      const closeBtn = modal.querySelector('.close-modal-btn');
+
+      // 親ボックスの影響を受けないよう、モーダルをbody直下へ移動
+      document.body.appendChild(modal);
+
+      // 【開く機能】
+      btn.addEventListener('click', function() {
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden'; // 背景スクロール禁止
+      });
+
+      // 【閉じる機能】関数化
+      const closeModal = function() {
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+      };
+
+      // ×ボタンで閉じる
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+      }
+
+      // 背景クリックで閉じる
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+    });
+  });
+</script>
 
   <script>
     const container = document.getElementById("tableContainer")!;
