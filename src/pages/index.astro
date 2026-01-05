@@ -339,9 +339,13 @@ const tagColors: Record<string, string> = {
               openButtons.forEach(function(btn) {
                 
                 // ボタンの近くにある「モーダル」を探す
-                // 構造: .zoom-wrapper > .image-container > button なので、
-                // 親(.image-container)の隣(.modal-overlay)を探す
+                // HTML要素(Element)として扱うために型アサーションを行うか、nullチェックが必要
                 const container = btn.closest('.image-container');
+          
+                // ▼▼▼【修正ポイント】この1行を追加してください ▼▼▼
+                if (!container) return; 
+                // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+          
                 const modal = container.nextElementSibling; // すぐ下の要素（モーダル）を取得
           
                 // モーダルが見つからなければスキップ
@@ -350,12 +354,8 @@ const tagColors: Record<string, string> = {
                 // モーダルの中にある「閉じるボタン」を探す
                 const closeBtn = modal.querySelector('.close-modal-btn');
           
-                // --------------------------------------------------
                 // 親ボックスの影響を受けないよう、モーダルをbody直下へ移動
-                // （ただし、元のペア関係を忘れないように変数 modal で操作し続ける）
-                // --------------------------------------------------
                 document.body.appendChild(modal);
-          
           
                 // 【開く機能】
                 btn.addEventListener('click', function() {
@@ -376,8 +376,6 @@ const tagColors: Record<string, string> = {
           
                 // 背景クリックで閉じる
                 modal.addEventListener('click', function(e) {
-                  // 画像とボタン以外（背景）をクリックしたら閉じる
-                  // .modal-content 自体はクリックしても閉じないようにする
                   if (e.target === modal) {
                     closeModal();
                   }
