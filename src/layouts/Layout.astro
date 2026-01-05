@@ -57,6 +57,12 @@ const ogImageURL = new URL(image, Astro.url);
     <title>{title}</title>
     <meta name="description" content="「第8回うぃーすた全国交流会」を2026年7月18日(土)〜19日(日)に大阪にて開催します！">
     <script>
+      // ユーザーエージェントに 'Twitter' が含まれているかチェック
+      if (navigator.userAgent.indexOf('Twitter') !== -1) {
+        document.body.classList.add('is-x-browser');
+      }
+    </script>
+    <script>
 (function() {
     // すでに表示済みなら何もしない（画面はそのまま表示される）
     if (sessionStorage.getItem("welcomeShown")) return;

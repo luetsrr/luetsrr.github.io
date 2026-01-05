@@ -5366,6 +5366,12 @@ article h2 {
   }
 }
 
+/* X (Twitter) アプリ内ブラウザの場合、このクラスがついた要素を非表示にする */
+
+body.is-x-browser .hide-on-x {
+  display: none !important;
+}
+
 .chart-wrapper {
   width: 100%;
   overflow-x: auto;
@@ -5375,6 +5381,7 @@ article h2 {
   /* スクロール可能領域ごと中央に */
   box-sizing: border-box;
   padding-top: 10px;
+  padding-bottom: 16px;
 }
 
 /* グラフ本体（横に伸びる領域）*/
