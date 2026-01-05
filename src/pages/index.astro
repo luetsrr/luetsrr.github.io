@@ -318,13 +318,13 @@ const tagColors: Record<string, string> = {
   -webkit-overflow-scrolling: touch;">
             <div style="display: flex; padding-left: 10px; align-items: flex-end; height: 300px;">
               <!-- 縦軸スケール -->
-              <div class="y-axis" style="height: 100%; display: flex; flex-direction: column;">
+              <div class="y-axis" style="background-color: #fff; height: 300px; display: flex; flex-direction: column; position: sticky; left: 0; top: auto !important; bottom: 0; z-index: 20;">
 
                 <div style="height: 45px; display: flex; align-items: flex-start; justify-content: center; padding-bottom: 7px; box-sizing: border-box;">
                   [人]
                 </div>
               
-                <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                <div style="height: 255px; display: flex; flex-direction: column; justify-content: space-between;">
                   
                   <div style="line-height: 1; display: flex; justify-content: center;">30</div>
                   <div style="line-height: 1; display: flex; justify-content: center;">25</div>
@@ -336,7 +336,6 @@ const tagColors: Record<string, string> = {
                   
                 </div>
               </div>
-              
               
           
               <!-- 棒グラフ -->
