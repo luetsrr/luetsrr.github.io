@@ -830,6 +830,14 @@ html[data-theme="light"] .text-color {
   top: -3px;
 }
 
+.left-\[calc\(\(100\%-48rem\)\/4\)\]{
+  left: calc((100% - 48rem) / 4);
+}
+
+.right-\[calc\(\(100\%-48rem\)\/4\)\]{
+  right: calc((100% - 48rem) / 4);
+}
+
 .-z-10{
   z-index: -10;
 }
@@ -1370,6 +1378,11 @@ html[data-theme="light"] .text-color {
 
 .-translate-y-\[190px\]{
   --tw-translate-y: -190px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.translate-x-1\/2{
+  --tw-translate-x: 50%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -6314,6 +6327,10 @@ h1 {
     height: 67px;
   }
 
+  .max-md\:h-\[280px\]{
+    height: 280px;
+  }
+
   .max-md\:w-16{
     width: 4rem;
   }
@@ -6467,6 +6484,14 @@ h1 {
 
   .md\:h-\[80px\]{
     height: 80px;
+  }
+
+  .md\:h-\[500px\]{
+    height: 500px;
+  }
+
+  .md\:h-\[300px\]{
+    height: 300px;
   }
 
   .md\:w-16{
@@ -6765,6 +6790,14 @@ h1 {
     height: 90px;
   }
 
+  .xl\:h-\[500px\]{
+    height: 500px;
+  }
+
+  .xl\:h-\[800px\]{
+    height: 800px;
+  }
+
   .xl\:w-40{
     width: 10rem;
   }
@@ -6842,6 +6875,12 @@ h1 {
 
 @media (min-width: 1400px){
   .min-\[1400px\]\:flex{
+    display: flex;
+  }
+}
+
+@media (min-width: 1500px){
+  .min-\[1500px\]\:flex{
     display: flex;
   }
 }
