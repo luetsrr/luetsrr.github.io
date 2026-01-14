@@ -57,9 +57,7 @@
   /* デフォルト背景 */
   :root,
 html[data-theme="light"]:not(.chukosei):not(:has(.index)) {
-  background: 
-    linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
-    url('/images/p0126_l.png') center center;
+  background-color: #fff1f1;
   background-size: contain;
 }
 
@@ -74,7 +72,7 @@ html[data-theme="light"]:not(.chukosei):not(:has(.index)) {
   /* 特定ページ背景 */
   /* 意味: data-theme="light" な html の中にある .indexクラス に適用 */
 html[data-theme="light"] .index {
-  background-color: #fae1e1;
+  background-color: #ffeaea;
   /* section自体に背景がつくので、background-sizeの挙動は意図と変わるかもしれません */
 }
 
