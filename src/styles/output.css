@@ -6258,6 +6258,10 @@ h1 {
     height: 100px;
   }
 
+  .max-xl\:h-\[120px\]{
+    height: 120px;
+  }
+
   .max-xl\:h-\[30px\]{
     height: 30px;
   }
@@ -6280,10 +6284,6 @@ h1 {
 
   .max-xl\:h-\[90px\]{
     height: 90px;
-  }
-
-  .max-xl\:h-\[120px\]{
-    height: 120px;
   }
 
   .max-xl\:w-20{
@@ -6882,6 +6882,10 @@ h1 {
     height: 180px;
   }
 
+  .xl\:h-\[200px\]{
+    height: 200px;
+  }
+
   .xl\:h-\[30px\]{
     height: 30px;
   }
@@ -6900,10 +6904,6 @@ h1 {
 
   .xl\:h-\[90px\]{
     height: 90px;
-  }
-
-  .xl\:h-\[200px\]{
-    height: 200px;
   }
 
   .xl\:w-40{

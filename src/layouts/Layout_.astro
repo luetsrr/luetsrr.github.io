@@ -96,6 +96,26 @@ const ogImageURL = new URL(image, Astro.url);
     document.body.classList.add('is-chrome');
   }
 </script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // 1. ページ内リンク（#）を持ってアクセスした場合を検知
+    if (window.location.hash) {
+      const header = document.getElementById("mainHeader");
+      if (header) {
+        // 2. 強制的に不透明度を1（見える状態）にする
+        // ※ requestAnimationFrameを使うことで描画のタイミングを合わせます
+        window.requestAnimationFrame(() => {
+          header.style.opacity = "1";
+          header.style.visibility = "visible"; 
+          
+          // もしヘッダーが「透明背景」になってしまっている場合は、
+          // 背景色クラスを適用するなどの処理もここに追加できます
+          // header.classList.add("is-scrolled"); 
+        });
+      }
+    }
+  });
+</script>
   <body class="flex flex-col m-0">
     <Header />
     <main class="flex-grow min-h-0">
