@@ -98,8 +98,7 @@ const tagColors: Record<string, string> = {
         <slot />
       </div>
 
-      {/* 修正: 固定の120pxを削除し、適度な余白(h-12)に変更 */}
-      <div style="height: 100px"></div>
+      <div style="height: 200px"></div>
     </div>
   </div>
   </div>
@@ -109,7 +108,7 @@ const tagColors: Record<string, string> = {
   /* .blog-width の中にある img タグすべてに適用 */
   .blog-width :global(img) {
     border-radius: 0.75rem; /* rounded-xl 相当 */
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); /* shadow-lg 相当 */
+    box-shadow: 0 5px 10px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); /* shadow-lg 相当 */
 
     /* 画像がはみ出さないように念のため */
     max-width: 100%;
