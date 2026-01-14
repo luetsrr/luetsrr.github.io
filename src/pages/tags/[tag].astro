@@ -124,6 +124,9 @@ const tagColors: Record<string, string> = {
     
             {/* タイトル */}
             <a class="text-[15px] md:text-base font-medium hover-color3" href={post.url}>
+              {post.frontmatter.new && (
+                <span class="text-red-500 font-bold text-base max-xl:text-sm">NEW!&nbsp;</span>
+              )}
               {post.frontmatter.title}
             </a>
           </div>
@@ -135,8 +138,7 @@ const tagColors: Record<string, string> = {
       ))}
     </ul>
     
-    {/* 修正: 固定の120pxを削除し、適度な余白(h-12)に変更 */}
-    <div style="height: 120px"></div>
+    <div style="height: 200px"></div>
 
   </div>
   </div>
