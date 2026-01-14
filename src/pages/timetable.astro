@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout_.astro";
 
-const times = ["7:00","8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"];
+const times = ["","7:00","8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"];
 const venues = ["研修室AB", "研修室C", "和室小", "大阪国際ユースホステル", "バーベキューガーデン羽衣"];
 const venueWidths = [150, 150, 150, 150, 150];
 ---
@@ -132,9 +132,26 @@ const venueWidths = [150, 150, 150, 150, 150];
               </tr>
             </thead>
             <tbody>
-              {times.map(time => (
-                <tr data-time={time} class="h-[60px] border-gray-200">
-                  <td class="absolute sticky text-black bg-white text-center left-0 z-[10] px-2 py-2 font-medium zen-kaku-gothic-new">{time}</td>
+              {times.map((time, index) => (
+                <tr data-time={time} class="h-[60px]">
+                  <td class="sticky left-0 z-[10] bg-white text-center font-medium zen-kaku-gothic-new p-0 align-top">
+                    {/* 箱（td）は動かさず、中身のdivだけを動かします。
+                       index === 0 (7:00) の時はずらさず、それ以外は translateY(-50%) で線の上に配置します。
+                    */}
+                    <div 
+                      style={{
+                        transform: index === 0 ? "translateY(0)" : "translateY(-150%)",
+                        backgroundColor: "white", // 文字の裏を通る線を隠す
+                        display: "inline-block",  // 文字の幅に合わせて背景色をつける
+                        padding: "0 4px",         // 文字周りの余白（線との距離）
+
+                        position: "relative",
+                        zIndex: 20
+                      }}
+                    >
+                      {time}
+                    </div>
+                  </td>
                   {venues.map((_, i) => (
                     <td class="border-t relative px-4 py-2" style={`width: ${venueWidths[i]}px;`}></td>
                   ))}
@@ -264,13 +281,11 @@ const venueWidths = [150, 150, 150, 150, 150];
       eventsList = eventsData[currentDate].map(ev => {
         const div = document.createElement("div");
         
-        // ▼ 修正箇所ここから ▼
         // データに color があればそれを使い、なければデフォルトで bg-yellow-300 を使う
         const bgColor = ev.color ? ev.color : "bg-yellow-300";
         
         // テンプレートリテラルを使ってクラス名を動的に埋め込みます
-        div.className = `event-block rounded absolute ${bgColor} border border-gray-300 text-black px-2 py-2 z-[0] flex flex-col cursor-pointer hover:opacity-90 transition-opacity hover:z-[30]`;
-        // ▲ 修正箇所ここまで ▲
+        div.className = `event-block rounded absolute ${bgColor} border border-gray-300 text-black px-2 py-2 z-[0] flex flex-col cursor-pointer hover:opacity-90 transition-opacity hover:z-[30] overflow-hidden`;
 
         const title = document.createElement("div");
         title.className = "font-medium text-sm";
