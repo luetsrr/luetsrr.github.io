@@ -602,7 +602,7 @@ html.chukosei[data-theme="light"] {
 /* 意味: data-theme="light" な html の中にある .indexクラス に適用 */
 
 html[data-theme="light"] .index {
-  background-color: #ffeaea;
+  background-color: #fff1f1;
   /* section自体に背景がつくので、background-sizeの挙動は意図と変わるかもしれません */
 }
 
@@ -1714,14 +1714,14 @@ html[data-theme="light"] .text-color {
   background-color: rgb(230 207 211 / var(--tw-bg-opacity, 1));
 }
 
-.bg-\[\#fae1e1\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(250 225 225 / var(--tw-bg-opacity, 1));
-}
-
 .bg-\[\#ffd8d8\]{
   --tw-bg-opacity: 1;
   background-color: rgb(255 216 216 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#ffe6e6\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 230 230 / var(--tw-bg-opacity, 1));
 }
 
 .bg-\[\#fffdfd\]{
@@ -1809,16 +1809,6 @@ html[data-theme="light"] .text-color {
 .bg-yellow-300{
   --tw-bg-opacity: 1;
   background-color: rgb(253 224 71 / var(--tw-bg-opacity, 1));
-}
-
-.bg-\[\#ffebeb\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 235 235 / var(--tw-bg-opacity, 1));
-}
-
-.bg-\[\#ffe6e6\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 230 230 / var(--tw-bg-opacity, 1));
 }
 
 .bg-opacity-50{
