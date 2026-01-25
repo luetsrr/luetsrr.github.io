@@ -96,24 +96,28 @@ const venueWidths = [150, 150, 150, 150, 150];
       </p>
     </div>
     <div style="height: 10px;"></div>
-        <div class="flex justify-center mt-8">
-          <label class="toggle-button-4 relative flex items-center w-[262px] h-[52px] rounded-[25px] border cursor-pointer">
-            <input type="checkbox" id="dateToggle" class="absolute opacity-0 w-0 h-0">
-        
-            <!-- スライダー -->
-            <span class="slider absolute top-1 left-1 w-32 h-10 bg-[#e26161] rounded-full transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] z-0"></span>
-        
-            <!-- 左日付（初期左端） -->
-            <span class="text-white date date-left absolute top-1/2 left-1 transform -translate-y-1/2 w-32 h-10 flex items-center justify-center font-semibold z-10 pointer-events-none transition-all duration-700 ease-in-out">
-              7月18日(<span class="text-blue-300">土</span>)
-            </span>
-        
-            <!-- 右日付（初期左端、スライドで右端へ） -->
-            <span class="text-white date date-right absolute top-1/2 left-1 transform -translate-y-1/2 w-32 h-10 flex items-center justify-center font-semibold z-10 pointer-events-none transition-all duration-700 ease-in-out opacity-0">
-              7月19日(<span class="text-red-200">日</span>)
-            </span>
-          </label>
-        </div>
+    <div class="flex justify-center mt-8">
+      <label class="toggle-button-4 relative flex items-center w-[262px] h-[52px] rounded-[25px] border cursor-pointer bg-white">
+        <input type="checkbox" id="dateToggle" class="peer absolute opacity-0 w-0 h-0">
+    
+        <span class="slider absolute top-1 left-1 w-32 h-10 bg-blue-500 rounded-full transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] z-0 
+          peer-checked:bg-[#e26161] 
+          peer-checked:translate-x-[0px]">
+        </span>
+    
+        <span class="text-white date date-left absolute top-1/2 left-1 transform -translate-y-1/2 w-32 h-10 flex items-center justify-center font-semibold z-10 pointer-events-none transition-all duration-700 ease-in-out
+          peer-checked:opacity-0 
+          peer-checked:translate-x-[0px]">
+          7月18日(土)
+        </span>
+    
+        <span class="text-white date date-right absolute top-1/2 left-1 transform -translate-y-1/2 w-32 h-10 flex items-center justify-center font-semibold z-10 pointer-events-none transition-all duration-700 ease-in-out opacity-0
+          peer-checked:opacity-100 
+          peer-checked:translate-x-[0px]">
+          7月19日(日)
+        </span>
+      </label>
+    </div>
 
       <div style="height: 24px;"></div>
       <div class="flex justify-center">
@@ -265,7 +269,7 @@ const venueWidths = [150, 150, 150, 150, 150];
       "7/19": [
         { start: "07:45", end: "08:25", venue: "大阪国際ユースホステル", name: "朝食", description: "", color: "", target: "中高生・学生・社会人" },
         { start: "08:30", end: "09:00", venue: "大阪国際ユースホステル", name: "チェックアウト", description: "", color: "", target: "中高生・学生・社会人" },
-        { start: "09:05", end: "10:40", venue: "研修室C", name: "プラ板づくり", description: "プラスチック板に自由に絵を描いて、オリジナルのキーホルダーやアクセサリーなどを作ります！<br>※希望者はレジン（ハンドメイド工作に使う樹脂）を使用できます。", color: "bg-blue-300", target: "中高生" },
+        { start: "09:05", end: "10:40", venue: "研修室C", name: "キーホルダー作り", description: "プラスチック板に自由に絵を描いて、オリジナルのキーホルダーやアクセサリーなどを作ります！<br>※希望者はレジン（ハンドメイド工作に使う樹脂）を使用できます。", color: "bg-blue-300", target: "中高生" },
         { start: "09:05", end: "9:35", venue: "研修室AB", name: "グループトーク", description: "グループに分かれてグループトークを行います。<br>吃音のことだけでなく、趣味や仕事の話などさまざま。", color: "bg-green-300", target: "学生・社会人" },
         { start: "09:35", end: "10:40", venue: "研修室AB", name: "マイメッセージ", description: "吃音にまつわる体験、思い、みんなに伝えたいことなどを自由に発表していただくプログラムです。<br>※希望者のみ", color: "bg-green-300", target: "学生・社会人" },
         { start: "10:50", end: "12:00", venue: "研修室AB", name: "クイズ大会", description: "チームで対抗してポイントを競い合います！", color: "", target: "中高生・学生・社会人" },
