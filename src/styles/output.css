@@ -1110,6 +1110,10 @@ html[data-theme="light"] .text-color {
   aspect-ratio: 720/100;
 }
 
+.aspect-\[720\/150\]{
+  aspect-ratio: 720/150;
+}
+
 .h-0{
   height: 0px;
 }
