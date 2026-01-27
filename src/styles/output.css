@@ -1098,6 +1098,14 @@ html[data-theme="light"] .text-color {
   aspect-ratio: 900/100;
 }
 
+.aspect-\[340\/100\]{
+  aspect-ratio: 340/100;
+}
+
+.aspect-\[700\/100\]{
+  aspect-ratio: 700/100;
+}
+
 .h-0{
   height: 0px;
 }
@@ -6664,6 +6672,10 @@ h1 {
 
   .md\:hidden{
     display: none;
+  }
+
+  .md\:aspect-\[900\/100\]{
+    aspect-ratio: 900/100;
   }
 
   .md\:h-72{
