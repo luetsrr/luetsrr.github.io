@@ -6618,6 +6618,10 @@ h1 {
     height: 22px;
   }
 
+  .max-md\:h-\[285px\]{
+    height: 285px;
+  }
+
   .max-md\:w-16{
     width: 4rem;
   }
