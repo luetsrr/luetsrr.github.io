@@ -716,7 +716,7 @@ body {
 }
 
 .resp-pc-a {
-  @apply hidden lg:flex;
+  @apply hidden xl:flex;
 }
 
 .resp-pc-b {
@@ -729,8 +729,22 @@ body {
 }
 
 .resp-pc-i {
-  @apply flex;
-  @apply md:hidden;
+  /* 1. hidden          : 最初は消す (0px〜)
+     2. min-[400px]:flex: 400px以上になったら flex にする
+     3. md:hidden       : md (768px) 以上になったら また消す
+  */
+  @apply hidden min-[410px]:flex md:hidden;
+}
+
+.resp-pc-j {
+  @apply hidden; /* 基本は flex で表示 */
+}
+
+/* ここでpxを指定 (min-width: ○○px) */
+@media (max-width: 409px) {
+  .resp-pc-j {
+    display: flex; /* または @apply hidden; */
+  }
 }
 
 .resp-pc-p {

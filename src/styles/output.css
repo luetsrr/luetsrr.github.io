@@ -1374,6 +1374,16 @@ html[data-theme="light"] .text-color {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.-translate-y-\[110px\]{
+  --tw-translate-y: -110px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.-translate-y-\[130px\]{
+  --tw-translate-y: -130px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .-translate-y-\[190px\]{
   --tw-translate-y: -190px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -3213,7 +3223,7 @@ body {
   display: none;
 }
 
-@media (min-width: 1024px){
+@media (min-width: 1280px){
   .resp-pc-a{
     display: flex;
   }
@@ -3244,18 +3254,37 @@ body {
   }
 }
 
-.resp-pc-i{
-  display: flex;
+.resp-pc-i {
+  /* 1. hidden          : 最初は消す (0px〜)
+     2. min-[400px]:flex: 400px以上になったら flex にする
+     3. md:hidden       : md (768px) 以上になったら また消す
+  */
+  display: none;
 }
 
-.footer .resp-pc-i {
-  align-items: center;
-  /* 子要素の高さを揃える */
+@media (min-width: 410px){
+  .resp-pc-i{
+    display: flex;
+  }
 }
 
 @media (min-width: 768px){
   .resp-pc-i{
     display: none;
+  }
+}
+
+.resp-pc-j{
+  display: none;
+  /* 基本は flex で表示 */
+}
+
+/* ここでpxを指定 (min-width: ○○px) */
+
+@media (max-width: 409px) {
+  .resp-pc-j {
+    display: flex;
+    /* または @apply hidden; */
   }
 }
 
@@ -6304,10 +6333,6 @@ h1 {
     height: 80px;
   }
 
-  .max-xl\:h-\[90px\]{
-    height: 90px;
-  }
-
   .max-xl\:w-20{
     width: 5rem;
   }
@@ -6506,6 +6531,10 @@ h1 {
     width: 100%;
   }
 
+  .max-md\:gap-4{
+    gap: 1rem;
+  }
+
   .max-md\:px-6{
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -6565,8 +6594,16 @@ h1 {
     margin-bottom: 0px;
   }
 
+  .md\:mb-10{
+    margin-bottom: 2.5rem;
+  }
+
   .md\:ml-4{
     margin-left: 1rem;
+  }
+
+  .md\:mt-10{
+    margin-top: 2.5rem;
   }
 
   .md\:block{
@@ -6653,6 +6690,10 @@ h1 {
     height: 55px;
   }
 
+  .md\:h-\[60px\]{
+    height: 60px;
+  }
+
   .md\:h-\[70px\]{
     height: 70px;
   }
@@ -6687,6 +6728,10 @@ h1 {
 
   .md\:gap-6{
     gap: 1.5rem;
+  }
+
+  .md\:gap-8{
+    gap: 2rem;
   }
 
   .md\:rounded-3xl{
@@ -7048,8 +7093,12 @@ h1 {
     height: 800px;
   }
 
-  .\32xl\:-translate-y-\[100px\]{
-    --tw-translate-y: -100px;
+  .\32xl\:w-\[1000px\]{
+    width: 1000px;
+  }
+
+  .\32xl\:-translate-y-\[180px\]{
+    --tw-translate-y: -180px;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   }
 }
