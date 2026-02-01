@@ -2455,9 +2455,7 @@ html[data-theme="light"] .text-color {
 @font-face {
   font-family: 'craftmincho';
 
-  src: url('/fonts/craftmincho.woff2') format('woff2'),
-       url('/fonts/craftmincho.woff') format('woff'),
-       url('/fonts/craftmincho.otf') format('opentype');
+  src: url('/fonts/craftmincho.otf') format('opentype');
 
   font-weight: normal;
 
