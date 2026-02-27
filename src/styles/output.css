@@ -6505,10 +6505,6 @@ h1 {
     height: 32px;
   }
 
-  .max-md\:h-\[35px\]{
-    height: 35px;
-  }
-
   .max-md\:h-\[40px\]{
     height: 40px;
   }
@@ -6654,6 +6650,10 @@ h1 {
 
   .md\:h-\[25px\]{
     height: 25px;
+  }
+
+  .md\:h-\[30px\]{
+    height: 30px;
   }
 
   .md\:h-\[35px\]{
