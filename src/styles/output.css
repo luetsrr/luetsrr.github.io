@@ -6536,6 +6536,10 @@ h1 {
     height: 70px;
   }
 
+  .max-md\:h-\[23px\]{
+    height: 23px;
+  }
+
   .max-md\:w-16{
     width: 4rem;
   }
