@@ -1631,6 +1631,10 @@ html[data-theme="light"] .text-color {
   border-width: 1px;
 }
 
+.border-2{
+  border-width: 2px;
+}
+
 .border-b{
   border-bottom-width: 1px;
 }
@@ -1711,6 +1715,11 @@ html[data-theme="light"] .text-color {
 .border-white{
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
+}
+
+.border-red-500{
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity, 1));
 }
 
 .bg-\[\#009dff\]{
@@ -1962,6 +1971,10 @@ html[data-theme="light"] .text-color {
 
 .p-\[3px\]{
   padding: 3px;
+}
+
+.p-12{
+  padding: 3rem;
 }
 
 .px-0{
