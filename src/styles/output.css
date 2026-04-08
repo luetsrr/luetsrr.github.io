@@ -1182,6 +1182,14 @@ html[data-theme="light"] .text-color {
   height: 100%;
 }
 
+.h-\[18px\]{
+  height: 18px;
+}
+
+.h-\[5px\]{
+  height: 5px;
+}
+
 .max-h-\[640px\]{
   max-height: 640px;
 }
