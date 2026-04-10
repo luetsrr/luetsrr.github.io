@@ -7143,6 +7143,10 @@ h1 {
     height: 800px;
   }
 
+  .\32xl\:h-\[600px\]{
+    height: 600px;
+  }
+
   .\32xl\:w-\[1000px\]{
     width: 1000px;
   }
