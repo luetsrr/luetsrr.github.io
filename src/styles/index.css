@@ -1106,6 +1106,10 @@ html {
     scroll-margin-top: 115px; /* 上から80px下にスクロールさせる */
   }
 
+  #mymessage {
+    scroll-margin-top: 115px; /* 上から80px下にスクロールさせる */
+  }
+
   #timetable {
     scroll-margin-top: 115px; /* 上から80px下にスクロールさせる */
   }
