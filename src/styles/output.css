@@ -1254,6 +1254,10 @@ html[data-theme="light"] .text-color {
   height: 50px;
 }
 
+.h-\[20px\]{
+  height: 20px;
+}
+
 .max-h-\[640px\]{
   max-height: 640px;
 }
