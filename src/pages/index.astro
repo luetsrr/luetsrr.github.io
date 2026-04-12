@@ -1084,7 +1084,7 @@ const tagColors: Record<string, string> = {
   </div>
 </div>
   <a id="contactButton" href="/application/"
-  class="fixed lg:right-14 lg:bottom-14 max-lg:right-5 max-lg:bottom-5 z-50 
+  class="fixed lg:right-12 lg:bottom-12 max-lg:right-5 max-lg:bottom-5 z-50 
   flex flex-col items-center justify-center
   opacity-0 pointer-events-none transition-opacity duration-200
   group"
@@ -1134,6 +1134,87 @@ const tagColors: Record<string, string> = {
   </div>
 
 </a>
+
+<a id="side-banner-bar" href="/character/" 
+   class="fixed right-0 top-[45%] -translate-y-1/2 z-50 
+          bg-pink-500 text-white py-6 px-2 md:px-3 
+          rounded-l-xl shadow-lg
+          hover:bg-pink-600 hover:pr-4 transition-all duration-300
+          flex flex-col items-center justify-center group
+          translate-x-full"> 
+          
+  <span class="zen-kaku-gothic-new font-bold tracking-widest text-sm md:text-base drop-shadow-sm" 
+        style="writing-mode: vertical-rl; text-orientation: mixed;">
+    公式キャラクターの秘密
+  </span>
+  
+  <div class="flex flex-col items-center gap-2 mt-4 relative z-20">
+    <img 
+      src="/images/su.png" 
+      alt="キャラ1" 
+      class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover border-2 border-white shadow-sm"
+    />
+    <img 
+      src="/images/fu.png" 
+      alt="キャラ2" 
+      class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover border-2 border-white shadow-sm"
+    />
+  </div>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" 
+       class="w-4 h-4 md:w-5 md:h-5 mt-4 transition-transform duration-300 group-hover:-translate-x-1">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+  </svg>
+</a>
+
+  <script>
+    // --- 右側固定バーのスクロール制御 ---
+    const sideBar = document.getElementById('side-banner-bar');
+  
+    // 表示範囲の比率（※もし「ページ全体の95%」の意味であれば、barMaxRatio は 0.95 に変更してください）
+    const barMinRatio = 0.05;
+    const barMaxRatio = 0.95; 
+  
+    let scrollTimeout;
+  
+    const handleBarScroll = () => {
+      if (!sideBar) return;
+  
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollRatio = docHeight > 0 ? scrollTop / docHeight : 0;
+  
+      // 条件1：指定した範囲内（0.005 〜 0.095）にいるか
+      if (scrollRatio > barMinRatio && scrollRatio < barMaxRatio) {
+        
+        // 範囲内に入ったら、右に隠すクラスを外して表示
+        sideBar.classList.remove('translate-x-full');
+  
+        // 条件2：スクロール中は半透明（opacity-50）にする
+        sideBar.classList.remove('opacity-100');
+        sideBar.classList.add('opacity-50');
+  
+        // 連続でスクロールしている間はタイマーをキャンセル
+        clearTimeout(scrollTimeout);
+  
+        // スクロールがピタッと止まってから200ミリ秒後に、元の濃さ（opacity-100）に戻す
+        scrollTimeout = setTimeout(() => {
+          sideBar.classList.remove('opacity-50');
+          sideBar.classList.add('opacity-100');
+        }, 200);
+  
+      } else {
+        // 範囲外に出たら、右にスライドして隠す
+        sideBar.classList.add('translate-x-full');
+        // 透明度のクラスもリセットしておく
+        sideBar.classList.remove('opacity-100', 'opacity-50');
+      }
+    };
+  
+    // スクロール時とページ読み込み時に実行
+    window.addEventListener('scroll', handleBarScroll);
+    window.addEventListener('load', handleBarScroll);
+  </script>
+
     <div class="max-md:h-[15px] md:h-[25px]" />
         <div class="reveal border-box" id="third">
           <div style="margin-left: 0.25rem !important; margin-right: 0.25rem !important;">
