@@ -1591,6 +1591,10 @@ html[data-theme="light"] .text-color {
   gap: 2rem;
 }
 
+.gap-4{
+  gap: 1rem;
+}
+
 .gap-y-1{
   row-gap: 0.25rem;
 }
