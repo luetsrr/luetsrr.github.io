@@ -500,7 +500,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     padding-left: 2rem;
-    padding-right: 1.5rem;
+    padding-right: 2rem;
   }
   }
 
@@ -3032,7 +3032,7 @@ h1 {
       height: 50px; /* 高さ100pxの半分 */
   }
   .number {
-      font-size: 6.5rem;
+      font-size: 6.6rem;
       line-height: 80px; /* スマホ時の全体の高さ */
   }
 
@@ -3059,7 +3059,7 @@ h1 {
       height: 50px; /* 高さ100pxの半分 */
   }
   .number {
-      font-size: 3.2rem;
+      font-size: 3.5rem;
       line-height: 80px; /* スマホ時の全体の高さ */
   }
 
