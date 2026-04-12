@@ -3001,7 +3001,7 @@ h1 {
 /* --- 数字のスタイル --- */
 .number {
   font-family: "Lobster", sans-serif; /* お好みのフォントで */
-  font-size: 7.5rem; /* ★数字を大きく */
+  font-size: 8rem; /* ★数字を大きく */
   font-weight: bold;
   color: #a66767; /* 黒文字に変更 */
   line-height: 1; /* 行間を詰める */
