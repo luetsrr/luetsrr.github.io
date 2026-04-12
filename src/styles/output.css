@@ -2096,6 +2096,10 @@ html[data-theme="light"] .text-color {
   --tw-gradient-to: #b91c1c var(--tw-gradient-to-position);
 }
 
+.to-red-600{
+  --tw-gradient-to: #dc2626 var(--tw-gradient-to-position);
+}
+
 .box-decoration-clone{
   -webkit-box-decoration-break: clone;
           box-decoration-break: clone;
