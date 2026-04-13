@@ -7532,6 +7532,10 @@ h1 {
     height: 800px;
   }
 
+  .\32xl\:h-\[500px\]{
+    height: 500px;
+  }
+
   .\32xl\:w-\[1000px\]{
     width: 1000px;
   }
