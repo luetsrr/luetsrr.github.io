@@ -7438,6 +7438,10 @@ h1 {
     height: 90px;
   }
 
+  .xl\:h-\[500px\]{
+    height: 500px;
+  }
+
   .xl\:w-40{
     width: 10rem;
   }
