@@ -2165,6 +2165,10 @@ html[data-theme="light"] .text-color {
   background-image: url('/images/sya.jpg');
 }
 
+.bg-\[url\(\'\/images\/niji\.png\'\)\]{
+  background-image: url('/images/niji.png');
+}
+
 .from-\[\#833ab4\]{
   --tw-gradient-from: #833ab4 var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(131 58 180 / 0) var(--tw-gradient-to-position);
