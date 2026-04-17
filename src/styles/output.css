@@ -2484,6 +2484,10 @@ html[data-theme="light"] .text-color {
   padding-left: 8px;
 }
 
+.pr-7{
+  padding-right: 1.75rem;
+}
+
 .text-left{
   text-align: left;
 }
@@ -7412,6 +7416,10 @@ h1 {
 
   .md\:pr-6{
     padding-right: 1.5rem;
+  }
+
+  .md\:pr-7{
+    padding-right: 1.75rem;
   }
 
   .md\:text-2xl{
