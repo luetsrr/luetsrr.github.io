@@ -42,8 +42,8 @@ const tagColors: Record<string, string> = {
       </a>
     </div>
     <div style="height: 24px;"></div>
-    <div class="zen-kaku-gothic-new text-base lg:text-xl">
-      <span class="md:text-lg max-md:text-base font-medium">
+    <div class="zen-kaku-gothic-new">
+      <span class="lg:text-xl md:text-lg text-base font-medium">
         {frontmatter.title}
       </span>
       <div style="height: 5px;"></div>
@@ -71,7 +71,7 @@ const tagColors: Record<string, string> = {
           </div>
         ) : (
           <div class="no-update-content">
-            <a class="text-sm lg:text-lg">{frontmatter.date}</a>
+            <a class="text-sm md:text-base lg:text-lg">{frontmatter.date}</a>
             <div style="height: 5px;" />
             {frontmatter.tags && frontmatter.tags.length > 0 && (
               <>
