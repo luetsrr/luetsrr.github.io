@@ -1920,6 +1920,11 @@ html[data-theme="light"] .text-color {
   background-color: ;
 }
 
+.bg-\[\#ffe7e5\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 231 229 / var(--tw-bg-opacity, 1));
+}
+
 .bg-opacity-50{
   --tw-bg-opacity: 0.5;
 }
