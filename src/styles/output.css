@@ -1326,6 +1326,14 @@ html[data-theme="light"] .text-color {
   width: max-content;
 }
 
+.w-2\/5{
+  width: 40%;
+}
+
+.w-1\/2{
+  width: 50%;
+}
+
 .min-w-\[810px\]{
   min-width: 810px;
 }
@@ -6768,6 +6776,10 @@ h1 {
     width: 100%;
   }
 
+  .max-md\:w-2\/5{
+    width: 40%;
+  }
+
   .max-md\:gap-4{
     gap: 1rem;
   }
@@ -7007,6 +7019,10 @@ h1 {
 
   .md\:w-auto{
     width: auto;
+  }
+
+  .md\:w-2\/5{
+    width: 40%;
   }
 
   .md\:grid-cols-2{
