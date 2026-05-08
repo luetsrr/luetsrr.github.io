@@ -2129,6 +2129,21 @@ html[data-theme="light"] .text-color {
   padding-bottom: 8px;
 }
 
+.px-14{
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+}
+
+.px-16{
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+.px-20{
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
 .pb-1{
   padding-bottom: 0.25rem;
 }
@@ -2199,6 +2214,10 @@ html[data-theme="light"] .text-color {
 
 .pt-8{
   padding-top: 2rem;
+}
+
+.pt-10{
+  padding-top: 2.5rem;
 }
 
 .text-left{
@@ -6512,6 +6531,10 @@ h1 {
     width: 5rem;
   }
 
+  .max-xl\:pt-10{
+    padding-top: 2.5rem;
+  }
+
   .max-xl\:text-base{
     font-size: 1rem;
     line-height: 1.5rem;
@@ -6525,6 +6548,22 @@ h1 {
   .max-xl\:text-sm{
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+}
+
+@media (max-width: 1280px){
+  .max-\[1280px\]\:pt-10{
+    padding-top: 2.5rem;
+  }
+}
+
+@media (max-width: 1250px){
+  .max-\[1250px\]\:pt-10{
+    padding-top: 2.5rem;
+  }
+
+  .max-\[1250px\]\:pt-4{
+    padding-top: 1rem;
   }
 }
 
@@ -6600,6 +6639,25 @@ h1 {
   .max-lg\:py-1{
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
+  }
+
+  .max-lg\:px-10{
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .max-lg\:px-20{
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+
+  .max-lg\:px-8{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .max-lg\:pt-10{
+    padding-top: 2.5rem;
   }
 
   .max-lg\:text-\[13px\]{
@@ -6717,6 +6775,21 @@ h1 {
   .max-md\:px-6{
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+  }
+
+  .max-md\:px-8{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .max-md\:px-10{
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .max-md\:px-20{
+    padding-left: 5rem;
+    padding-right: 5rem;
   }
 
   .max-md\:text-\[1\.2rem\]{
@@ -7123,6 +7196,11 @@ h1 {
   .lg\:py-2{
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+  }
+
+  .lg\:px-12{
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 
   .lg\:text-4xl{

@@ -24,7 +24,7 @@ import Layout from "../layouts/Layout_.astro";
       
       <section class="content-section" id="section-0">
         <div class="text-box">
-          <h2 class="split-text shippori-mincho-regular">2014年、京都。</h2>
+          <h2 class="split-text shippori-mincho-regular max-[1250px]:pt-4">2014年、京都。</h2>
           <p class="split-text shippori-mincho-regular">
             吃音のある若者が集まるコミュニティを作りたいという思いのもと、
             <br>
@@ -71,7 +71,7 @@ import Layout from "../layouts/Layout_.astro";
         </div>
         <div class="text-box">
           <h2 class="split-text shippori-mincho-regular">第2回〜第4回うぃーすた全国交流会開催</h2>
-          <p class="split-text shippori-mincho-regular">2015年〜2017年にかけて、年に一度、東京と京都で交互に開催されました。<br>年々多くの方にご参加いただき、うぃーすたは全国で盛り上がっていきました。</p>
+          <p class="split-text shippori-mincho-regular">2015年〜2017年にかけて、年に一度、東京と京都にて交互に開催されました。<br>年々多くの方にご参加いただき、うぃーすたは全国で盛り上がっていきました。</p>
         </div>
       </section>
 
@@ -130,13 +130,13 @@ import Layout from "../layouts/Layout_.astro";
   </main>
 
   <div class="spacer" style="background: #fff3f3;">
-    <div class="margin-contents shippori-mincho-regular pt-8 md:px-12 max-md:px-6" style="max-width: 1200px;">
+    <div class="shippori-mincho-regular pt-8 px-16 max-md:px-8" style="max-width: 1200px;">
 
       <div class="h-[15px] md:h-[40px]"></div>
 
       <p class="h-midashi">うぃーすた全国交流会は今年で8回目を迎えます。</p>
       <p class="p-midashi">全国各地より多くの方に支えられながら、うぃーすたはここまで歩んでくることができました。</p>
-      <p class="p-midashi">心より感謝いたします。</p>
+      <p class="p-midashi">うぃーすたに関わるすベての皆さまに、心より感謝申し上げます。</p>
       <div class="h-[10px] md:h-[20px]"></div>
       <p class="p-midashi">今年のうぃーすた全国交流会は大阪にて開催します。</p>
       <p class="p-midashi">吃音のある同年代の仲間たちと悩みや夢を語り合う、かけがえのない時間を過ごしてみませんか？</p>
@@ -283,6 +283,39 @@ import Layout from "../layouts/Layout_.astro";
   box-shadow: 0 20px 40px rgba(0,0,0,0.05);
 }
 
+@media screen and (min-width:768px) and (max-width:1248px) {
+  .content-section, .content-section.reverse {
+    /* 縦並びに変更 */
+    flex-direction: column;
+    gap: 36px;
+    /* ヘッダーの余白 + 左右の余白 + 下部の余白 */
+    padding: 155px 80px 40px;
+    max-width: 800px;
+  }
+
+  .text-box { max-width: 500px; }
+
+  /* HTMLの記述順に関わらず、必ず「画像が上・テキストが下」になるように強制 */
+  .image-box { 
+    order: 1; 
+    width: 70%; 
+  }
+  .text-box { 
+    order: 2; 
+    width: 100%;
+    text-align: left; /* スマホでは中央揃えの方が見栄えが良い場合はここを活かす */
+  }
+
+  .text-box h2 { 
+    font-size: 2.0rem; 
+    margin-bottom: 12px; 
+  }
+  .text-box p { 
+    font-size: 1.5rem; /* 1.5remから縮小し、読みやすく */
+    line-height: 1.8; 
+  }
+}
+
 /* --- ★スマホ用レスポンシブ設定 --- */
 @media (max-width: 768px) {
   .content-section, .content-section.reverse {
@@ -290,7 +323,8 @@ import Layout from "../layouts/Layout_.astro";
     flex-direction: column;
     gap: 24px;
     /* ヘッダーの余白 + 左右の余白 + 下部の余白 */
-    padding: 150px 28px 40px; 
+    padding: 140px 28px 40px; 
+    max-width: 480px;
   }
 
   /* HTMLの記述順に関わらず、必ず「画像が上・テキストが下」になるように強制 */
