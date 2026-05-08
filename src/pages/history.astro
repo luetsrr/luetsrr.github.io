@@ -15,7 +15,18 @@ import Layout from "../layouts/Layout_.astro";
   </div>
 
   <main class="scroll-container zen-kaku-gothic-new" id="fade-container">
-    <div class="sticky-wrapper">
+    <div class="fade-in margin-contents pt-8 md:px-12 max-md:px-6">
+        <div class="h-[15px] md:h-[40px]"></div>
+      <p class="mb-2">2014年より発足し、全国各地に広がるうぃーすたプロジェクト。
+        <br>
+        その歴史をご紹介します。
+        <div style="height: 10px;"></div>
+        ※スクロールで見ることができます。
+      <br>
+    ※お使いの端末により、表示が崩れる場合があります。ご了承ください。</p>
+      </div>
+    <div class="bg-white/30 sticky-wrapper">
+      
 
       <div id="scroll-indicator" class="scroll-indicator">
         <span class="tracking-widest text-base text-black">SCROLL</span>
@@ -130,7 +141,7 @@ import Layout from "../layouts/Layout_.astro";
   </main>
 
   <div class="spacer" style="background: #fff3f3;">
-    <div class="shippori-mincho-regular pt-8 px-16 max-md:px-8" style="max-width: 1200px;">
+    <div class="shippori-mincho-regular pt-8 px-16 mx-auto max-md:px-8" style="max-width: 1200px;">
 
       <p class="h-midashi">うぃーすた全国交流会は今年で8回目を迎えます。</p>
       <p class="p-midashi">全国各地より多くの方に支えられながら、うぃーすたはここまで歩んでくることができました。</p>
@@ -187,12 +198,12 @@ import Layout from "../layouts/Layout_.astro";
 
 .sticky-wrapper {
   position: sticky;
-  top: 0;
+  top: 0px;
   /* スマホのブラウザバー（アドレスバーなど）を考慮した高さ設定 */
   height: 100dvh; 
   width: 100%;
   overflow: hidden;
-  background-color: #fff3f3;
+  background-color: #fff3f375;
 }
 
 .scroll-indicator {
@@ -205,7 +216,7 @@ import Layout from "../layouts/Layout_.astro";
   align-items: center;
   gap: 10px;
   pointer-events: none;
-  z-index: 50; 
+  z-index: 1; 
   will-change: opacity;
 }
 
@@ -323,7 +334,7 @@ import Layout from "../layouts/Layout_.astro";
     flex-direction: column;
     gap: 24px;
     /* ヘッダーの余白 + 左右の余白 + 下部の余白 */
-    padding: 140px 28px 40px; 
+    padding: 130px 28px 40px; 
     max-width: 480px;
   }
 
