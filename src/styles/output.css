@@ -24,6 +24,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap');
+
 *, ::before, ::after{
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -1204,6 +1206,10 @@ html[data-theme="light"] .text-color {
 
 .h-full{
   height: 100%;
+}
+
+.h-\[35px\]{
+  height: 35px;
 }
 
 .max-h-\[640px\]{
@@ -2391,11 +2397,6 @@ html[data-theme="light"] .text-color {
   color: rgb(17 24 39 / var(--tw-text-opacity, 1));
 }
 
-.text-orange-400{
-  --tw-text-opacity: 1;
-  color: rgb(251 146 60 / var(--tw-text-opacity, 1));
-}
-
 .text-red-500{
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity, 1));
@@ -2409,11 +2410,6 @@ html[data-theme="light"] .text-color {
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
-}
-
-.text-red-400{
-  --tw-text-opacity: 1;
-  color: rgb(248 113 113 / var(--tw-text-opacity, 1));
 }
 
 .underline{
@@ -2637,6 +2633,12 @@ html, body {
 
 body {
   overflow-x: clip;
+}
+
+.shippori-mincho-regular {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .dotgothic16-regular {
@@ -6902,6 +6904,10 @@ h1 {
     height: 80px;
   }
 
+  .md\:h-\[30px\]{
+    height: 30px;
+  }
+
   .md\:w-1\/3{
     width: 33.333333%;
   }
@@ -7328,10 +7334,6 @@ h1 {
 
   .\32xl\:h-\[600px\]{
     height: 600px;
-  }
-
-  .\32xl\:h-\[800px\]{
-    height: 800px;
   }
 
   .\32xl\:w-\[1000px\]{

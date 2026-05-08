@@ -11,6 +11,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -90,6 +91,12 @@ html, body {
 
 body {
   overflow-x: clip;
+}
+
+.shippori-mincho-regular {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .dotgothic16-regular {
