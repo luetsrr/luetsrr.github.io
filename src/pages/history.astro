@@ -35,15 +35,15 @@ import Layout from "../layouts/Layout_.astro";
       
       <section class="content-section" id="section-0">
         <div class="text-box">
-          <h2 class="split-text shippori-mincho-regular max-[1250px]:pt-4">2014年、京都。</h2>
+          <h2 class="split-text shippori-mincho-regular max-[1250px]">2014年、京都。</h2>
           <p class="split-text shippori-mincho-regular">
             吃音のある若者が集まるコミュニティを作りたいという思いのもと、
             <br>
-            「うぃーすた京都」（現うぃーすた関西）の名にて発足しました。
-          <br>
-        うぃーすたという名前は、"We are stutters!"に由来します。</p>
+            「うぃーすた京都」（現うぃーすた関西）の名にて発足しました。</p>
           </div>
-
+          <div class="image-box">
+          <img src="/images/kyoto-prefecture_map_outline_3D.png" alt="テーマ画像2">
+        </div>
       </section>
 
       <section class="content-section" id="section-0">
@@ -88,11 +88,15 @@ import Layout from "../layouts/Layout_.astro";
 
       <section class="content-section" id="section-0">
         <div class="text-box">
-          <h2 class="split-text shippori-mincho-regular max-[1250px]:pt-4">コロナ禍で活動休止</h2>
+          <h2 class="split-text shippori-mincho-regular max-[1250px]">コロナ禍で活動休止</h2>
           <p class="split-text shippori-mincho-regular">
             2019年〜2022年、全国的に流行したコロナウイルスの影響を受け、対面での活動休止を余儀なくされました。
             <br>
             一部地域ではオンラインにて活動を行っていました。</p>
+            
+        </div>
+        <div class="image-box">
+          <img src="/images/coronaviruses.png" alt="テーマ画像2">
         </div>
 
       </section>
@@ -291,7 +295,7 @@ import Layout from "../layouts/Layout_.astro";
   width: 100%;
   height: auto;
   border-radius: 4px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+
 }
 
 @media screen and (min-width:768px) and (max-width:1248px) {
@@ -334,7 +338,7 @@ import Layout from "../layouts/Layout_.astro";
     flex-direction: column;
     gap: 24px;
     /* ヘッダーの余白 + 左右の余白 + 下部の余白 */
-    padding: 130px 28px 40px; 
+    padding: 125px 28px 40px; 
     max-width: 480px;
   }
 
