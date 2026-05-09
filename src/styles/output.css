@@ -2236,6 +2236,10 @@ html[data-theme="light"] .text-color {
   padding-top: 2.5rem;
 }
 
+.pb-0{
+  padding-bottom: 0px;
+}
+
 .text-left{
   text-align: left;
 }
@@ -7126,6 +7130,14 @@ h1 {
     padding-right: 1.75rem;
   }
 
+  .md\:pt-8{
+    padding-top: 2rem;
+  }
+
+  .md\:pb-8{
+    padding-bottom: 2rem;
+  }
+
   .md\:text-2xl{
     font-size: 1.5rem;
     line-height: 2rem;
@@ -7267,6 +7279,10 @@ h1 {
   .lg\:px-16{
     padding-left: 4rem;
     padding-right: 4rem;
+  }
+
+  .lg\:pb-0{
+    padding-bottom: 0px;
   }
 
   .lg\:text-4xl{
