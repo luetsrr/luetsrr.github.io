@@ -1338,6 +1338,10 @@ html[data-theme="light"] .text-color {
   width: 20%;
 }
 
+.w-3\/5{
+  width: 60%;
+}
+
 .min-w-\[810px\]{
   min-width: 810px;
 }
