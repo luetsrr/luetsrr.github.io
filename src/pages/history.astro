@@ -322,7 +322,8 @@ import Layout from "../layouts/Layout_.astro";
   /* HTMLの記述順に関わらず、必ず「画像が上・テキストが下」になるように強制 */
   .image-box { 
     order: 1; 
-    width: 90%; 
+    width: min(90vw, 600px);
+    flex-shrink: 0;
   }
   .text-box { 
     order: 2; 
