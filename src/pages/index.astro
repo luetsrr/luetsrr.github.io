@@ -1365,23 +1365,26 @@ const allTags = Array.from(
 </div>
 
 <script>
-  const buttons = document.querySelectorAll(".tag-btn");
-  const posts = document.querySelectorAll(".post-item");
+  // ▼ 変更点：<HTMLElement> を追加して型を指定します
+  const buttons = document.querySelectorAll<HTMLElement>(".tag-btn");
+  const posts = document.querySelectorAll<HTMLElement>(".post-item");
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
+      // button は HTMLElement と認識されるので dataset が使えます
       const selectedTag = button.dataset.tag;
 
       let count = 0;
 
       posts.forEach((post) => {
+        // post も HTMLElement と認識されるので dataset と style が使えます
         const tags = (post.dataset.tags || "")
           .split(",")
           .map((t) => t.trim());
 
         const matched =
           selectedTag === "ALL" ||
-          tags.includes(selectedTag);
+          (selectedTag && tags.includes(selectedTag)); // 安全のため selectedTag が存在するかチェックを追加
 
         // タグごとに最大5件表示
         if (matched && count < 5) {
