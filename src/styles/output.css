@@ -6919,6 +6919,10 @@ h1 {
     height: 80px;
   }
 
+  .md\:h-\[30px\]{
+    height: 30px;
+  }
+
   .md\:w-1\/2{
     width: 50%;
   }
