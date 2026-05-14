@@ -1,17 +1,6 @@
 ---
 import Layout from "../layouts/Layout_.astro";
 
-type Frontmatter = {
-  draft: boolean;
-  pubDate: string;
-  title: string;
-  date: string;
-  update?: string;
-  description: string;
-  tags: string[];
-  new?: boolean;
-};
-
 const allPosts = await Astro.glob("./posts/*.md");
 
 const nonDraftPosts = allPosts.filter(
