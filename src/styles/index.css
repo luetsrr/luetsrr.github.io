@@ -2573,10 +2573,9 @@ body.is-x-browser .show-on-x-only {
   padding-bottom: 16px;
 }
 
-/* グラフ本体（横に伸びる領域）*/
 .chart-inner {
   display: inline-flex;
-  min-width: max-content; /* ← これが重要：折り返しさせずスクロール発生 */
+  min-width: max-content;
 }
 
 
