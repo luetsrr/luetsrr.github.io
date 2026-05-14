@@ -169,148 +169,154 @@ const allTags = Array.from(
   </div>
 
   <script>
-    const buttons =
-      document.querySelectorAll(".tag-btn");
+  const buttons =
+  document.querySelectorAll<HTMLElement>(".tag-btn");
 
-    const posts = Array.from(
-      document.querySelectorAll(".post-item")
+  const posts = Array.from(
+  document.querySelectorAll(".post-item")
+) as HTMLElement[];
+
+  const prevBtn =
+  document.getElementById("prev-btn") as HTMLButtonElement | null;
+
+const nextBtn =
+  document.getElementById("next-btn") as HTMLButtonElement | null;
+
+  const pageInfo =
+    document.getElementById("page-info");
+
+  const POSTS_PER_PAGE = 10;
+
+  let currentPage = 1;
+  let currentTag = "ALL";
+
+  function getFilteredPosts() {
+    return posts.filter((post) => {
+      const tags = (post.dataset.tags || "")
+        .split(",")
+        .map((t) => t.trim());
+
+      return (
+        currentTag === "ALL" ||
+        tags.includes(currentTag)
+      );
+    });
+  }
+
+  function renderPosts() {
+    const filteredPosts =
+      getFilteredPosts();
+
+    const totalPages = Math.max(
+      1,
+      Math.ceil(
+        filteredPosts.length /
+        POSTS_PER_PAGE
+      )
     );
 
-    const prevBtn =
-      document.getElementById("prev-btn");
-
-    const nextBtn =
-      document.getElementById("next-btn");
-
-    const pageInfo =
-      document.getElementById("page-info");
-
-    const POSTS_PER_PAGE = 10;
-
-    let currentPage = 1;
-    let currentTag = "ALL";
-
-    function getFilteredPosts() {
-      return posts.filter((post) => {
-        const tags = (post.dataset.tags || "")
-          .split(",")
-          .map((t) => t.trim());
-
-        return (
-          currentTag === "ALL" ||
-          tags.includes(currentTag)
-        );
-      });
+    if (currentPage > totalPages) {
+      currentPage = totalPages;
     }
 
-    function renderPosts() {
-      const filteredPosts =
-        getFilteredPosts();
+    posts.forEach((post) => {
+      post.style.display = "none";
+    });
 
-      const totalPages = Math.max(
-        1,
-        Math.ceil(
-          filteredPosts.length /
-          POSTS_PER_PAGE
-        )
-      );
+    const start =
+      (currentPage - 1) *
+      POSTS_PER_PAGE;
 
-      if (currentPage > totalPages) {
-        currentPage = totalPages;
-      }
+    const end =
+      start + POSTS_PER_PAGE;
 
-      posts.forEach((post) => {
-        post.style.display = "none";
+    filteredPosts
+      .slice(start, end)
+      .forEach((post) => {
+        post.style.display = "block";
       });
 
-      const start =
-        (currentPage - 1) *
-        POSTS_PER_PAGE;
-
-      const end =
-        start + POSTS_PER_PAGE;
-
-      filteredPosts
-        .slice(start, end)
-        .forEach((post) => {
-          post.style.display = "block";
-        });
-
+    if (pageInfo) {
       pageInfo.textContent =
         currentPage +
         " / " +
         totalPages;
+    }
 
+    if (prevBtn) {
       prevBtn.disabled =
         currentPage === 1;
+    }
 
+    if (nextBtn) {
       nextBtn.disabled =
         currentPage === totalPages;
     }
+  }
 
-    buttons.forEach((button) => {
-      button.addEventListener(
-        "click",
-        () => {
-          currentTag =
-            button.dataset.tag || "ALL";
+  buttons.forEach((button) => {
+    button.addEventListener(
+      "click",
+      () => {
+        currentTag =
+          button.dataset.tag || "ALL";
 
-          currentPage = 1;
+        currentPage = 1;
 
-          buttons.forEach((btn) => {
-            btn.classList.remove(
-              "bg-red-200"
-            );
-
-            btn.classList.add(
-              "bg-white"
-            );
-          });
-
-          button.classList.remove(
-            "bg-white"
-          );
-
-          button.classList.add(
+        buttons.forEach((btn) => {
+          btn.classList.remove(
             "bg-red-200"
           );
 
-          renderPosts();
-        }
-      );
-    });
-
-    prevBtn?.addEventListener(
-      "click",
-      () => {
-        if (currentPage > 1) {
-          currentPage--;
-          renderPosts();
-        }
-      }
-    );
-
-    nextBtn?.addEventListener(
-      "click",
-      () => {
-        const filteredPosts =
-          getFilteredPosts();
-
-        const totalPages =
-          Math.ceil(
-            filteredPosts.length /
-            POSTS_PER_PAGE
+          btn.classList.add(
+            "bg-white"
           );
+        });
 
-        if (
-          currentPage < totalPages
-        ) {
-          currentPage++;
-          renderPosts();
-        }
+        button.classList.remove(
+          "bg-white"
+        );
+
+        button.classList.add(
+          "bg-red-200"
+        );
+
+        renderPosts();
       }
     );
+  });
 
-    renderPosts();
-  </script>
+  prevBtn?.addEventListener(
+    "click",
+    () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderPosts();
+      }
+    }
+  );
+
+  nextBtn?.addEventListener(
+    "click",
+    () => {
+      const filteredPosts =
+        getFilteredPosts();
+
+      const totalPages =
+        Math.ceil(
+          filteredPosts.length /
+          POSTS_PER_PAGE
+        );
+
+      if (
+        currentPage < totalPages
+      ) {
+        currentPage++;
+        renderPosts();
+      }
+    }
+  );
+
+  renderPosts();
+</script>
 </Layout>
