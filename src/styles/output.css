@@ -2442,6 +2442,14 @@ html[data-theme="light"] .text-color {
   text-decoration-line: line-through;
 }
 
+.decoration-red-500{
+  text-decoration-color: #ef4444;
+}
+
+.decoration-double{
+  text-decoration-style: double;
+}
+
 .decoration-wavy{
   text-decoration-style: wavy;
 }
