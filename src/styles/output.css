@@ -7030,6 +7030,10 @@ h1 {
     height: 30px;
   }
 
+  .md\:h-\[28px\]{
+    height: 28px;
+  }
+
   .md\:w-1\/2{
     width: 50%;
   }
