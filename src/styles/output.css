@@ -2446,10 +2446,6 @@ html[data-theme="light"] .text-color {
   text-decoration-color: #ef4444;
 }
 
-.decoration-double{
-  text-decoration-style: double;
-}
-
 .decoration-wavy{
   text-decoration-style: wavy;
 }
@@ -6370,11 +6366,11 @@ h1 {
 .auto-zoom-content img {
   width: 100%;
   height: auto;
-  max-height: 90vh;
+  max-height: 70vh;
   -o-object-fit: contain;
      object-fit: contain;
   /* 縦横比を維持してはみ出さないようにする */
-  border-radius: 8px;
+  border-radius: 0px;
   /* お好みで角丸に */
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   /* 少し影をつけると綺麗です */
@@ -6780,10 +6776,6 @@ h1 {
     height: 15px;
   }
 
-  .max-md\:h-\[18px\]{
-    height: 18px;
-  }
-
   .max-md\:h-\[20px\]{
     height: 20px;
   }
@@ -6974,6 +6966,10 @@ h1 {
     height: 25px;
   }
 
+  .md\:h-\[28px\]{
+    height: 28px;
+  }
+
   .md\:h-\[35px\]{
     height: 35px;
   }
@@ -7020,18 +7016,6 @@ h1 {
 
   .md\:h-\[80px\]{
     height: 80px;
-  }
-
-  .md\:h-\[32px\]{
-    height: 32px;
-  }
-
-  .md\:h-\[30px\]{
-    height: 30px;
-  }
-
-  .md\:h-\[28px\]{
-    height: 28px;
   }
 
   .md\:w-1\/2{

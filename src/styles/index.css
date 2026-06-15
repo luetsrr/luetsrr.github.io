@@ -3112,9 +3112,9 @@ h1 {
 .auto-zoom-content img {
   width: 100%;
   height: auto;
-  max-height: 90vh;
+  max-height: 70vh;
   object-fit: contain; /* 縦横比を維持してはみ出さないようにする */
-  border-radius: 8px; /* お好みで角丸に */
+  border-radius: 0px; /* お好みで角丸に */
   box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* 少し影をつけると綺麗です */
 }
 
