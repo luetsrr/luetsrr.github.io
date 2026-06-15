@@ -3077,7 +3077,7 @@ h1 {
 
 .auto-zoom-overlay {
   /* 最初は非表示 */
-  display: none;
+  display: flex;
   
   /* 画面全体に固定 */
   position: fixed;
@@ -3095,11 +3095,16 @@ h1 {
   /* 中央寄せのためのFlexbox設定 */
   align-items: center;
   justify-content: center;
+
+  opacity: 0;             /* 最初は透明 */
+  visibility: hidden;     /* 最初は非表示（クリックなども当たらない状態） */
+  transition: opacity 0.4s ease, visibility 0.4s ease; /* 0.4秒かけてじわっと変化 */
 }
 
 /* JavaScriptで「auto-zoom-is-open」クラスが付与されたら表示 */
 .auto-zoom-overlay.auto-zoom-is-open {
-  display: flex;
+  opacity: 1;             /* 不透明にする */
+  visibility: visible;    /* 表示する */
 }
 
 .auto-zoom-content {
@@ -3128,7 +3133,7 @@ h1 {
   border: none;
   color: #ffffff; /* 白色の× */
   font-size: 40px;
-  font-weight: bold;
+  font-weight: 400;
   cursor: pointer;
   line-height: 1;
   padding: 0;

@@ -124,9 +124,14 @@ const allTags = Array.from(
 
       // 【閉じる機能】
       const closeModal = function() {
-        modal.classList.remove('auto-zoom-is-open');
-        document.body.style.overflow = '';
-      };
+  // 先にクラスを外して、CSSのフェードアウトアニメーションを動かす
+  modal.classList.remove('auto-zoom-is-open');
+  
+  // 400ミリ秒（CSSの0.4sと同じ時間）待ってから、背景のスクロール禁止を解除する
+  setTimeout(function() {
+    document.body.style.overflow = '';
+  }, 400); 
+};
 
       // ×ボタンで閉じる
       if (closeBtn) {
