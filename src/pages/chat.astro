@@ -1,5 +1,9 @@
 ---
-// レイアウトのインポートなし
+
+import "katex/dist/katex.min.css";
+import "remixicon/fonts/remixicon.css";
+import "../styles/output.css";
+
 ---
 <!DOCTYPE html>
 <html lang="ja">
@@ -86,7 +90,6 @@
 
             messageInput.value = ''; 
             
-            // 入力フォーカスを外してキーボードを強制的に閉じ、画面をリセット
             messageInput.blur(); 
             window.scrollTo(0, 0);
         }
@@ -169,19 +172,17 @@
 </html>
 
 <style>
-    /* 画面全体でスクロールを徹底的に排除 */
-    html, body {
+    :global(html), :global(body) {
         height: 100%;
         height: 100dvh; 
         margin: 0;
         padding: 0;
         overflow: hidden;
-        position: fixed; /* スクリプトやキーボードによるバウンスを防ぐ */
+        position: fixed; 
         width: 100%;
         background-color: #ffffff;
     }
 
-    /* ★修正：アプリ全体のコンテナを固定配置し、はみ出しを禁止 */
     .app-container {
         position: fixed;
         top: 0;
@@ -205,12 +206,11 @@
         font-size: 1.35rem;
     }
 
-    /* チャットボックス内だけを独立してスクロールさせる（他は動かさない） */
     #chat-box { 
         border: 1px solid #ccc; 
         flex-grow: 1; 
         overflow-y: auto; 
-        -webkit-overflow-scrolling: touch; /* iOSでのスクロールを滑らかに */
+        -webkit-overflow-scrolling: touch; 
         padding: 15px; 
         margin-bottom: 12px; 
         background: #ffffff; 
@@ -218,7 +218,6 @@
         box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
     }
 
-    /* 定型文・メッセージのレイアウト */
     :global(.message) { 
         margin-bottom: 14px; 
         display: flex;
