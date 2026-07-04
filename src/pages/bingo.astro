@@ -1,0 +1,651 @@
+---
+import "katex/dist/katex.min.css";
+import "remixicon/fonts/remixicon.css";
+import "../styles/output.css";
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>ビンゴ＆チャット - 第8回うぃーすた全国交流会</title>
+</head>
+<body>
+
+    <div class="main-layout">
+        
+        <div class="roulette-section glass-panel">
+            <div class="section-title title-highlight">BINGO ROULETTE</div>
+            <div class="bingo-ball-wrapper">
+                <div class="bingo-ball" id="current-number">?</div>
+            </div>
+            <button class="spin-btn" id="spin-btn">ルーレットを回す</button>
+            
+            <button class="reset-btn" id="reset-btn">
+                <i class="ri-refresh-line"></i> 進行状況をリセット
+            </button>
+        </div>
+
+        <div class="history-section glass-panel">
+            <div class="section-title">これまでにでた数字</div>
+            <div class="history-grid" id="history-grid">
+                </div>
+        </div>
+
+        <div class="chat-section glass-panel">
+            <div class="app-container">
+                <div class="section-title">リアルタイムチャット</div>
+
+                <div id="chat-box"></div>
+
+                <div class="preset-area">
+                    <button class="preset-btn btn-reach" data-msg="リーチ！" data-color="reach">リーチ！</button>
+                    <button class="preset-btn btn-bingo" data-msg="BINGO!" data-color="bingo">BINGO！</button>
+                </div>
+
+                <div class="input-area">
+                    <input type="text" id="message-input" placeholder="メッセージを入力...">
+                    <button id="send-btn"><i class="ri-send-plane-fill"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script is:inline src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script is:inline src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+    <script is:inline>
+        /* ==========================================
+           1. ビンゴルーレットの処理（ローカル保存対応）
+        ========================================== */
+        const totalNumbers = 75;
+        let availableNumbers = [];
+        let drawnNumbers = [];
+        let isSpinning = false;
+
+        const currentNumberDisplay = document.getElementById('current-number');
+        const spinBtn = document.getElementById('spin-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const historyGrid = document.getElementById('history-grid');
+
+        function loadBingoState() {
+            const savedAvailable = localStorage.getItem('bingo_available');
+            const savedDrawn = localStorage.getItem('bingo_drawn');
+            const savedCurrent = localStorage.getItem('bingo_current');
+
+            if (savedAvailable && savedDrawn) {
+                availableNumbers = JSON.parse(savedAvailable);
+                drawnNumbers = JSON.parse(savedDrawn);
+            } else {
+                availableNumbers = Array.from({length: totalNumbers}, (_, i) => i + 1);
+                drawnNumbers = [];
+            }
+
+            if (savedCurrent) {
+                currentNumberDisplay.innerText = savedCurrent;
+            } else {
+                currentNumberDisplay.innerText = "?";
+            }
+
+            historyGrid.innerHTML = "";
+            drawnNumbers.forEach(num => {
+                const numDiv = document.createElement('div');
+                numDiv.className = 'history-item';
+                numDiv.innerText = num;
+                historyGrid.appendChild(numDiv);
+            });
+
+            if (availableNumbers.length === 0 && drawnNumbers.length > 0) {
+                spinBtn.disabled = true;
+                spinBtn.innerText = "終了";
+            }
+        }
+
+        loadBingoState();
+
+        spinBtn.addEventListener('click', () => {
+            if (isSpinning || availableNumbers.length === 0) return;
+            
+            isSpinning = true;
+            spinBtn.disabled = true;
+            spinBtn.innerText = "抽選中...";
+            currentNumberDisplay.classList.add('spinning');
+
+            let spinInterval = setInterval(() => {
+                const randomTempNum = availableNumbers[Math.floor(Math.random() * availableNumbers.length)];
+                currentNumberDisplay.innerText = randomTempNum;
+            }, 50);
+
+            setTimeout(() => {
+                clearInterval(spinInterval);
+                currentNumberDisplay.classList.remove('spinning');
+                
+                const randomIndex = Math.floor(Math.random() * availableNumbers.length);
+                const selectedNumber = availableNumbers.splice(randomIndex, 1)[0];
+                drawnNumbers.push(selectedNumber);
+                
+                currentNumberDisplay.innerText = selectedNumber;
+                currentNumberDisplay.classList.add('pop-animation');
+                
+                const numDiv = document.createElement('div');
+                numDiv.className = 'history-item new-drawn';
+                numDiv.innerText = selectedNumber;
+                historyGrid.appendChild(numDiv);
+
+                const historySection = document.querySelector('.history-section');
+                historySection.scrollTop = historySection.scrollHeight;
+
+                localStorage.setItem('bingo_available', JSON.stringify(availableNumbers));
+                localStorage.setItem('bingo_drawn', JSON.stringify(drawnNumbers));
+                localStorage.setItem('bingo_current', selectedNumber);
+
+                setTimeout(() => currentNumberDisplay.classList.remove('pop-animation'), 400);
+
+                if (availableNumbers.length > 0) {
+                    spinBtn.disabled = false;
+                    spinBtn.innerText = "ルーレットを回す";
+                } else {
+                    spinBtn.innerText = "終了";
+                }
+                
+                isSpinning = false;
+            }, 2000);
+        });
+
+        resetBtn.addEventListener('click', () => {
+            if (confirm("ビンゴの進行状況をリセットしますか？\n（※チャットの履歴は消えません）")) {
+                localStorage.removeItem('bingo_available');
+                localStorage.removeItem('bingo_drawn');
+                localStorage.removeItem('bingo_current');
+
+                availableNumbers = Array.from({length: totalNumbers}, (_, i) => i + 1);
+                drawnNumbers = [];
+                
+                currentNumberDisplay.innerText = "?";
+                historyGrid.innerHTML = "";
+                
+                spinBtn.disabled = false;
+                spinBtn.innerText = "ルーレットを回す";
+            }
+        });
+
+        /* ==========================================
+           2. Firebaseチャットの処理
+        ========================================== */
+        const firebaseConfig = {
+            apiKey: "AIzaSyAx1_nza7sR6c8v3_2c-MBZS5yi4y4rE4c",
+            authDomain: "bingo-37920.firebaseapp.com",
+            databaseURL: "https://bingo-37920-default-rtdb.firebaseio.com",
+            projectId: "bingo-37920",
+            storageBucket: "bingo-37920.firebasestorage.app",
+            messagingSenderId: "858255325745",
+            appId: "1:858255325745:web:fec3635297acfb698fb310",
+            measurementId: "G-NY97WJKMR2"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const chatRef = database.ref('chat_messages');
+
+        const chatBox = document.getElementById('chat-box');
+        const messageInput = document.getElementById('message-input');
+        const sendBtnChat = document.getElementById('send-btn');
+        let currentNickname = ""; 
+
+        window.addEventListener('DOMContentLoaded', () => {
+            let savedName = sessionStorage.getItem('chat_nickname');
+            while (!savedName || savedName.trim() === '') {
+                const inputName = prompt("チャットで使用するニックネームを必ず入力してください：");
+                if (inputName && inputName.trim() !== '') {
+                    savedName = inputName.trim();
+                    sessionStorage.setItem('chat_nickname', savedName);
+                } else {
+                    alert("ニックネームの入力は必須です！");
+                }
+            }
+            currentNickname = savedName; 
+        });
+
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (currentNickname === '' || message === '') return;
+
+            chatRef.push({
+                nickname: currentNickname, 
+                message: message,
+                timestamp: Date.now(),
+                isPreset: false
+            });
+
+            messageInput.value = ''; 
+            messageInput.blur(); 
+        }
+
+        sendBtnChat.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        document.querySelectorAll('.preset-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                if (currentNickname === '') {
+                    alert("ニックネームを設定してください。");
+                    return;
+                }
+
+                const baseMessage = button.getAttribute('data-msg');
+                const colorType = button.getAttribute('data-color');
+                let finalMessage = baseMessage;
+
+                if (baseMessage === "BINGO!") {
+                    finalMessage = `<span class="big-title">BINGO！</span><br><span class="small-sub">${currentNickname}さんがビンゴになりました🎉</span>`;
+                } else if (baseMessage === "リーチ！") {
+                    finalMessage = `<span class="big-title">リーチ！</span><br><span class="small-sub">${currentNickname}さんがリーチになりました🔥</span>`;
+                }
+
+                chatRef.push({
+                    nickname: currentNickname,
+                    message: finalMessage,
+                    timestamp: Date.now(),
+                    isPreset: true,
+                    colorType: colorType
+                });
+            });
+        });
+
+        chatRef.on('child_added', (snapshot) => {
+            const data = snapshot.val();
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            
+            let formattedMessage;
+            if (data.isPreset === true) {
+                formattedMessage = data.message;
+            } else {
+                formattedMessage = escapeHTML(data.message).replace(/\n/g, '<br>');
+            }
+            
+            if (data.isPreset === true) {
+                messageElement.classList.add('preset-message');
+                if (data.colorType) {
+                    messageElement.classList.add(`color-${data.colorType}`);
+                }
+                messageElement.innerHTML = `<span class="text-content">${formattedMessage}</span>`;
+            } else {
+                messageElement.innerHTML = `
+                    <div class="msg-author">${escapeHTML(data.nickname)}</div>
+                    <div class="msg-bubble"><span class="text-content">${formattedMessage}</span></div>
+                `;
+            }
+
+            chatBox.appendChild(messageElement);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>"']/g, match => {
+                const escape = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#x27;' };
+                return escape[match];
+            });
+        }
+    </script>
+
+</body>
+</html>
+
+<style>
+    /* ==========================================
+       デザイン刷新版レイアウト
+    ========================================== */
+    :global(html), :global(body) {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; 
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        /* イベントを盛り上げる鮮やかなグラデーション背景 */
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #333;
+    }
+
+    .main-layout {
+        display: flex;
+        width: 100vw;
+        height: 100dvh;
+        padding: 20px;
+        box-sizing: border-box;
+        gap: 20px;
+    }
+
+    /* 各カラム共通のすりガラス（グラスモーフィズム）パネル */
+    .glass-panel {
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .section-title {
+        font-size: 1.4rem;
+        font-weight: 900;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        text-align: center;
+        letter-spacing: 2px;
+    }
+
+    .title-highlight {
+        background: linear-gradient(45deg, #ff416c, #ff4b2b);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 1.6rem;
+    }
+
+    /* --- 左側：ルーレット --- */
+    .roulette-section {
+        flex: 1;
+        min-width: 320px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 30px;
+        position: relative;
+    }
+
+    .bingo-ball-wrapper {
+        margin-bottom: 40px;
+        border-radius: 50%;
+        padding: 10px;
+        background: linear-gradient(145deg, #f0f0f0, #cacaca);
+        box-shadow:  20px 20px 60px rgba(0,0,0,0.1), -20px -20px 60px rgba(255,255,255,0.8);
+    }
+
+    /* リッチな3D風ビンゴボール */
+    .bingo-ball {
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle at 35% 35%, #ffffff 0%, #ffeaa7 20%, #fdcb6e 60%, #e17055 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 90px;
+        font-weight: 900;
+        color: #d63031;
+        text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+        box-shadow: 
+            inset -15px -15px 25px rgba(0,0,0,0.15), 
+            inset 10px 10px 20px rgba(255,255,255,0.8);
+        border: 6px solid #fff;
+    }
+
+    .spinning {
+        animation: shake 0.1s infinite;
+        color: #888;
+        background: radial-gradient(circle at 35% 35%, #ffffff 0%, #e0e0e0 60%, #b2bec3 100%);
+    }
+    @keyframes shake {
+        0% { transform: translate(1px, 1px) rotate(0deg); }
+        50% { transform: translate(-1px, 2px) rotate(-1deg); }
+        100% { transform: translate(1px, -1px) rotate(1deg); }
+    }
+
+    .pop-animation {
+        animation: bouncePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes bouncePop {
+        0% { transform: scale(0.8); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+
+    /* 3D風スピンボタン */
+    .spin-btn {
+        padding: 16px 45px;
+        font-size: 1.3rem;
+        font-weight: 900;
+        color: #fff;
+        background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 8px 15px rgba(255, 65, 108, 0.3), inset 0 -3px 0 rgba(0,0,0,0.2);
+        transition: all 0.2s;
+        letter-spacing: 1px;
+    }
+    .spin-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 20px rgba(255, 65, 108, 0.4), inset 0 -3px 0 rgba(0,0,0,0.2);
+    }
+    .spin-btn:active {
+        transform: translateY(2px);
+        box-shadow: 0 2px 5px rgba(255, 65, 108, 0.4), inset 0 -1px 0 rgba(0,0,0,0.2);
+    }
+    .spin-btn:disabled {
+        background: #bdc3c7;
+        box-shadow: none;
+        transform: none;
+        cursor: not-allowed;
+    }
+
+    .reset-btn {
+        margin-top: 35px;
+        background: #f1f2f6;
+        border: none;
+        color: #747d8c;
+        padding: 10px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-weight: bold;
+        transition: all 0.2s;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .reset-btn:hover {
+        background: #dfe4ea;
+        color: #2f3542;
+    }
+
+    /* --- 中央：履歴 --- */
+    .history-section {
+        flex: 1.3;
+        min-width: 380px;
+        padding: 30px 20px;
+        overflow-y: auto;
+    }
+    /* スクロールバーの装飾 */
+    .history-section::-webkit-scrollbar { width: 8px; }
+    .history-section::-webkit-scrollbar-track { background: transparent; }
+    .history-section::-webkit-scrollbar-thumb { background: #dcdde1; border-radius: 4px; }
+
+    .history-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+        gap: 15px;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    /* メダル/チップ風の履歴アイテム */
+    .history-item {
+        background: linear-gradient(135deg, #f9ca24, #f0932b);
+        color: #fff;
+        border-radius: 12px;
+        font-size: 1.4rem;
+        font-weight: 900;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 1 / 1;
+        box-shadow: 0 4px 10px rgba(240, 147, 43, 0.4), inset 0 2px 0 rgba(255,255,255,0.4);
+        border: 2px solid #ffbe76;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .history-item.new-drawn {
+        animation: dropIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes dropIn {
+        0% { transform: translateY(-20px) scale(0.5); opacity: 0; }
+        100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    /* --- 右側：チャット --- */
+    .chat-section {
+        flex: 1;
+        min-width: 350px;
+        max-width: 450px;
+    }
+
+    .app-container {
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #chat-box { 
+        border: none;
+        flex-grow: 1; 
+        overflow-y: auto; 
+        padding: 15px; 
+        margin-bottom: 15px; 
+        background: #f8f9fa; 
+        border-radius: 16px;
+        box-shadow: inset 0 4px 6px rgba(0,0,0,0.03);
+    }
+    #chat-box::-webkit-scrollbar { width: 6px; }
+    #chat-box::-webkit-scrollbar-thumb { background: #ced4da; border-radius: 3px; }
+
+    :global(.message) { 
+        margin-bottom: 16px; 
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        animation: fadeIn 0.3s ease-out;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    :global(.msg-author) {
+        font-size: 12px;
+        color: #7f8c8d;
+        font-weight: 700;
+        margin-left: 10px;
+        margin-bottom: 4px;
+    }
+
+    :global(.msg-bubble) {
+        padding: 12px 16px; 
+        border-radius: 20px; 
+        background: #ffffff; 
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06); 
+        font-size: 15px;
+        line-height: 1.5;
+        max-width: 85%;
+        word-break: break-all;
+        border-top-left-radius: 4px; /* 吹き出しっぽさ */
+    }
+
+    :global(.message.preset-message) {
+        padding: 14px 20px;
+        animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        text-align: left; 
+        width: fit-content; 
+        max-width: 90%;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    :global(.big-title) {
+        font-size: 22px; 
+        font-weight: 900; 
+        letter-spacing: 2px; 
+        margin-bottom: 6px;
+        display: inline-block;
+    }
+
+    :global(.message.color-bingo) {
+        background: linear-gradient(135deg, #00c6ff, #0072ff); 
+        border: none; 
+        border-radius: 16px;
+        color: #fff;
+    }
+    :global(.message.color-reach) {
+        background: linear-gradient(135deg, #f6d365, #fda085); 
+        border: none;
+        border-radius: 16px;
+        color: #fff;
+    }
+    :global(.message.color-bingo .big-title), :global(.message.color-bingo .small-sub),
+    :global(.message.color-reach .big-title), :global(.message.color-reach .small-sub) { 
+        color: #ffffff; 
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .preset-area {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .preset-btn {
+        border: none;
+        padding: 12px 10px; 
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 900;
+        transition: all 0.2s;
+        flex: 1;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .preset-btn:hover { transform: translateY(-2px); }
+    .btn-bingo { background: linear-gradient(135deg, #00c6ff, #0072ff); color: white; }
+    .btn-reach { background: linear-gradient(135deg, #f6d365, #fda085); color: white; }
+
+    .input-area { 
+        display: flex; 
+        gap: 10px; 
+    }
+    #message-input { 
+        flex-grow: 1; 
+        padding: 14px 16px; 
+        font-size: 15px; 
+        border: 1px solid #e0e0e0;
+        border-radius: 25px;
+        outline: none;
+        background: #f8f9fa;
+        transition: border 0.3s;
+    }
+    #message-input:focus {
+        border-color: #667eea;
+        background: #fff;
+    }
+    #send-btn {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
+        transition: transform 0.2s;
+    }
+    #send-btn:hover {
+        transform: scale(1.05);
+    }
+</style>
