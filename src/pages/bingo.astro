@@ -31,11 +31,13 @@ import "../styles/output.css";
             </button>
 
             <div class="event-image-area">
+                <!--
     <div class="image-title">
         ⬇️ チャットに参加！
     </div>
+            -->
 
-    <img src="/images/QR_150249.png" alt="イベント画像">
+    <img src="/images/qr.png" alt="イベント画像">
 </div>
         </div>
 
@@ -317,8 +319,8 @@ import "../styles/output.css";
         showAnnouncement(
             formattedMessage,
             data.colorType === "bingo"
-                ? "#2196f3"
-                : "#ff9800"
+                ? "#0073ff"
+                : "#ff8800"
         );
 
     } else {
@@ -371,7 +373,7 @@ function showAnnouncement(html, color){
     #announcement-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.45);
+    background: rgba(0,0,0,.6);
 
     display: flex;
     justify-content: center;
@@ -529,14 +531,14 @@ function showAnnouncement(html, color){
     }
 
     .bingo-ball {
-        width: 240px;
-        height: 240px;
+        width: 300px;
+        height: 300px;
         background: radial-gradient(circle at 35% 35%, #ffffff 0%, #ffeaa7 20%, #fdcb6e 60%, #e17055 100%);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 120px;
+        font-size: 180px;
         font-weight: 900;
         color: #d63031;
         text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
@@ -628,19 +630,45 @@ function showAnnouncement(html, color){
 
 .event-image-area img {
     max-width: 100%;
-    max-height: 280px;
+    max-height: 260px;
 }
 
 
     /* --- 中央：履歴エリアの装飾 --- */
     .history-section {
-        flex: 1.3;
-        min-width: 380px;
-        padding: 30px;
-        overflow-y: auto;
-        /* 背景にうっすらと模様があるとさらにリッチになります */
-        background: rgba(255, 255, 255, 0.85);
-    }
+    position: relative;
+    flex: 1.3;
+    min-width: 380px;
+    padding: 30px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.85);
+}
+
+/* 背景ロゴ */
+.history-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-image: url("/images/FaL0NR0rzFvlirh1774449511_1774449520.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;   /* ロゴの大きさ */
+
+    opacity: 0.5;          /* ロゴの濃さ */
+    pointer-events: none;
+}
+
+/* 数字をロゴより前面に表示 */
+.history-grid {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+    gap: 20px;
+    align-content: start;
+}
 
     .history-grid {
         display: grid;
