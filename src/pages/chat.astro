@@ -110,9 +110,9 @@ import "../styles/output.css";
                 let finalMessage = baseMessage;
 
                 if (baseMessage === "BINGO!") {
-                    finalMessage = `<span class="big-title">BINGO！</span><br><span class="small-sub">${currentNickname}さんがビンゴになりました🎉</span>`;
+                    finalMessage = `<span class="big-title">BINGO！</span><br><span class="small-sub">${currentNickname}さんがビンゴになりました</span>`;
                 } else if (baseMessage === "リーチ！") {
-                    finalMessage = `<span class="big-title">リーチ！</span><br><span class="small-sub">${currentNickname}さんがリーチになりました🔥</span>`;
+                    finalMessage = `<span class="big-title">リーチ！</span><br><span class="small-sub">${currentNickname}さんがリーチになりました</span>`;
                 }
 
                 chatRef.push({
@@ -182,7 +182,7 @@ import "../styles/output.css";
         position: fixed; 
         width: 100%;
         font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* メイン画面と同じ背景 */
+        background: linear-gradient(135deg, #ffd6d6 0%, #ffd6d6 100%); /* メイン画面と同じ背景 */
         color: #333;
     }
 
@@ -191,7 +191,7 @@ import "../styles/output.css";
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         border-radius: 24px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+
         border: 1px solid rgba(255, 255, 255, 0.5);
     }
 
@@ -219,7 +219,7 @@ import "../styles/output.css";
     }
 
     .title-highlight {
-        background: linear-gradient(45deg, #ff416c, #ff4b2b);
+        background: linear-gradient(45deg, #000000, #000000);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
@@ -303,19 +303,19 @@ import "../styles/output.css";
 
     /* BINGO! （ブルーグラデーション） */
     :global(.message.color-bingo) {
-        background: linear-gradient(135deg, #00c6ff, #0072ff); 
+        background: linear-gradient(135deg, #2084ff, #2084ff); 
         border: none; 
         border-radius: 16px;
         color: #fff;
     }
     :global(.message.color-bingo .big-title), :global(.message.color-bingo .small-sub) { 
         color: #ffffff; 
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+
     }
 
     /* リーチ！ （オレンジグラデーション） */
     :global(.message.color-reach) {
-        background: linear-gradient(135deg, #f6d365, #fda085); 
+        background: linear-gradient(135deg, #ff9721, #ff9721); 
         border: none;
         border-radius: 16px;
         color: #fff;
@@ -346,15 +346,14 @@ import "../styles/output.css";
         transition: all 0.2s;
         flex: 1;
         max-width: 180px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
     .preset-btn:hover {
         transform: translateY(-2px);
         filter: brightness(1.1);
     }
     
-    .btn-bingo { background: linear-gradient(135deg, #00c6ff, #0072ff); color: white; }
-    .btn-reach { background: linear-gradient(135deg, #f6d365, #fda085); color: white; }
+    .btn-bingo { background: linear-gradient(135deg, #2084ff, #2084ff); color: white; }
+    .btn-reach { background: linear-gradient(135deg, #ff9721, #ff9721); color: white; }
 
     .input-area { 
         display: flex; 
@@ -380,7 +379,7 @@ import "../styles/output.css";
         width: 48px;
         height: 48px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #667eea, #764ba2);
+        background: linear-gradient(135deg, #ea6666, #ff4c4c);
         color: white;
         border: none;
         cursor: pointer;
@@ -388,7 +387,6 @@ import "../styles/output.css";
         align-items: center;
         justify-content: center;
         font-size: 1.3rem;
-        box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
         transition: transform 0.2s;
         flex-shrink: 0;
     }

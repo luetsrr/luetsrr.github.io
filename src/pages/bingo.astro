@@ -8,33 +8,45 @@ import "../styles/output.css";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ビンゴ＆チャット - 第8回うぃーすた全国交流会</title>
+    <title>ビンゴ - 第8回うぃーすた全国交流会</title>
 </head>
 <body>
 
     <div class="main-layout">
         
         <div class="roulette-section glass-panel">
-            <div class="section-title title-highlight">BINGO ROULETTE</div>
+            
+            <button id="fullscreen-btn" class="fullscreen-btn" title="全画面表示の切り替え">
+                <i class="ri-fullscreen-line"></i>
+            </button>
+
+            <div class="section-title title-highlight"></div>
             <div class="bingo-ball-wrapper">
                 <div class="bingo-ball" id="current-number">?</div>
             </div>
-            <button class="spin-btn" id="spin-btn">ルーレットを回す</button>
+            <button class="spin-btn" id="spin-btn">スタート！</button>
             
             <button class="reset-btn" id="reset-btn">
-                <i class="ri-refresh-line"></i> 進行状況をリセット
+                <i class="ri-refresh-line"></i> リセット
             </button>
+
+            <div class="event-image-area">
+    <div class="image-title">
+        ⬇️ チャットに参加！
+    </div>
+
+    <img src="/images/QR_150249.png" alt="イベント画像">
+</div>
         </div>
 
         <div class="history-section glass-panel">
-            <div class="section-title">これまでにでた数字</div>
+            <div class="section-title"></div>
             <div class="history-grid" id="history-grid">
                 </div>
         </div>
 
         <div class="chat-section glass-panel">
             <div class="app-container">
-                <div class="section-title">リアルタイムチャット</div>
 
                 <div id="chat-box"></div>
 
@@ -52,10 +64,40 @@ import "../styles/output.css";
 
     </div>
 
+    <div id="announcement-overlay">
+    <div id="announcement-content"></div>
+</div>
+
     <script is:inline src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script is:inline src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
     <script is:inline>
+        /* ==========================================
+           0. 全画面表示（フルスクリーン）の処理
+        ========================================== */
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        
+        fullscreenBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch((err) => {
+                    console.log(`全画面表示エラー: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        });
+
+        // 画面の状態が変わったときにアイコンを切り替える
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                fullscreenBtn.innerHTML = '<i class="ri-fullscreen-line"></i>';
+            } else {
+                fullscreenBtn.innerHTML = '<i class="ri-fullscreen-exit-line"></i>';
+            }
+        });
+
         /* ==========================================
            1. ビンゴルーレットの処理（ローカル保存対応）
         ========================================== */
@@ -144,7 +186,7 @@ import "../styles/output.css";
 
                 if (availableNumbers.length > 0) {
                     spinBtn.disabled = false;
-                    spinBtn.innerText = "ルーレットを回す";
+                    spinBtn.innerText = "スタート！";
                 } else {
                     spinBtn.innerText = "終了";
                 }
@@ -166,7 +208,7 @@ import "../styles/output.css";
                 historyGrid.innerHTML = "";
                 
                 spinBtn.disabled = false;
-                spinBtn.innerText = "ルーレットを回す";
+                spinBtn.innerText = "スタート！";
             }
         });
 
@@ -194,17 +236,9 @@ import "../styles/output.css";
         let currentNickname = ""; 
 
         window.addEventListener('DOMContentLoaded', () => {
-            let savedName = sessionStorage.getItem('chat_nickname');
-            while (!savedName || savedName.trim() === '') {
-                const inputName = prompt("チャットで使用するニックネームを必ず入力してください：");
-                if (inputName && inputName.trim() !== '') {
-                    savedName = inputName.trim();
-                    sessionStorage.setItem('chat_nickname', savedName);
-                } else {
-                    alert("ニックネームの入力は必須です！");
-                }
-            }
-            currentNickname = savedName; 
+            // ニックネームを聞かず、自動で「運営」に設定
+            currentNickname = "第8回うぃーすた全国交流会";
+            sessionStorage.setItem('chat_nickname', currentNickname);
         });
 
         function sendMessage() {
@@ -239,9 +273,9 @@ import "../styles/output.css";
                 let finalMessage = baseMessage;
 
                 if (baseMessage === "BINGO!") {
-                    finalMessage = `<span class="big-title">BINGO！</span><br><span class="small-sub">${currentNickname}さんがビンゴになりました🎉</span>`;
+                    finalMessage = `<span class="big-title">BINGO！</span><br><span class="small-sub">${currentNickname}さんがビンゴになりました</span>`;
                 } else if (baseMessage === "リーチ！") {
-                    finalMessage = `<span class="big-title">リーチ！</span><br><span class="small-sub">${currentNickname}さんがリーチになりました🔥</span>`;
+                    finalMessage = `<span class="big-title">リーチ！</span><br><span class="small-sub">${currentNickname}さんがリーチになりました</span>`;
                 }
 
                 chatRef.push({
@@ -255,33 +289,56 @@ import "../styles/output.css";
         });
 
         chatRef.on('child_added', (snapshot) => {
-            const data = snapshot.val();
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message');
-            
-            let formattedMessage;
-            if (data.isPreset === true) {
-                formattedMessage = data.message;
-            } else {
-                formattedMessage = escapeHTML(data.message).replace(/\n/g, '<br>');
-            }
-            
-            if (data.isPreset === true) {
-                messageElement.classList.add('preset-message');
-                if (data.colorType) {
-                    messageElement.classList.add(`color-${data.colorType}`);
-                }
-                messageElement.innerHTML = `<span class="text-content">${formattedMessage}</span>`;
-            } else {
-                messageElement.innerHTML = `
-                    <div class="msg-author">${escapeHTML(data.nickname)}</div>
-                    <div class="msg-bubble"><span class="text-content">${formattedMessage}</span></div>
-                `;
-            }
+    const data = snapshot.val();
 
-            chatBox.appendChild(messageElement);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        });
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message');
+
+    // メッセージ内容を作成
+    const formattedMessage = data.isPreset
+        ? data.message
+        : escapeHTML(data.message).replace(/\n/g, "<br>");
+
+    if (data.isPreset) {
+
+        messageElement.classList.add("preset-message");
+
+        if (data.colorType) {
+            messageElement.classList.add(`color-${data.colorType}`);
+        }
+
+        messageElement.innerHTML = `
+            <span class="text-content">
+                ${formattedMessage}
+            </span>
+        `;
+
+        // 画面中央に大きく表示
+        showAnnouncement(
+            formattedMessage,
+            data.colorType === "bingo"
+                ? "#2196f3"
+                : "#ff9800"
+        );
+
+    } else {
+
+        messageElement.innerHTML = `
+            <div class="msg-author">
+                ${escapeHTML(data.nickname)}
+            </div>
+
+            <div class="msg-bubble">
+                <span class="text-content">
+                    ${formattedMessage}
+                </span>
+            </div>
+        `;
+    }
+
+    chatBox.appendChild(messageElement);
+    chatBox.scrollTop = chatBox.scrollHeight;
+});
 
         function escapeHTML(str) {
             return str.replace(/[&<>"']/g, match => {
@@ -289,12 +346,94 @@ import "../styles/output.css";
                 return escape[match];
             });
         }
+
+        const overlay = document.getElementById("announcement-overlay");
+const overlayContent = document.getElementById("announcement-content");
+
+function showAnnouncement(html, color){
+
+    overlayContent.innerHTML = html;
+
+    overlayContent.style.color = color;
+
+    overlay.classList.add("show");
+
+    setTimeout(()=>{
+        overlay.classList.remove("show");
+    },2000);
+}
     </script>
 
 </body>
 </html>
 
 <style>
+    #announcement-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: opacity .2s;
+
+    z-index: 99999;
+    pointer-events: none;
+}
+
+#announcement-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#announcement-content {
+    color: white;
+    text-align: center;
+    font-weight: 900;
+}
+
+:global(#announcement-content .big-title){
+    font-size: 100px;
+    display:block;
+    line-height:1;
+}
+
+:global(#announcement-content .small-sub){
+    font-size: 42px;
+    display:block;
+    margin-top:25px;
+}
+
+#announcement-overlay.show #announcement-content{
+    animation: bigAnnouncement .9s cubic-bezier(.18,.89,.32,1.4);
+}
+
+@keyframes bigAnnouncement{
+
+    0%{
+        transform:scale(.1) rotate(-20deg);
+        opacity:0;
+    }
+
+    60%{
+        transform:scale(1.2) rotate(5deg);
+        opacity:1;
+    }
+
+    80%{
+        transform:scale(.95);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
     /* ==========================================
        デザイン刷新版レイアウト
     ========================================== */
@@ -304,8 +443,7 @@ import "../styles/output.css";
         padding: 0;
         overflow: hidden; 
         font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-        /* イベントを盛り上げる鮮やかなグラデーション背景 */
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #ffd6d6 0%, #ffd6d6 100%);
         color: #333;
     }
 
@@ -318,7 +456,6 @@ import "../styles/output.css";
         gap: 20px;
     }
 
-    /* 各カラム共通のすりガラス（グラスモーフィズム）パネル */
     .glass-panel {
         background: rgba(255, 255, 255, 0.92);
         backdrop-filter: blur(10px);
@@ -356,30 +493,54 @@ import "../styles/output.css";
         position: relative;
     }
 
+    /* 追加：全画面ボタン */
+    .fullscreen-btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(200, 200, 200, 0.5);
+        color: #333;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        z-index: 100;
+    }
+    .fullscreen-btn:hover {
+        background: #ffffff;
+        transform: scale(1.1);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+
     .bingo-ball-wrapper {
+        margin-top: 40px;
         margin-bottom: 40px;
         border-radius: 50%;
         padding: 10px;
         background: linear-gradient(145deg, #f0f0f0, #cacaca);
-        box-shadow:  20px 20px 60px rgba(0,0,0,0.1), -20px -20px 60px rgba(255,255,255,0.8);
+
     }
 
-    /* リッチな3D風ビンゴボール */
     .bingo-ball {
-        width: 200px;
-        height: 200px;
+        width: 240px;
+        height: 240px;
         background: radial-gradient(circle at 35% 35%, #ffffff 0%, #ffeaa7 20%, #fdcb6e 60%, #e17055 100%);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 90px;
+        font-size: 120px;
         font-weight: 900;
         color: #d63031;
         text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
-        box-shadow: 
-            inset -15px -15px 25px rgba(0,0,0,0.15), 
-            inset 10px 10px 20px rgba(255,255,255,0.8);
+
         border: 6px solid #fff;
     }
 
@@ -403,7 +564,6 @@ import "../styles/output.css";
         100% { transform: scale(1); }
     }
 
-    /* 3D風スピンボタン */
     .spin-btn {
         padding: 16px 45px;
         font-size: 1.3rem;
@@ -413,13 +573,12 @@ import "../styles/output.css";
         border: none;
         border-radius: 50px;
         cursor: pointer;
-        box-shadow: 0 8px 15px rgba(255, 65, 108, 0.3), inset 0 -3px 0 rgba(0,0,0,0.2);
         transition: all 0.2s;
         letter-spacing: 1px;
     }
     .spin-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 20px rgba(255, 65, 108, 0.4), inset 0 -3px 0 rgba(0,0,0,0.2);
+        transform: translateY(0px);
+        box-shadow: inset 0 -3px 0 rgba(0,0,0,0.2);
     }
     .spin-btn:active {
         transform: translateY(2px);
@@ -433,7 +592,7 @@ import "../styles/output.css";
     }
 
     .reset-btn {
-        margin-top: 35px;
+        margin-top: 25px;
         background: #f1f2f6;
         border: none;
         color: #747d8c;
@@ -450,48 +609,86 @@ import "../styles/output.css";
         color: #2f3542;
     }
 
-    /* --- 中央：履歴 --- */
+    /* 追加：画像のエリア */
+    .event-image-area {
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-title {
+    font-size: 26px;
+    font-weight: 900;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.event-image-area img {
+    max-width: 100%;
+    max-height: 280px;
+}
+
+
+    /* --- 中央：履歴エリアの装飾 --- */
     .history-section {
         flex: 1.3;
         min-width: 380px;
-        padding: 30px 20px;
+        padding: 30px;
         overflow-y: auto;
+        /* 背景にうっすらと模様があるとさらにリッチになります */
+        background: rgba(255, 255, 255, 0.85);
     }
-    /* スクロールバーの装飾 */
-    .history-section::-webkit-scrollbar { width: 8px; }
-    .history-section::-webkit-scrollbar-track { background: transparent; }
-    .history-section::-webkit-scrollbar-thumb { background: #dcdde1; border-radius: 4px; }
 
     .history-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-        gap: 15px;
-        max-width: 100%;
-        margin: 0 auto;
+        grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+        gap: 20px;
+        align-content: start;
     }
 
-    /* メダル/チップ風の履歴アイテム */
-    .history-item {
-        background: linear-gradient(135deg, #f9ca24, #f0932b);
-        color: #fff;
-        border-radius: 12px;
-        font-size: 1.4rem;
-        font-weight: 900;
+    /* 高級カジノチップ風のデザイン */
+    :global(.history-item) {
+        position: relative;
+        width: 75px;
+        height: 75px;
+        background: radial-gradient(circle at 30% 30%, #fff6e5, #f39c12);
+        border: 4px solid #fff;
+        border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        aspect-ratio: 1 / 1;
-        box-shadow: 0 4px 10px rgba(240, 147, 43, 0.4), inset 0 2px 0 rgba(255,255,255,0.4);
-        border: 2px solid #ffbe76;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        font-size: 2rem;
+        font-weight: 900;
+        color: #e12828;
+        box-shadow: 
+            0 4px 0 #d35400, /* チップの厚み */
+            inset 0 -4px 4px rgba(0,0,0,0);
+        transition: transform 0.3s;
     }
 
-    .history-item.new-drawn {
-        animation: dropIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* 新しい数字が追加される時のリッチなアニメーション */
+    :global(.history-item.new-drawn) {
+        animation: chipDrop 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    @keyframes dropIn {
-        0% { transform: translateY(-20px) scale(0.5); opacity: 0; }
-        100% { transform: translateY(0) scale(1); opacity: 1; }
+
+    @keyframes chipDrop {
+        0% {
+            transform: translateY(-50px) scale(0) rotate(-180deg);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0) scale(1) rotate(0deg);
+            opacity: 1;
+        }
+    }
+
+    /* ホバーで少し浮き上がる演出 */
+    :global(.history-item:hover) {
+        transform: translateY(-5px);
+        filter: brightness(1.1);
     }
 
     /* --- 右側：チャット --- */
@@ -553,7 +750,7 @@ import "../styles/output.css";
         line-height: 1.5;
         max-width: 85%;
         word-break: break-all;
-        border-top-left-radius: 4px; /* 吹き出しっぽさ */
+        border-top-left-radius: 4px;
     }
 
     :global(.message.preset-message) {
@@ -562,7 +759,6 @@ import "../styles/output.css";
         text-align: left; 
         width: fit-content; 
         max-width: 90%;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
 
     :global(.big-title) {
@@ -574,13 +770,13 @@ import "../styles/output.css";
     }
 
     :global(.message.color-bingo) {
-        background: linear-gradient(135deg, #00c6ff, #0072ff); 
+        background: linear-gradient(135deg, #2084ff, #2084ff); 
         border: none; 
         border-radius: 16px;
         color: #fff;
     }
     :global(.message.color-reach) {
-        background: linear-gradient(135deg, #f6d365, #fda085); 
+        background: linear-gradient(135deg, #ff9721, #ff9721); 
         border: none;
         border-radius: 16px;
         color: #fff;
@@ -588,7 +784,6 @@ import "../styles/output.css";
     :global(.message.color-bingo .big-title), :global(.message.color-bingo .small-sub),
     :global(.message.color-reach .big-title), :global(.message.color-reach .small-sub) { 
         color: #ffffff; 
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
     }
 
     .preset-area {
@@ -606,11 +801,10 @@ import "../styles/output.css";
         font-weight: 900;
         transition: all 0.2s;
         flex: 1;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
-    .preset-btn:hover { transform: translateY(-2px); }
-    .btn-bingo { background: linear-gradient(135deg, #00c6ff, #0072ff); color: white; }
-    .btn-reach { background: linear-gradient(135deg, #f6d365, #fda085); color: white; }
+    .preset-btn:hover { transform: translateY(0px); }
+    .btn-bingo { background: linear-gradient(135deg, #2084ff, #2084ff); color: white; }
+    .btn-reach { background: linear-gradient(135deg, #ff9721, #ff9721); color: white; }
 
     .input-area { 
         display: flex; 
@@ -634,7 +828,7 @@ import "../styles/output.css";
         width: 48px;
         height: 48px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #667eea, #764ba2);
+        background: linear-gradient(135deg, #ea6666, #ff4c4c);
         color: white;
         border: none;
         cursor: pointer;
@@ -642,7 +836,6 @@ import "../styles/output.css";
         align-items: center;
         justify-content: center;
         font-size: 1.2rem;
-        box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
         transition: transform 0.2s;
     }
     #send-btn:hover {
