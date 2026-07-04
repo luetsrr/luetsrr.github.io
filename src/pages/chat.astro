@@ -1,0 +1,206 @@
+---
+// レイアウトのインポートを削除しました
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>開催概要 - 第8回うぃーすた全国交流会</title>
+</head>
+<body>
+
+    <h2>リアルタイムチャット</h2>
+
+    <div id="chat-box"></div>
+
+    <div class="preset-area">
+        <button class="preset-btn" data-msg="BINGO!">BINGO!</button>
+        <button class="preset-btn" data-msg="ナイス！👍">👍 ナイス！</button>
+        <button class="preset-btn" data-msg="お疲れ様でした！🎉">🎉 お疲れ様</button>
+        <button class="preset-btn" data-msg="わかります笑">😂 それな</button>
+    </div>
+
+    <div class="input-area">
+        <input type="text" id="nickname-input" placeholder="ニックネーム" value="名無しさん">
+        <input type="text" id="message-input" placeholder="メッセージを入力...">
+        <button id="send-btn">送信</button>
+    </div>
+
+    <script is:inline src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script is:inline src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+    <script is:inline>
+        // 1. Firebaseの設定
+        const firebaseConfig = {
+            apiKey: "AIzaSyAx1_nza7sR6c8v3_2c-MBZS5yi4y4rE4c",
+            authDomain: "bingo-37920.firebaseapp.com",
+            databaseURL: "https://bingo-37920-default-rtdb.firebaseio.com",
+            projectId: "bingo-37920",
+            storageBucket: "bingo-37920.firebasestorage.app",
+            messagingSenderId: "858255325745",
+            appId: "1:858255325745:web:fec3635297acfb698fb310",
+            measurementId: "G-NY97WJKMR2"
+        };
+
+        // Firebaseの初期化
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const chatRef = database.ref('chat_messages');
+
+        // 要素の取得
+        const chatBox = document.getElementById('chat-box');
+        const nicknameInput = document.getElementById('nickname-input');
+        const messageInput = document.getElementById('message-input');
+        const sendBtn = document.getElementById('send-btn');
+
+        // ★修正：ページ読み込み時にニックネームを記憶・確認する処理
+        window.addEventListener('DOMContentLoaded', () => {
+            // ブラウザの記憶（LocalStorage）からニックネームを読み込む
+            let savedName = localStorage.getItem('chat_nickname');
+            
+            // まだ一度も名前が保存されていない場合だけ、ポップアップを表示する
+            if (!savedName) {
+                const inputName = prompt("チャットで使用するニックネームを入力してください：", "名無しさん");
+                savedName = (inputName && inputName.trim() !== '') ? inputName.trim() : "名無しさん";
+                
+                // 入力された名前をブラウザに保存する
+                localStorage.setItem('chat_nickname', savedName);
+            }
+            
+            // ニックネーム入力欄に名前をセット
+            nicknameInput.value = savedName;
+        });
+
+        // ★新設：画面下のニックネーム入力欄が直接書き換えられたら、記憶を上書きする
+        nicknameInput.addEventListener('input', () => {
+            const currentName = nicknameInput.value.trim() || "名無しさん";
+            localStorage.setItem('chat_nickname', currentName);
+        });
+
+        // 2. 通常のメッセージ送信処理
+        function sendMessage() {
+            const nickname = nicknameInput.value.trim();
+            const message = messageInput.value.trim();
+
+            if (nickname === '' || message === '') return;
+
+            chatRef.push({
+                nickname: nickname,
+                message: message,
+                timestamp: Date.now(),
+                isPreset: false
+            });
+
+            messageInput.value = ''; 
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        // 定型文ボタンのクリック処理
+        document.querySelectorAll('.preset-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const nickname = nicknameInput.value.trim() || "名無しさん";
+                const presetMessage = button.getAttribute('data-msg');
+
+                chatRef.push({
+                    nickname: nickname,
+                    message: presetMessage,
+                    timestamp: Date.now(),
+                    isPreset: true
+                });
+            });
+        });
+
+        // 3. メッセージのリアルタイム受信処理
+        chatRef.on('child_added', (snapshot) => {
+            const data = snapshot.val();
+            
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            
+            if (data.isPreset === true) {
+                messageElement.classList.add('preset-message');
+            }
+            
+            messageElement.innerHTML = `<span class="nickname">${escapeHTML(data.nickname)}:</span><span>${escapeHTML(data.message)}</span>`;
+            chatBox.appendChild(messageElement);
+
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+
+        // セキュリティ対策：XSSを防ぐ関数
+        function escapeHTML(str) {
+            return str.replace(/[&<>"']/g, match => {
+                const escape = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#x27;' };
+                return escape[match];
+            });
+        }
+    </script>
+
+</body>
+</html>
+
+<style>
+    body {
+        font-family: sans-serif;
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 10px;
+    }
+    #chat-box { 
+        border: 1px solid #ccc; 
+        height: 400px; 
+        overflow-y: scroll; 
+        padding: 10px; 
+        margin-bottom: 10px; 
+        background: #f9f9f9; 
+    }
+    :global(.message) { 
+        margin-bottom: 10px; 
+        padding: 5px 10px; 
+        border-radius: 5px; 
+        background: #fff; 
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1); 
+    }
+    :global(.message.preset-message) {
+        background-color: #e3f2fd; 
+        border-left: 5px solid #2196f3; 
+    }
+    :global(.nickname) {
+        font-weight: bold; 
+        color: #333; 
+        margin-right: 5px; 
+    }
+    .preset-area {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+    .preset-btn {
+        background-color: #9ce1ff;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 15px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.2s;
+    }
+    .preset-btn:hover {
+        background-color: #d0d0d0;
+    }
+    .input-area { 
+        display: flex; 
+        gap: 10px; 
+    }
+    #nickname-input { 
+        width: 100px; 
+    }
+    #message-input { 
+        flex-grow: 1; 
+    }
+</style>
