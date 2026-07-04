@@ -13,7 +13,7 @@ import "../styles/output.css";
 <body>
 
     <div class="app-container glass-panel">
-        <h2 class="section-title title-highlight">リアルタイムチャット</h2>
+        <h2 class="section-title title-highlight">チャット</h2>
 
         <div id="chat-box"></div>
 
@@ -57,21 +57,38 @@ import "../styles/output.css";
 
         // sessionStorage を使うことで「タブを閉じたら忘れる」ようにしました
         window.addEventListener('DOMContentLoaded', () => {
-            let savedName = sessionStorage.getItem('chat_nickname');
-            
-            while (!savedName || savedName.trim() === '') {
-                const inputName = prompt("チャットで使用するニックネームを入力してください：");
-                
-                if (inputName && inputName.trim() !== '') {
-                    savedName = inputName.trim();
-                    sessionStorage.setItem('chat_nickname', savedName);
-                } else {
-                    alert("ニックネームの入力は必須です！");
-                }
-            }
-            
-            currentNickname = savedName; 
-        });
+    let savedName = sessionStorage.getItem('chat_nickname');
+
+    let isNewUser = false;
+
+    while (!savedName || savedName.trim() === '') {
+        const inputName = prompt("チャットで使用するニックネームを入力してください：");
+
+        if (inputName && inputName.trim() !== '') {
+            savedName = inputName.trim();
+            sessionStorage.setItem('chat_nickname', savedName);
+            isNewUser = true;
+        } else {
+            alert("ニックネームの入力は必須です！");
+        }
+    }
+
+    currentNickname = savedName;
+
+    // 初めてニックネームを入力したときだけ表示
+    if (isNewUser) {
+        alert(
+`【チャット利用時のお願い】
+
+・節度を守ってご利用ください。
+・個人情報の投稿はお控えください。
+・他の利用者への誹謗中傷、差別的・攻撃的な発言、迷惑行為は禁止します。
+・運営が不適切と判断した内容は削除する場合があります。
+
+楽しく交流しましょう！`
+        );
+    }
+});
 
         // 2. 通常のメッセージ送信処理
         function sendMessage() {
