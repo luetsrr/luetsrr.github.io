@@ -1,12 +1,12 @@
 ---
-// レイアウトのインポートを削除しました
+// レイアウトのインポートなし
 ---
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>開催概要 - 第8回うぃーすた全国交流会</title>
+    <title>チャット - 第8回うぃーすた全国交流会</title>
 </head>
 <body>
 
@@ -15,14 +15,11 @@
     <div id="chat-box"></div>
 
     <div class="preset-area">
-        <button class="preset-btn" data-msg="BINGO!">BINGO!</button>
-        <button class="preset-btn" data-msg="ナイス！👍">👍 ナイス！</button>
-        <button class="preset-btn" data-msg="お疲れ様でした！🎉">🎉 お疲れ様</button>
-        <button class="preset-btn" data-msg="わかります笑">😂 それな</button>
+        <button class="preset-btn btn-reach" data-msg="リーチ！" data-color="reach">リーチ！</button>
+        <button class="preset-btn btn-bingo" data-msg="BINGO!" data-color="bingo">BINGO！</button>
     </div>
 
     <div class="input-area">
-        <input type="text" id="nickname-input" placeholder="ニックネーム" value="名無しさん">
         <input type="text" id="message-input" placeholder="メッセージを入力...">
         <button id="send-btn">送信</button>
     </div>
@@ -50,43 +47,36 @@
 
         // 要素の取得
         const chatBox = document.getElementById('chat-box');
-        const nicknameInput = document.getElementById('nickname-input');
         const messageInput = document.getElementById('message-input');
         const sendBtn = document.getElementById('send-btn');
+        let currentNickname = ""; 
 
-        // ★修正：ページ読み込み時にニックネームを記憶・確認する処理
+        // ★修正：sessionStorage を使うことで「タブを閉じたら忘れる」ようにしました
         window.addEventListener('DOMContentLoaded', () => {
-            // ブラウザの記憶（LocalStorage）からニックネームを読み込む
-            let savedName = localStorage.getItem('chat_nickname');
+            let savedName = sessionStorage.getItem('chat_nickname');
             
-            // まだ一度も名前が保存されていない場合だけ、ポップアップを表示する
-            if (!savedName) {
-                const inputName = prompt("チャットで使用するニックネームを入力してください：", "名無しさん");
-                savedName = (inputName && inputName.trim() !== '') ? inputName.trim() : "名無しさん";
+            while (!savedName || savedName.trim() === '') {
+                const inputName = prompt("チャットで使用するニックネームを必ず入力してください：");
                 
-                // 入力された名前をブラウザに保存する
-                localStorage.setItem('chat_nickname', savedName);
+                if (inputName && inputName.trim() !== '') {
+                    savedName = inputName.trim();
+                    sessionStorage.setItem('chat_nickname', savedName);
+                } else {
+                    alert("ニックネームの入力は必須です！");
+                }
             }
             
-            // ニックネーム入力欄に名前をセット
-            nicknameInput.value = savedName;
-        });
-
-        // ★新設：画面下のニックネーム入力欄が直接書き換えられたら、記憶を上書きする
-        nicknameInput.addEventListener('input', () => {
-            const currentName = nicknameInput.value.trim() || "名無しさん";
-            localStorage.setItem('chat_nickname', currentName);
+            currentNickname = savedName; 
         });
 
         // 2. 通常のメッセージ送信処理
         function sendMessage() {
-            const nickname = nicknameInput.value.trim();
             const message = messageInput.value.trim();
 
-            if (nickname === '' || message === '') return;
+            if (currentNickname === '' || message === '') return;
 
             chatRef.push({
-                nickname: nickname,
+                nickname: currentNickname, 
                 message: message,
                 timestamp: Date.now(),
                 isPreset: false
@@ -103,14 +93,27 @@
         // 定型文ボタンのクリック処理
         document.querySelectorAll('.preset-btn').forEach(button => {
             button.addEventListener('click', () => {
-                const nickname = nicknameInput.value.trim() || "名無しさん";
-                const presetMessage = button.getAttribute('data-msg');
+                if (currentNickname === '') {
+                    alert("ニックネームを設定してください。");
+                    return;
+                }
+
+                const baseMessage = button.getAttribute('data-msg');
+                const colorType = button.getAttribute('data-color');
+                let finalMessage = baseMessage;
+
+                if (baseMessage === "BINGO!") {
+                    finalMessage = `<span class="big-title">BINGO！</span><br><span class="small-sub">${currentNickname}さんがビンゴになりました</span>`;
+                } else if (baseMessage === "リーチ！") {
+                    finalMessage = `<span class="big-title">リーチ！</span><br><span class="small-sub">${currentNickname}さんがリーチになりました</span>`;
+                }
 
                 chatRef.push({
-                    nickname: nickname,
-                    message: presetMessage,
+                    nickname: currentNickname,
+                    message: finalMessage,
                     timestamp: Date.now(),
-                    isPreset: true
+                    isPreset: true,
+                    colorType: colorType
                 });
             });
         });
@@ -122,17 +125,30 @@
             const messageElement = document.createElement('div');
             messageElement.classList.add('message');
             
+            let formattedMessage;
             if (data.isPreset === true) {
-                messageElement.classList.add('preset-message');
+                formattedMessage = data.message;
+            } else {
+                formattedMessage = escapeHTML(data.message).replace(/\n/g, '<br>');
             }
             
-            messageElement.innerHTML = `<span class="nickname">${escapeHTML(data.nickname)}:</span><span>${escapeHTML(data.message)}</span>`;
-            chatBox.appendChild(messageElement);
+            if (data.isPreset === true) {
+                messageElement.classList.add('preset-message');
+                if (data.colorType) {
+                    messageElement.classList.add(`color-${data.colorType}`);
+                }
+                messageElement.innerHTML = `<span class="text-content">${formattedMessage}</span>`;
+            } else {
+                messageElement.innerHTML = `
+                    <div class="msg-author">${escapeHTML(data.nickname)}</div>
+                    <div class="msg-bubble"><span class="text-content">${formattedMessage}</span></div>
+                `;
+            }
 
+            chatBox.appendChild(messageElement);
             chatBox.scrollTop = chatBox.scrollHeight;
         });
 
-        // セキュリティ対策：XSSを防ぐ関数
         function escapeHTML(str) {
             return str.replace(/[&<>"']/g, match => {
                 const escape = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#x27;' };
@@ -150,57 +166,151 @@
         max-width: 600px;
         margin: 20px auto;
         padding: 10px;
+        background-color: #ffffff;
     }
+    h2 { text-align: center; color: #1c1e21; }
+
     #chat-box { 
         border: 1px solid #ccc; 
-        height: 400px; 
+        height: 420px; 
         overflow-y: scroll; 
-        padding: 10px; 
-        margin-bottom: 10px; 
-        background: #f9f9f9; 
+        padding: 15px; 
+        margin-bottom: 15px; 
+        background: #ffffff; 
+        border-radius: 12px;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
     }
+
     :global(.message) { 
-        margin-bottom: 10px; 
-        padding: 5px 10px; 
-        border-radius: 5px; 
-        background: #fff; 
+        margin-bottom: 14px; 
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    :global(.msg-author) {
+        font-size: 12px;
+        color: #65676b;
+        font-weight: bold;
+        margin-left: 6px;
+        margin-bottom: 3px;
+    }
+
+    :global(.msg-bubble) {
+        padding: 10px 14px; 
+        border-radius: 14px; 
+        background: #f1f0f0; 
         box-shadow: 0 1px 2px rgba(0,0,0,0.1); 
+        font-size: 15px;
+        line-height: 1.4;
+        max-width: 85%;
+        word-break: break-all;
     }
+
+    /* ★修正：定型文メッセージを左寄せ（text-align: left）にし、幅をコンテンツに合わせました */
     :global(.message.preset-message) {
-        background-color: #e3f2fd; 
-        border-left: 5px solid #2196f3; 
+        padding: 12px 18px;
+        animation: pop 0.3s ease-out;
+        text-align: left; 
+        width: fit-content; 
+        max-width: 90%;
+        box-sizing: border-box;
     }
-    :global(.nickname) {
-        font-weight: bold; 
-        color: #333; 
-        margin-right: 5px; 
+
+    :global(.message.preset-message .text-content) {
+        display: block;
+        line-height: 1.3;
     }
+
+    :global(.big-title) {
+        font-size: 20px; 
+        font-weight: 900; 
+        letter-spacing: 2px; 
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    :global(.small-sub) {
+        font-size: 14px; 
+        font-weight: normal; 
+        opacity: 0.9; 
+        display: inline-block;
+    }
+
+    /* BINGO! （ブルー） */
+    :global(.message.color-bingo) {
+        background-color: #0095ff; 
+        border: 2px solid #2196f3; 
+        border-radius: 12px;
+    }
+    :global(.message.color-bingo .big-title) { color: #ffffff; }
+    :global(.message.color-bingo .small-sub) { color: #ffffff; }
+
+    /* リーチ！ （オレンジ） */
+    :global(.message.color-reach) {
+        background-color: #ff9d00; 
+        border: 2px solid #ff9800; 
+        border-radius: 12px;
+    }
+    :global(.message.color-reach .big-title) { color: #ffffff; }
+    :global(.message.color-reach .small-sub) { color: #ffffff; }
+
+    @keyframes pop {
+        0% { transform: scale(0.8); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
     .preset-area {
         display: flex;
-        gap: 5px;
+        gap: 24px;
         flex-wrap: wrap;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
+        justify-content: center;
     }
     .preset-btn {
-        background-color: #9ce1ff;
         border: none;
-        padding: 6px 12px;
-        border-radius: 15px;
+        padding: 12px 20px; 
+        border-radius: 30px;
         cursor: pointer;
-        font-size: 14px;
-        transition: background 0.2s;
+        font-size: 18px;
+        font-weight: bold;
+        transition: all 0.2s;
+        flex: 1;
+        max-width: 180px;
     }
     .preset-btn:hover {
-        background-color: #d0d0d0;
+        transform: translateY(0px);
+        filter: brightness(1.1);
     }
+    
+    .btn-bingo { background-color: #2196f3; color: white; }
+    .btn-reach { background-color: #ff9800; color: white; }
+
     .input-area { 
         display: flex; 
         gap: 10px; 
-    }
-    #nickname-input { 
-        width: 100px; 
+        background: white;
+        padding: 10px;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     #message-input { 
         flex-grow: 1; 
+        padding: 12px 15px; 
+        font-size: 16px; 
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        outline: none;
+    }
+    #send-btn {
+        padding: 0 25px;
+        font-size: 16px;
+        background-color: #0084ff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
     }
 </style>
