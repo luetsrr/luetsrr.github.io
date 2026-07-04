@@ -5,7 +5,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>チャット - 第8回うぃーすた全国交流会</title>
 </head>
 <body>
@@ -161,21 +161,40 @@
 </html>
 
 <style>
+    /* 画面全体でスクロールを発生させない設定 */
+    html, body {
+        height: 100%;
+        height: 100dvh; /* スマホのアドレスバー対策 */
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
     body {
         font-family: sans-serif;
         max-width: 600px;
-        margin: 20px auto;
+        margin: 0 auto;
         padding: 10px;
         background-color: #ffffff;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column; /* 縦並びのレイアウトに */
     }
-    h2 { text-align: center; color: #1c1e21; }
 
+    h2 { 
+        text-align: center; 
+        color: #1c1e21; 
+        margin: 5px 0 10px 0;
+        font-size: 1.35rem;
+    }
+
+    /* チャットボックスが残りの高さを埋めて、ここだけスクロールさせる */
     #chat-box { 
         border: 1px solid #ccc; 
-        height: 420px; 
-        overflow-y: scroll; 
+        flex-grow: 1; /* 空きスペースをすべて埋める */
+        overflow-y: auto; 
         padding: 15px; 
-        margin-bottom: 15px; 
+        margin-bottom: 12px; 
         background: #ffffff; 
         border-radius: 12px;
         box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
@@ -208,7 +227,6 @@
         word-break: break-all;
     }
 
-    /* ★修正：定型文メッセージを左寄せ（text-align: left）にし、幅をコンテンツに合わせました */
     :global(.message.preset-message) {
         padding: 12px 18px;
         animation: pop 0.3s ease-out;
@@ -263,17 +281,16 @@
 
     .preset-area {
         display: flex;
-        gap: 24px;
-        flex-wrap: wrap;
-        margin-bottom: 20px;
+        gap: 10px;
+        margin-bottom: 10px;
         justify-content: center;
     }
     .preset-btn {
         border: none;
-        padding: 12px 20px; 
+        padding: 10px 20px; 
         border-radius: 30px;
         cursor: pointer;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
         transition: all 0.2s;
         flex: 1;
@@ -291,9 +308,7 @@
         display: flex; 
         gap: 10px; 
         background: white;
-        padding: 10px;
-        border-radius: 12px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        padding: 5px 0 10px 0; /* 下部の余白調整 */
     }
     #message-input { 
         flex-grow: 1; 
