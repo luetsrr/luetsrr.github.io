@@ -51,7 +51,7 @@
         const sendBtn = document.getElementById('send-btn');
         let currentNickname = ""; 
 
-        // ★修正：sessionStorage を使うことで「タブを閉じたら忘れる」ようにしました
+        // sessionStorage を使うことで「タブを閉じたら忘れる」ようにしました
         window.addEventListener('DOMContentLoaded', () => {
             let savedName = sessionStorage.getItem('chat_nickname');
             
@@ -83,6 +83,10 @@
             });
 
             messageInput.value = ''; 
+            
+            // ★修正：送信完了と同時にキーボードを閉じ、画面の位置ズレを強制リセットする
+            messageInput.blur(); 
+            window.scrollTo(0, 0);
         }
 
         sendBtn.addEventListener('click', sendMessage);
@@ -115,6 +119,9 @@
                     isPreset: true,
                     colorType: colorType
                 });
+                
+                // 定型文タップ時も一応画面のズレをリセット
+                window.scrollTo(0, 0);
             });
         });
 
@@ -164,7 +171,7 @@
     /* 画面全体でスクロールを発生させない設定 */
     html, body {
         height: 100%;
-        height: 100dvh; /* スマホのアドレスバー対策 */
+        height: 100dvh; 
         margin: 0;
         padding: 0;
         overflow: hidden;
@@ -178,7 +185,7 @@
         background-color: #ffffff;
         box-sizing: border-box;
         display: flex;
-        flex-direction: column; /* 縦並びのレイアウトに */
+        flex-direction: column; 
     }
 
     h2 { 
@@ -188,10 +195,9 @@
         font-size: 1.35rem;
     }
 
-    /* チャットボックスが残りの高さを埋めて、ここだけスクロールさせる */
     #chat-box { 
         border: 1px solid #ccc; 
-        flex-grow: 1; /* 空きスペースをすべて埋める */
+        flex-grow: 1; 
         overflow-y: auto; 
         padding: 15px; 
         margin-bottom: 12px; 
@@ -282,7 +288,7 @@
     .preset-area {
         display: flex;
         gap: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
         justify-content: center;
     }
     .preset-btn {
@@ -308,7 +314,7 @@
         display: flex; 
         gap: 10px; 
         background: white;
-        padding: 5px 0 10px 0; /* 下部の余白調整 */
+        padding: 5px 0 10px 0; 
     }
     #message-input { 
         flex-grow: 1; 
