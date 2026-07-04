@@ -5,23 +5,25 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>チャット - 第8回うぃーすた全国交流会</title>
 </head>
 <body>
 
-    <h2>リアルタイムチャット</h2>
+    <div class="app-container">
+        <h2>リアルタイムチャット</h2>
 
-    <div id="chat-box"></div>
+        <div id="chat-box"></div>
 
-    <div class="preset-area">
-        <button class="preset-btn btn-reach" data-msg="リーチ！" data-color="reach">リーチ！</button>
-        <button class="preset-btn btn-bingo" data-msg="BINGO!" data-color="bingo">BINGO！</button>
-    </div>
+        <div class="preset-area">
+            <button class="preset-btn btn-reach" data-msg="リーチ！" data-color="reach">リーチ！</button>
+            <button class="preset-btn btn-bingo" data-msg="BINGO!" data-color="bingo">BINGO！</button>
+        </div>
 
-    <div class="input-area">
-        <input type="text" id="message-input" placeholder="メッセージを入力...">
-        <button id="send-btn">送信</button>
+        <div class="input-area">
+            <input type="text" id="message-input" placeholder="メッセージを入力...">
+            <button id="send-btn">送信</button>
+        </div>
     </div>
 
     <script is:inline src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -84,7 +86,7 @@
 
             messageInput.value = ''; 
             
-            // ★修正：送信完了と同時にキーボードを閉じ、画面の位置ズレを強制リセットする
+            // 入力フォーカスを外してキーボードを強制的に閉じ、画面をリセット
             messageInput.blur(); 
             window.scrollTo(0, 0);
         }
@@ -120,7 +122,6 @@
                     colorType: colorType
                 });
                 
-                // 定型文タップ時も一応画面のズレをリセット
                 window.scrollTo(0, 0);
             });
         });
@@ -168,24 +169,33 @@
 </html>
 
 <style>
-    /* 画面全体でスクロールを発生させない設定 */
+    /* 画面全体でスクロールを徹底的に排除 */
     html, body {
         height: 100%;
         height: 100dvh; 
         margin: 0;
         padding: 0;
         overflow: hidden;
+        position: fixed; /* スクリプトやキーボードによるバウンスを防ぐ */
+        width: 100%;
+        background-color: #ffffff;
     }
 
-    body {
-        font-family: sans-serif;
+    /* ★修正：アプリ全体のコンテナを固定配置し、はみ出しを禁止 */
+    .app-container {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
         max-width: 600px;
-        margin: 0 auto;
+        height: 100%;
+        height: 100dvh;
         padding: 10px;
-        background-color: #ffffff;
         box-sizing: border-box;
         display: flex;
-        flex-direction: column; 
+        flex-direction: column;
+        overflow: hidden;
     }
 
     h2 { 
@@ -195,10 +205,12 @@
         font-size: 1.35rem;
     }
 
+    /* チャットボックス内だけを独立してスクロールさせる（他は動かさない） */
     #chat-box { 
         border: 1px solid #ccc; 
         flex-grow: 1; 
         overflow-y: auto; 
+        -webkit-overflow-scrolling: touch; /* iOSでのスクロールを滑らかに */
         padding: 15px; 
         margin-bottom: 12px; 
         background: #ffffff; 
@@ -206,6 +218,7 @@
         box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
     }
 
+    /* 定型文・メッセージのレイアウト */
     :global(.message) { 
         margin-bottom: 14px; 
         display: flex;
