@@ -60,7 +60,7 @@ import "../styles/output.css";
             let savedName = sessionStorage.getItem('chat_nickname');
             
             while (!savedName || savedName.trim() === '') {
-                const inputName = prompt("チャットで使用するニックネームを必ず入力してください：");
+                const inputName = prompt("チャットで使用するニックネームを入力してください：");
                 
                 if (inputName && inputName.trim() !== '') {
                     savedName = inputName.trim();
