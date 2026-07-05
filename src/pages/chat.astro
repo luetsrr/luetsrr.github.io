@@ -2,6 +2,9 @@
 import "katex/dist/katex.min.css";
 import "remixicon/fonts/remixicon.css";
 import "../styles/output.css";
+
+const image = "/images/card.png";
+const ogImageURL = new URL(image, Astro.url);
 ---
 <!DOCTYPE html>
 <html lang="ja">
@@ -9,6 +12,8 @@ import "../styles/output.css";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>チャット - 第8回うぃーすた全国交流会</title>
+    <meta property="og:image" content={ogImageURL} />
+    <meta name="twitter:image" content={ogImageURL} />
 </head>
 <body>
 
@@ -82,7 +87,7 @@ import "../styles/output.css";
 
 ・節度を守ってご利用ください。
 ・個人情報の投稿はお控えください。
-・他の利用者への誹謗中傷、差別的・攻撃的な発言、迷惑行為は禁止します。
+・他の参加者への誹謗中傷、差別的・攻撃的な発言、迷惑行為は禁止します。
 ・運営が不適切と判断した内容は削除する場合があります。
 
 楽しく交流しましょう！`
