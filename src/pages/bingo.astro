@@ -52,10 +52,11 @@ import "../styles/output.css";
 
                 <div id="chat-box"></div>
 
-                <div class="preset-area">
-                    <button class="preset-btn btn-reach" data-msg="リーチ！" data-color="reach">リーチ！</button>
-                    <button class="preset-btn btn-bingo" data-msg="BINGO!" data-color="bingo">BINGO！</button>
-                </div>
+<div class="status-counter">
+    <div class="status-item reach-status">リーチ：<span id="count-reach">0</span>人</div>
+    <div class="status-item bingo-status">BINGO：<span id="count-bingo">0</span>人</div>
+</div>
+<div class="preset-area">
 
                 <div class="input-area">
                     <input type="text" id="message-input" placeholder="メッセージを入力...">
@@ -184,6 +185,14 @@ import "../styles/output.css";
                 localStorage.setItem('bingo_drawn', JSON.stringify(drawnNumbers));
                 localStorage.setItem('bingo_current', selectedNumber);
 
+                chatRef.push({
+                    nickname: currentNickname,
+                    timestamp: Date.now(),
+                    isPreset: false,
+                    isNumberNotice: true,   // 番号通知であることを示すフラグ
+                    number: selectedNumber  // 抽選された数字データ
+                });
+
                 setTimeout(() => currentNumberDisplay.classList.remove('pop-animation'), 400);
 
                 if (availableNumbers.length > 0) {
@@ -290,16 +299,36 @@ import "../styles/output.css";
             });
         });
 
+        const reachUsers = new Set();
+const bingoUsers = new Set();
+const countReachEl = document.getElementById('count-reach');
+const countBingoEl = document.getElementById('count-bingo');
+
         chatRef.on('child_added', (snapshot) => {
     const data = snapshot.val();
+
+    if (data.isPreset) {
+        if (data.colorType === "reach") {
+            reachUsers.add(data.nickname); // nicknameを保存（重複は無視される）
+            countReachEl.innerText = reachUsers.size;
+        } else if (data.colorType === "bingo") {
+            bingoUsers.add(data.nickname);
+            countBingoEl.innerText = bingoUsers.size;
+        }
+    }
 
     const messageElement = document.createElement('div');
     messageElement.classList.add('message');
 
     // メッセージ内容を作成
-    const formattedMessage = data.isPreset
-        ? data.message
-        : escapeHTML(data.message).replace(/\n/g, "<br>");
+    let formattedMessage = "";
+    if (data.isNumberNotice) {
+        formattedMessage = `<span class="number-highlight">${data.number}</span>`;
+    } else {
+        formattedMessage = data.isPreset
+            ? data.message
+            : escapeHTML(data.message).replace(/\n/g, "<br>");
+    }
 
     if (data.isPreset) {
 
@@ -370,6 +399,51 @@ function showAnnouncement(html, color){
 </html>
 
 <style>
+
+    :global(.number-highlight) {
+    color: #e12828;      /* チップやビンゴ球に合わせた鮮やかな赤 */
+    font-size: 26px;     /* 通常のチャット文字（15px）より大幅に大きく */
+    font-weight: 900;     /* 極太 */
+    margin: 0 4px;       /* 数字の左右に少しだけ隙間を作る */
+    vertical-align: -2px; /* 周りの文字と中心を揃える調整 */
+    display: inline-block;
+}
+
+    /* ==========================================
+   カウンターのスタイル（追加）
+========================================== */
+.status-counter {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    justify-content: center;
+}
+
+.status-item {
+    font-weight: 900;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: white;
+    flex: 1;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.status-item span {
+    font-size: 18px;
+    margin: 0 4px;
+}
+
+/* 既存のボタンカラーとトーンを合わせる */
+.reach-status { 
+    background: linear-gradient(135deg, #ff9721, #e67e22); 
+}
+
+.bingo-status { 
+    background: linear-gradient(135deg, #2084ff, #0984e3); 
+}
+
     #announcement-overlay {
     position: fixed;
     inset: 0;
