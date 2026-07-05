@@ -151,11 +151,15 @@ import "../styles/output.css";
             const messageElement = document.createElement('div');
             messageElement.classList.add('message');
             
-            let formattedMessage;
-            if (data.isPreset === true) {
+            let formattedMessage = "";
+            if (data.isNumberNotice) {
+                // 番号通知の場合は専用のHTMLを組む
+                formattedMessage = `<span class="number-highlight">${data.number}</span>`;
+            } else if (data.isPreset === true) {
                 formattedMessage = data.message;
             } else {
-                formattedMessage = escapeHTML(data.message).replace(/\n/g, '<br>');
+                // 通常メッセージ（空データによるエラー防止の || "" も追加）
+                formattedMessage = escapeHTML(data.message || "").replace(/\n/g, '<br>');
             }
             
             if (data.isPreset === true) {
@@ -187,6 +191,15 @@ import "../styles/output.css";
 </html>
 
 <style>
+    :global(.number-highlight) {
+        color: #e12828;      /* 鮮やかな赤 */
+        font-size: 26px;     /* 大きく */
+        font-weight: 900;     /* 極太 */
+        margin: 0 4px;
+        vertical-align: -2px;
+        display: inline-block;
+    }
+
     /* ==========================================
        デザイン刷新版レイアウト（モバイル・参加者向け）
     ========================================== */

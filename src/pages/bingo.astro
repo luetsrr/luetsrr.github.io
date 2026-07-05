@@ -187,10 +187,11 @@ import "../styles/output.css";
 
                 chatRef.push({
                     nickname: currentNickname,
+                    message: `【抽選番号】 ${selectedNumber} 番が出ました！`, // ← ★この1行を追加！
                     timestamp: Date.now(),
                     isPreset: false,
-                    isNumberNotice: true,   // 番号通知であることを示すフラグ
-                    number: selectedNumber  // 抽選された数字データ
+                    isNumberNotice: true,   
+                    number: selectedNumber  
                 });
 
                 setTimeout(() => currentNumberDisplay.classList.remove('pop-animation'), 400);
@@ -327,7 +328,7 @@ const countBingoEl = document.getElementById('count-bingo');
     } else {
         formattedMessage = data.isPreset
             ? data.message
-            : escapeHTML(data.message).replace(/\n/g, "<br>");
+            : escapeHTML(data.message || "").replace(/\n/g, "<br>");
     }
 
     if (data.isPreset) {
