@@ -613,9 +613,9 @@ function showAnnouncement(html, color){
 
     /* 追加：画像のエリア */
     .event-image-area {
-    margin-top: auto;
+
     margin-bottom: auto;
-    padding-top: 30px;
+    padding-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -628,9 +628,11 @@ function showAnnouncement(html, color){
     margin-bottom: 6px;
 }
 
-.event-image-area img {
-    max-width: 100%;
-    max-height: 260px;
+:global(.event-image-area img) {
+    width: 260px;      /* 幅を300pxに固定 */
+    height: 260px;     /* 高さを300pxに固定 */
+    object-fit: contain; /* 比率を維持して枠内に収める（画像を歪ませない） */
+    display: block;
 }
 
 
